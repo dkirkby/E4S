@@ -3,6 +3,11 @@
 #
 # Display 3 lines of text on the 128 x 32 OLED display
 # connected via the built-in I2C interface.
+# Connect the QT-pin cable to the display and wire to the M4:
+# BLACK => GND
+# RED => 3.3V
+# BLUE => SDA (serial data)
+# YELLOW => SCL (serial clock)
 import time
 
 import board

@@ -2,6 +2,10 @@
 # https://github.com/dkirkby/E4S
 #
 # Play sine-wave tones from the STEMMA speaker.
+# Connect the JST cable to the speaker and wire to the M4:
+# RED => 3.3V
+# BLACK => GND
+# WHITE => A0
 import time
 import math
 
