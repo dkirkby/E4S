@@ -33,7 +33,10 @@ def play_tone(freq, duration, DAC):
 note_frequency = {}
 for i, note in enumerate('A,A#,B,C,C#,D,D#,E,F,F#,G,G#'.split(',')):
     note_frequency[note] = 440 * math.pow(2, i / 12)
-    print(i, note, note_frequency[note])
+    if note[-1] == '#':
+        # Add flat equivalent.
+        equiv = 'Ab' if note == 'G#' else chr(ord(note[0]) + 1) + 'b'
+        note_frequency[equiv] = note_frequency[note]
 
 # Play musical notes at a specified tempo in beats per minute.
 # Each note has the format <octave><note><beats>, e.g. 1C2 plays
@@ -48,6 +51,3 @@ def play_notes(notes, tempo, DAC, gap=0.1):
         duration = (beats - gap) * beat_duration
         play_tone(note_frequency[note[1:-1]] * (1 << octave), duration, DAC)
         time.sleep(gap_duration)
-
-with audioio.AudioOut(board.A0) as DAC:
-    play_notes('1G1,1G1,2A2,1G2,2C2,2B4', 200, DAC)
