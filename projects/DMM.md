@@ -59,6 +59,8 @@ is color coded.
 Update your code to calculate and display the temperature in Kelvin, Celsius and Fahrenheit.  The python
 [math library](https://docs.python.org/3/library/math.html) is available in CircuitPython, so you can evaluate a [natural logarithm](https://docs.python.org/3/library/math.html#power-and-logarithmic-functions) using, e.g.
 ```
+import math
+
 math.log(1.23)
 ```
 Check that your results give sensible results for the ambient air temperature and your skin temperature.
