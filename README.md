@@ -18,11 +18,3 @@ The two microcontroller boards (Metro M4) are programmable and require some init
 ## Projects
 
 1. [Digital Multimeter](projects/DMM.md)
-
-## CircuitPython Libraries
-
-Some of the components in the kit need additional [libaries to be installed](https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries):
-
-OLED display:
-- adafruit_display_text
-- adafruit_displayio_ssd1306
