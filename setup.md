@@ -8,7 +8,7 @@ The traditional way of working with a microcontroller is to install a new main p
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the M4, the editor runs on your computer and communicates with the M4 over USB.
 
-The following steps ensure that you have current working versions of these programs.
+The steps described below ensure that you have current working versions of these programs.  The general documentation for these steps is [here](https://circuitpython.org/board/metro_m4_express/) but you should normally follow one of the dated explicit recipes below.
 
 ## Instructions for 4 January 2021
 
@@ -27,6 +27,7 @@ Model: Metro M4 Express
 Board-ID: SAMD51J19A-Metro-v0
 ```
 
+
 ### Update CircuitPython to 5.3.1
 
 Note that 5.3.1 is not the most recent version (6.0.1) since that currently has [some unresolved issues](https://github.com/adafruit/circuitpython/issues/3918).
@@ -37,6 +38,11 @@ The **METROM4BOOT** USB drive should again disappear from your desktop and, afte
 ```
 Adafruit CircuitPython 5.3.1 on 2020-07-13; Adafruit Metro M4 Express with samd51j19
 ```
+The `lib` folder on your **CIRCUITPY** drive contains python modules to support basic interaction with the M4 hardware.  Some of the components in your kit will require additional libraries to be installed lateby copying them
+to this folder.
+
+The general documentation for installing CircuitPython is [here](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython).
+
 
 ### Install the Mu Editor
 
@@ -50,3 +56,5 @@ Visit this [download page](https://codewith.mu/en/download) to select the approp
 **If you are using the latest "Catalina" version 11.x.x of MacOS, I recommend the ALPHA version instead of the official installer because of [this issue](https://github.com/mu-editor/mu/issues/1147).**
 
 I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22).
+
+The general instructions for installing the Mu Editor are [here](https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor).
