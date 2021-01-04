@@ -4,12 +4,16 @@ Material for a [UC Irvine](https://uci.edu/) course offered by the [Department o
 
 ## Equipment
 
-This course uses a [standard component kit](https://docs.google.com/spreadsheets/d/1fDZMHFTLSX1ApLEP1mGgGuPPSofG94EePxDg_fpRnkw/edit#gid=0) whose total cost is about US$200.  There are two components (9V supply, AC relay) that assume North American AC power.
+This course uses a [standard component kit](https://docs.google.com/spreadsheets/d/1fDZMHFTLSX1ApLEP1mGgGuPPSofG94EePxDg_fpRnkw/edit#gid=0) whose total cost is about US$200:
 
-![Image of Kit Components]
-(https://raw.githubusercontent.com/dkirkby/E4S/master/img/kit.jpg)
+![Image of Kit Components](https://raw.githubusercontent.com/dkirkby/E4S/master/img/kit.jpg)
+
+There are two components (9V supply, AC relay) that assume North American AC power.  The kit's jumper wires and cables are not shown in the photo.  If you are ordering components yourself, there is some soldering required to
+attached headers.
 
 Most of the components are designed and manufactured by [adafruit](https://www.adafruit.com/about) which provides excellent [supporting documentation and tutorials](https://learn.adafruit.com/).
+
+The two microcontroller boards (Metro M4) are programmable and require some initial setup: instructions are [here](setup.md).
 
 ## Projects
 
