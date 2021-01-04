@@ -16,7 +16,7 @@ The steps described below ensure that you have current working versions of these
 
 Connect the M4 to your computer via USB.  It should appear on your desktop as a new USB drive named **CIRCUITPY**.
 
-Double click the *Reset* button on the M4. The large round LED should turn green and **CIRCUITPY** will be renamed **METROM4BOOT**.
+Double click the *Reset* button on the M4. The large round LED should turn green and **CIRCUITPY** will be renamed **METROM4BOOT**.  *You can safely ignore any warnings about the drive not being properly removed.*
 
 Download [this file](https://github.com/adafruit/uf2-samdx1/releases/download/v3.10.0/update-bootloader-metro_m4-v3.10.0.uf2) then copy it to the **METROM4BOOT** USB drive.
 
