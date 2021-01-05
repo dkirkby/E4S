@@ -25,12 +25,18 @@ With the black and red wires floating (i.e. not connected to anything at their o
 
 ## Conversion to Volts
 
-The printed values are in "analog digital units" (ADU) so we still need to convert them to physical units.
+The printed values are in "analog-to-digital units" (ADU) so we still need to convert them to physical units.
 To do this, connect the red wire to a different GND so we know the input is 0V.  Record the typical value you observe.  Note that we can leave the black wire floating since it already uses the same 0V (GND) reference as
 the voltage source we are measuring (which is itself!)
 
 Next, connect the red wire to 3.3V and record the typical value you observe.  Now write down a formula to
 convert from ADUs to Volts, assuming a linear relationship.  Modify your code to print this value.
+
+Because the analog-to-digital conversion process includes some random noise you might sometimes obtain
+ADU values outside of your nominal 0 - 3.3V range.  In this case, you should "clamp" your result, for example:
+```
+ADU = min(ADUhi,max(ADUlo, ADU))
+```
 
 The `ADU` value is represented by 16 bits, so has a range from zero to `2^16-1` which equals 65,535 or $ffff in hex.  What do you expect would happen if you try to measure the 5V level on the M4?  Go ahead and try it.  Does
 the result make sense?  (The A0 input has sufficient protection that 5V will not damage it, but a larger voltage could).
@@ -41,6 +47,9 @@ At this point, you have created a digital *voltmeter*.  To make this more of a *
 resistance measurements.  Draw a [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers) with resistors R1 and R2 and write the equation for the voltage Vout between R1 and R2 when the circuit is powered by Vin=3.3V.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1 and Vout.
 
 Modify your circuit by adding R1=1K to the breadboard so that there are two long jumper wires that can be connected to the ends of an unknown resistance, forming a voltage divider whose output voltage is measured by A0. Adapt your code to print the value of the unknown resistance in Ohms.
+
+What happens during an "open circuit" condition, i.e. when there is no R2 completing the circuit? Adapt your
+code to detect this condition and report an open circuit.
 
 Verify that your code is working by measuring all four of the resistors in your kit. Note that these resistors
 have 1% "tolerance" which means that their true resistance is probably within 1% of their nominal value. Try some
@@ -63,7 +72,10 @@ import math
 
 math.log(1.23)
 ```
-Check that your results give sensible results for the ambient air temperature and your skin temperature.
+Check that your results give sensible results for the ambient air temperature and your skin temperature (which
+is probably around 33C).
+
+Make sure that your code handles an "open circuit" condition sensibly.
 
 ## Further Study
 
