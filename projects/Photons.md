@@ -136,14 +136,15 @@ Modify your loop to modulate the LED brightness using a smooth sine function wit
 Your design is now directly controlling the forward current flowing through the LED.  Next, you will estimate the corresponding rate of photons entering your eye...
 
 Modify your code so that a constant forward current of 0.1mA flows through the LED.  Hint: you can do this by passing a value of `y0 = ADU0-ADU1` to `calibrate()` that is different from the default `y0 = 0`.  Use the
-resulting value in ADU to set A0 for the desired LED current.
-
-Since your new program no longer has a loop and does all of its work during startup, you can end it with
-an empty loop, e.g.
+resulting value in ADU to set A0 for the desired LED current. In your program's main loop, toggle the LED current on and off, once per second, i.e.
 ```
 while True:
-    time.sleep(1)
+    A0.value = ADU0
+    time.sleep(0.5)
+    A0.value = 0
+    time.sleep(0.5)
 ```
+where `ADU0` is the value of `x0` returned by `calibrate()` as described above.
 
 Calculate the number of electrons passing through the LED per second at 0.1mA. Each electron has some probability to be converted into a photon leaving the LED known as the **quantum efficiency**.  The datasheet does not provide this value, so we will assume it is 1%.
 
@@ -159,6 +160,6 @@ Figure 5 of the datasheet shows that the LED photons are emitted within a narrow
 around 620 nanometers (nm).
 
 Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Modify your program to print the rates
-at 1,2,3,...,20 meters.
+at 2,4,6,...,40 meters.
 
-Find a dark location and determine the distance at which you can just barely detect any photons with your eye.  What is your corresponding detection threshold rate in photons per second?
+Find a dark location and determine the distance at which you can just barely detect the blinking LED with your eye.  What is your corresponding detection threshold rate in photons per second?  Note that the human eye can detect single photons under the [special conditions](https://en.wikipedia.org/wiki/Absolute_threshold#Vision) but your experiment will likely be limited by the ambient light levels.  Covering the M4's on-board LEDs should help.
