@@ -138,6 +138,13 @@ Your design is now directly controlling the forward current flowing through the 
 Modify your code so that a constant forward current of 0.1mA flows through the LED.  Hint: you can do this by passing a value of `y0 = ADU0-ADU1` to `calibrate()` that is different from the default `y0 = 0`.  Use the
 resulting value in ADU to set A0 for the desired LED current.
 
+Since your new program no longer has a loop and does all of its work during startup, you can end it with
+an empty loop, e.g.
+```
+while True:
+    time.sleep(1)
+```
+
 Calculate the number of electrons passing through the LED per second at 0.1mA. Each electron has some probability to be converted into a photon leaving the LED known as the **quantum efficiency**.  The datasheet does not provide this value, so we will assume it is 1%.
 
 Next, assume that your pupil is a circle of 5mm diameter, and calculate the fraction of photons entering your
@@ -146,7 +153,7 @@ this fraction change if the distance was increase by a factor of two?
 
 Observe the LED from directly overhead (the "north pole") then at a 90 degree angle (the "equator") and notice that the actual LED emission is far from isotropic. The LED body, viewed from above, is not round but elliptical, as shown on page 9 of the datasheet.  Is the brightness along the equator different when you look at the short or axis of this ellipse?
 
-Figure 6 of the datasheet shows the LED's **field pattern** of relative luminous intensity (brightness) for different viewing angles.  An accurate calculation of the photon rate into your eye would need to model and  account for these field angle effects.  Instead, we will simply assume that viewing angle of 80 degrees, close to the equator and looking toward the short axis of the ellipse, results in a factor of 10 reduction in the photon rate relative to an isotropic emitter.
+Figure 6 of the datasheet shows the LED's **field pattern** of relative luminous intensity (brightness) for different viewing angles.  An accurate calculation of the photon rate into your eye would need to model and  account for these field angle effects.  Instead, we will simply assume that viewing angle of 80 degrees, close to the equator and looking toward the long axis of the ellipse, results in a factor of 10 reduction in the photon rate relative to an isotropic emitter.
 
 Figure 5 of the datasheet shows that the LED photons are emitted within a narrow range of wavelengths centered
 around 620 nanometers (nm).
@@ -154,4 +161,4 @@ around 620 nanometers (nm).
 Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Modify your program to print the rates
 at 1,2,3,...,20 meters.
 
-Find a dark location and determine the distance at which you can just barely detect any photons with your eye.  What is your corresponding threshold rate in photons per second?
+Find a dark location and determine the distance at which you can just barely detect any photons with your eye.  What is your corresponding detection threshold rate in photons per second?
