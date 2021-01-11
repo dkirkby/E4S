@@ -1,4 +1,4 @@
-# Project: Photons
+# Project: Waveforms and Photons
 
 In this project, you will generate and monitor analog waveforms to control photons produced by a light-emitting diode (LED).
 
