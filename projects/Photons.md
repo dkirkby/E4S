@@ -29,6 +29,7 @@ while True:
     if ADU0 > HI:
         ADU0 = LO
 ```
+Values in the code starting with `0x` are integers specified in hexadecimal notation.
 Download your program and click on the **Serial** icon in the Mu editor toolbar: you should see a stream of numbers being printed, using the
 [python tuple](https://docs.python.org/3.8/library/stdtypes.html#tuple) format `(1234,)`.
 
@@ -121,7 +122,8 @@ HI = 0xffff
 STEP = 0x0600
 ...
 ```
-Next, read the comments and implement these functions and download your code. Notice how we perform many repeated analog measurements to reduce the effects of random noise.
+Next, read the comments and implement these functions and download your code. Notice how we perform many repeated analog measurements to reduce the effects of random noise. Also note the use of the `round()` function to
+convert a floating-point value to its nearest integer value, since analog outputs must have (16-bit) integer values (in the range 0x0000 - 0xffff).
 
 When these functions are implemented correctly, you should see the graph of `iLED` increase (approximately) linearly from zero on each cycle with corresponding brightness variations in the LED.  There should no longer be an initial part of the cycle when the LED is off.
 
