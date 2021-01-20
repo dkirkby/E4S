@@ -40,14 +40,14 @@ LED.value = False # Initially off
 def transmit(bits):
     assert len(bits) == MSG_BITS
     # Add the minimum number of idle bits then a start bit.
-    prologue = [IDLE_VALUE] * MIN_IDLE_BITS + [ACTIVE_VALUE]
+    prologue = [TX_IDLE_VALUE] * MIN_IDLE_BITS + [not TX_IDLE_VALUE]
     # Allocate and fill an efficient array of the bits to transmit.
     bits_array = array.array('B', prologue + bits)
     for bit in bits_array:
-        LED.value = TX.value = (ACTIVE_VALUE if bit else IDLE_VALUE)
+        LED.value = TX.value = (bit != TX_IDLE_VALUE)
         time.sleep(BIT_DURATION)
     # Leave the bus in the idle state.
-    LED.value = TX.value = IDLE_VALUE
+    LED.value = TX.value = TX_IDLE_VALUE
 
 while True:
     transmit([1,0,1,0])
