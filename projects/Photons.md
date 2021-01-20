@@ -159,7 +159,6 @@ Figure 6 of the datasheet shows the LED's **field pattern** of relative luminous
 Figure 5 of the datasheet shows that the LED photons are emitted within a narrow range of wavelengths centered
 around 620 nanometers (nm).
 
-Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Modify your program to print the rates
-at 2,4,6,...,40 meters.
+Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Assume that the LED is always on for the purposes of this calculation, i.e. you do not need to account for the slow on/off toggle. Modify your program to print the rates at 2,4,6,...,40 meters.
 
 Find a dark location and determine the distance at which you can just barely detect the blinking LED with your eye.  What is your corresponding detection threshold rate in photons per second?  Note that the human eye can detect single photons under the [special conditions](https://en.wikipedia.org/wiki/Absolute_threshold#Vision) but your experiment will likely be limited by the ambient light levels.  Covering the M4's on-board LEDs should help.
