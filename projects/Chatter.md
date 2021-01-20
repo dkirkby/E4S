@@ -64,7 +64,7 @@ The timing diagrams below show graphs of voltage versus time for a single 4-bit 
 
 ![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/ProtocolTiming.png)
 
-The sequence of bits being transmitted here correspond to this statement in your main loop:
+The "S" label identfies a **start bit**, which is frequently used to implement [asynchronous protocols](https://en.wikipedia.org/wiki/Asynchronous_serial_communication). The sequence of bits being transmitted here correspond to this statement in your main loop:
 ```
     transmit([1,0,1,0])
 ```
