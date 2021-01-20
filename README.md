@@ -19,3 +19,4 @@ The two microcontroller boards (Metro M4) are programmable and require some init
 
 1. [Digital Multimeter](projects/DMM.md)
 2. [Waveforms and Photons](projects/Photons.md)
+3. [Communication](projects/Chatter.md)

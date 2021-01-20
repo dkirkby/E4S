@@ -1,6 +1,6 @@
 # Project: Communication between Circuits
 
-In this project you will explore how two circuits can communicate. You will first implement a simple protocol for sending a small number of binary values and debug it at low speeds using a direct electrical connection.  Next, you will speed up the communication 100 times and implement a higher-level layer for sending text messages.  Finally, you replace the direct electrical connection with a wireless infra-red connection.
+In this project you will explore how two circuits can communicate. You will first implement a simple protocol for sending a small number of binary values and debug it at low speeds using a direct electrical connection.  Next, you will speed up the communication 100 times and implement a higher-level layer for sending text messages.  Finally, you replace the direct electrical connection with a wireless infrared connection.
 
 ## Build the Transmitter
 
