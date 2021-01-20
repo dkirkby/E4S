@@ -168,6 +168,65 @@ different speeds by changing `BIT_DURATION`.  Remember that you need to update b
 
 ## Another Layer
 
+We have now established a communication protocol that operates at 200 bits per second (bps or "baud"). This is still extremely slow by modern standards: for example, USB 3 can communicate at 5 Gbps! However, 300 baud was the standard speed for connecting to the early internet (via [dial-up modems](https://en.wikipedia.org/wiki/Dial-up_Internet_access)) and we are already communicating fast enough to benefit from a higher layer of abstraction.
+
+Most communication protocols are organized into "stacks" of progressively more abstract layers, each one building on the one below it.  For example, a USB keyboard uses a [human-interface device](https://en.wikipedia.org/wiki/USB_human_interface_device_class) protocol layered above a lower-level bit oriented electrical protocol.  Similarly, the web exchanges HTTP messages, defined in a protocol above a tall stack of lower-level networking protocols.
+
+We will now implement a layer to exchange text messages that builds on top of our existing "high-speed" bit protocol.  Starting with the sending side, we can send each character like this:
+```
+def send_text(text):
+    """Send each character of the text then 8 zeros.
+    """
+    for char in text:
+        transmit(char_to_bits(char))
+    # Transmit 8 zeros to signal that we are done.
+    transmit([0] * 8)
+```
+Note that we need some way to indicate when a message is complete.  We accomplish this by sending
+a sequence of 8 zeros, which is not a valid character.
+
+This `send_text` function relies on a `char_to_bits` function that you will need to complete:
+```
+def char_to_bits(char, nbits=8):
+    """Encode a single character as a sequence of nbit binary values
+    representing its numeric code, starting with the least-significant bit.
+    """
+    value = ord(char)
+    return ...
+```
+Since this function makes no use of any special M4 features, you can test it in any python environment on your computer, if that is more convenient.  Note the use of the [ord function](https://docs.python.org/3.8/library/functions.html#ord) to convert any character to a corresponding integer value in the range 0-255 (for standard ASCII characters).
+
+Test your `char_to_bits` by checking that `A` returns `[1, 0, 0, 0, 0, 0, 1, 0]` and `z` returns `[0, 1, 0, 1, 1, 1, 1, 0]`.  If your arrays are backwards, you have implemented most-significant bit (MSB) ordering instead of the desired LSB ordering.
+
+Next, implement the receiving end of this text message protocol with:
+```
+def get_text():
+    """Get characters until we see 8 zeros.
+    """
+    text = ''
+    while len(text) < 128:
+        bits = receive()
+        if any(bits):
+            text += bits_to_char(bits)
+        else:
+            # Got 8 zeros so we are done.
+            return text
+```
+You will need to implement `bits_to_char` to make this work but, again, you can develop and test it in any python environment.  A useful way to test pairs of functions like these is to perform a round trip, e.g.
+```
+print(bits_to_char(char_to_bits('A')))
+```
+If the result is not `A`, then something is wrong...
+
+Finally, update your main loop:
+```
+while True:
+    # Uncomment the first line in the transmitter or the second in the receiver.
+    send_text('Hello, world!'); time.sleep(1)
+    #print(get_text())
+```
+and install this new code in both your transmitter and receiver (remembering to modify the main loop in the receiver).  You should now see `Hello, world!` printed in your receiver's serial window every second.
+
 ## Wireless
 
 Although the term "wireless" usually implies communication via electromagnetic waves with wavelengths measured in centimeters (microwaves), this is just one of many non-electrical channels available. We will use infrared radiation with a wavelength of about 1 micron, but you could also use sound waves, etc.
@@ -179,9 +238,10 @@ Note that there is no longer any direct electrical connection between the M4s (n
 
 Before building this circuit, you will need to carefully bend the leads of each IR pair following these steps:
 ![IR lead bending](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRleads.jpg)
+You will need scissors (or small wire cutters if you have them) to clip the two longer leads in the final step.
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
-![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
+![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/master/projects/img/IRcloseup.jpg)
 
 Going wireless does not require any changes to your transmitter code, but there is a simple change required for the receiver:
 ```
