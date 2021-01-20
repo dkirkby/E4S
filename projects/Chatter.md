@@ -49,10 +49,20 @@ Although this is a simple communication protcol, there are still a few things we
 
 Study the code above and make a note of your answers to each question.
 
+The timing diagrams below show graphs of voltage versus time for a single 4-bit message transmitted with `IDLE_VALUE=False` (top) or `IDLE_VALUE=True` (bottom):
+
+![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/ProtocolTiming.png)
+
+The sequence of bits being transmitted here correspond to this statement in your main loop:
+```
+    transmit([1,0,1,0])
+```
+
 We use the on-board red LED (connected to D13) to monitor the transmitter. Note its activity when this program is running. Make sure you understand why the code produces the sequence of flashes you observe before proceeding to the next step of this project.
 
-Untether your transmitter with the following steps:
+To complete this section, untether your transmitter with the following steps:
  - Eject the CIRCUITPY usb drive from your computer.
+ - Close the Serial window in the Mu editor (if it was open).
  - Disconnect the USB cable at the M4.
  - Plug in the 9VDC to a wall socket and connect to your M4.
  - Make sure the DC_JACK switch is ON.
@@ -194,7 +204,7 @@ def char_to_bits(char, nbits=8):
     value = ord(char)
     return ...
 ```
-Since this function makes no use of any special M4 features, you can test it in any python environment on your computer, if that is more convenient.  Note the use of the [ord function](https://docs.python.org/3.8/library/functions.html#ord) to convert any character to a corresponding integer value in the range 0-255 (for standard ASCII characters).
+Since this function makes no use of any special M4 features, you can test it in any python environment on your computer, if that is more convenient.  Note the use of the [ord function](https://docs.python.org/3/library/functions.html#ord) to convert any character to a corresponding integer value in the range 0-255 (for standard ASCII characters).
 
 Test your `char_to_bits` by checking that `A` returns `[1, 0, 0, 0, 0, 0, 1, 0]` and `z` returns `[0, 1, 0, 1, 1, 1, 1, 0]`.  If your arrays are backwards, you have implemented most-significant bit (MSB) ordering instead of the desired LSB ordering.
 
@@ -212,7 +222,7 @@ def get_text():
             # Got 8 zeros so we are done.
             return text
 ```
-You will need to implement `bits_to_char` to make this work but, again, you can develop and test it in any python environment.  The [chr function](https://docs.python.org/3.8/library/functions.html#chr) should help. A useful way to test pairs of functions like these is to perform a round trip, e.g.
+You will need to implement `bits_to_char` to make this work but, again, you can develop and test it in any python environment.  The [chr function](https://docs.python.org/3/library/functions.html#chr) should help. A useful way to test pairs of functions like these is to perform a round trip, e.g.
 ```
 print(bits_to_char(char_to_bits('A')))
 ```
@@ -234,15 +244,19 @@ If you are new to python programming, or a bit rusty, you might find writing the
 Although the term "wireless" usually implies communication via electromagnetic waves with wavelengths measured in centimeters (microwaves), this is just one of many non-electrical channels available. We will use infrared radiation with a wavelength of about 1 micron, but you could also use sound waves, etc.
 
 To establish our wireless "bus", we will point a pair of IR transmit-receive pairs at each other on the breadboard:
+
 ![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRbus.jpg)
 
 Note that there is no longer any direct electrical connection between the M4s (not even a common ground).  The transmitter's TX now drives the IR LED of one pair (through a 1K series resistor) and the receiver's RX listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
 
 Before building this circuit, you will need to carefully bend the leads of each IR pair following these steps:
+
 ![IR lead bending](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRleads.jpg)
-You will need scissors (or small wire cutters if you have them) to clip the two longer leads in the final step.
+
+You will need scissors or nail clippers (or small wire cutters if you have them) to clip the two longer leads in the final step.
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
+
 ![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
 
 Going wireless does not require any changes to your transmitter code, but there is a simple change required for the receiver:
