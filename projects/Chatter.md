@@ -212,7 +212,7 @@ def get_text():
             # Got 8 zeros so we are done.
             return text
 ```
-You will need to implement `bits_to_char` to make this work but, again, you can develop and test it in any python environment.  A useful way to test pairs of functions like these is to perform a round trip, e.g.
+You will need to implement `bits_to_char` to make this work but, again, you can develop and test it in any python environment.  The [chr function](https://docs.python.org/3.8/library/functions.html#chr) should help. A useful way to test pairs of functions like these is to perform a round trip, e.g.
 ```
 print(bits_to_char(char_to_bits('A')))
 ```
@@ -241,13 +241,13 @@ Before building this circuit, you will need to carefully bend the leads of each 
 You will need scissors (or small wire cutters if you have them) to clip the two longer leads in the final step.
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
-![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/master/projects/img/IRcloseup.jpg)
+![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
 
 Going wireless does not require any changes to your transmitter code, but there is a simple change required for the receiver:
 ```
 IDLE_VALUE = True
 ```
-Why is this change required and why does the protocol work when the transmitter and receiver have different defintions of the idle state?
+Why is this change required?  Why does the protocol work when the transmitter and receiver have different defintions of the idle state?
 
 Check that your wireless setup gives the same results as your previous wired setup.
 
