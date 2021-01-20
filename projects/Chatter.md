@@ -173,15 +173,15 @@ different speeds by changing `BIT_DURATION`.  Remember that you need to update b
 Although the term "wireless" usually implies communication via electromagnetic waves with wavelengths measured in centimeters (microwaves), this is just one of many non-electrical channels available. We will use infrared radiation with a wavelength of about 1 micron, but you could also use sound waves, etc.
 
 To establish our wireless "bus", we will point a pair of IR transmit-receive pairs at each other on the breadboard:
-![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/master/projects/img/IRbus.jpg)
+![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRbus.jpg)
 
 Note that there is no longer any direct electrical connection between the M4s (not even a common ground).  The transmitter's TX now drives the IR LED of one pair (through a 1K series resistor) and the receiver's RX listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
 
 Before building this circuit, you will need to carefully bend the leads of each IR pair following these steps:
-![IR lead bending](https://raw.githubusercontent.com/dkirkby/E4S/master/projects/img/IRleads.jpg)
+![IR lead bending](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRleads.jpg)
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
-![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/master/projects/img/IRcloseup.jpg)
+![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
 
 Going wireless does not require any changes to your transmitter code, but there is a simple change required for the receiver:
 ```
