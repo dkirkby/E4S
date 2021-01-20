@@ -227,6 +227,8 @@ while True:
 ```
 and install this new code in both your transmitter and receiver (remembering to modify the main loop in the receiver).  You should now see `Hello, world!` printed in your receiver's serial window every second.
 
+If you are new to python programming, or a bit rusty, you might find writing these two functions to be harder than I intended, but don't hesitate to ask for help.
+
 ## Wireless
 
 Although the term "wireless" usually implies communication via electromagnetic waves with wavelengths measured in centimeters (microwaves), this is just one of many non-electrical channels available. We will use infrared radiation with a wavelength of about 1 micron, but you could also use sound waves, etc.
