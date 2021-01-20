@@ -58,7 +58,7 @@ Although this is a simple communication protcol, there are still a few things we
  - How many bits are sent together as a single message?
  - How is each message "framed", i.e. how can a receiver identify the start of a new message?
 
-Study the code above and make a note of your answers to each question.
+Study the code above and make a note of your answers to each question.  We use the [array library](https://docs.python.org/3/library/array.html) instead of the more general purpose python lists in the `transmit` function to provide faster and more reproducible timing.
 
 The timing diagrams below show graphs of voltage versus time for a single 4-bit message transmitted with `TX_IDLE_VALUE=False` (top) or `TX_IDLE_VALUE=True` (bottom):
 
