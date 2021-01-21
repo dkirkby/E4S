@@ -113,7 +113,7 @@ def receive():
         # ...
         print('idle start')
         # Wait for the minimum idle period.
-        wait_until = time.time() + MIN_IDLE_BITS * BIT_DURATION
+        wait_until = time.monotonic() + MIN_IDLE_BITS * BIT_DURATION
         # ...
         print('min idle completed')
         # Wait for a start bit.
