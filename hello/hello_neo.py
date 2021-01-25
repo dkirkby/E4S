@@ -2,6 +2,8 @@
 # https://github.com/dkirkby/E4S
 #
 # Demonstrate the on-board neopixel RGB LED.
+# https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels
+# Wavelengths are R~625nm, G~522nm, B~470nm.
 # No wiring is required.
 import time
 import board
