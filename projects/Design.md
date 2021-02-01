@@ -19,7 +19,7 @@ Here are a few examples of projects at the right level:
  - A wireless communication system that transmits data via sound.
  - An ambient light monitor that distinguishes between types of lighting: sunlight, fluorescent and incandescent.
 
-The [hack-a-day site](https://hackaday.com/) is generally a good source of inspiration for projects like this.
+The [hack-a-day](https://hackaday.com/) and (instructables)[https://www.instructables.com/circuits/] sites are generally a good source of inspiration for projects like this.
 
 ## Phase 1: Project Definition
 

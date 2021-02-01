@@ -273,6 +273,8 @@ Here is a closeup of one IR pair inserted into the breadboard, with green labels
 
 ![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
 
+Make sure that all 4 leads of the IR package are inserted far enough into the breadboard to make electrical contact.  Also double check that you are using the 1K series resistor from your kit, and not the (almost indistinguishable) 10K resistor.
+
 Going wireless does not require any changes to your transmitter code, but there is a simple change required for the receiver:
 ```
 RX_IDLE_VALUE = True
