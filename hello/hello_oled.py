@@ -3,6 +3,11 @@
 #
 # Display 3 lines of text on the 128 x 32 OLED display
 # connected via the built-in I2C interface.
+# The following files must be copied to your CIRCUITPY lib/ folder:
+#
+#  adafruit_displayio_ssd1306.mpy
+#  adafruit_display_text/*
+#
 # Connect the QT-pin cable to the display and wire to the M4:
 # BLACK => GND
 # RED => 3.3V
@@ -14,14 +19,15 @@ import board
 import displayio
 import terminalio
 
-# Copy these into your lib/ folder
+# These files are not in the base CircuitPython installation.
+# See instructions above for installing them and their dependencies.
 from adafruit_display_text import label
 import adafruit_displayio_ssd1306
 
 displayio.release_displays()
 
 i2c = board.I2C()
-display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
+display_bus = displayio.I2CDisplay(i2c)
 
 WIDTH = 128
 HEIGHT = 32
