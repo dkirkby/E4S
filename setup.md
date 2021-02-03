@@ -10,7 +10,7 @@ The final piece of software you will need is an editor that works well with the 
 
 The steps described below ensure that you have current working versions of these programs, and are based on the general instructions for the [M4 Express](https://circuitpython.org/board/metro_m4_express/) and [M4 Airlift Lite](https://circuitpython.org/board/metro_m4_airlift_lite/).
 
-## Instructions for 4 January 2021
+## Instructions for January 2021
 
 ### Update the bootloader to v.3.10.0
 
@@ -56,7 +56,7 @@ or (for M4 Airlift Lite):
 Adafruit CircuitPython 5.3.1 on 2020-07-13; Adafruit Metro M4 Airlift Lite with samd51j19
 ```
 
-The `lib` folder on your **CIRCUITPY** drive contains python modules to support basic interaction with the M4 hardware.  Some of the components in your kit will require additional libraries to be installed later by copying them to this folder.
+The `lib` folder on your **CIRCUITPY** drive contains python modules to support basic interaction with the M4 hardware.  Some of the components in your kit will require additional libraries to be installed later by copying them to this folder.  Instructions for that are [here](libraries.md).
 
 You have completed your M4 setup and are ready to install a code editor.
 

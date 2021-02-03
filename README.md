@@ -15,9 +15,11 @@ Most of the components are designed and manufactured by [adafruit](https://www.a
 
 The two microcontroller boards (Metro M4) are programmable and require some initial setup: instructions are [here](setup.md).
 
+For basic examples that demonstrate each of the kit's components, start [here](hello.md).
+
 ## Projects
 
 1. [Digital Multimeter](projects/DMM.md)
 2. [Waveforms and Photons](projects/Photons.md)
 3. [Communication](projects/Chatter.md)
-4. [Independent design](projects/Design.md)
+4. [Independent Design Project](projects/Design.md)
