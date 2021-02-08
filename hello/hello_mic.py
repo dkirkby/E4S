@@ -20,6 +20,8 @@ mic = analogio.AnalogIn(board.A0)
 
 buffer = array.array("H", [0] * BUFFER_SIZE)
 
+fullscale = float(0xffff)
+
 while True:
     print('Sampling...')
     nsamples = 0
@@ -41,6 +43,7 @@ while True:
         sumsq += value * value
     mean = sum / nsamples
     stddev = sumsq / nsamples - mean * mean
-    print(f'Sample mean = {mean:.1f} ADU, standard deviation = {stddev:.1f} ADU.')
+
+    print(f'Sample mean = {mean:.1f} ADU ({1e2*mean/fullscale:.1f}%), std dev = {stddev:.1f} ADU ({stddev/fullscale:.1f}%)')
 
     time.sleep(0.5)
