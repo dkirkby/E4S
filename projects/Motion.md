@@ -30,6 +30,12 @@ Write a program to read out the IMU's acceleration and magnetic field vectors an
 
 Notice the diagram of the IMU's right-handed XYZ coordinate system printed on its silkscreen, which defines its local axes.
 
+These sensor readings are fairly noisy so, next implement a loop to average 16 values and observe the improvement.  However, even with averaging the magnetic field measurements will still be noisy since the signal (the earth's magnetic field) is relatively weak.
+
+Try moving the speaker from your kit close to the IMU and observe the effect of the small permanent magnet it contains on your measurements.  If the B field direction is far from where you think north should be, check for any nearby magnets (or large pieces of steel which will distort the magnetic field nearby).
+
+In case your sensor values stop updating, there may be a problem with the locking of the I2C bus in the CircuitPython libraries, but power cycling (by disconnecting and reconnecting USB) should fix it.
+
 ## Calculate Angles
 
 The visual feedback for this project is based on two angles that you can calculate from the acceleration and B field vectors:
@@ -50,7 +56,7 @@ Update your code to calculate and display the tilt and turn values every 0.5 sec
 
 ## Implement Visual Tilt Feedback
 
-Update your program to provide visual feedback on the tilt angle following the top section of the guide below, where dark gray indicates that an LED is off.  Use a brightness value of 0.05 to avoid any power consumption issues.  Note that the scheme we are using is intended to simulate the bubble in a traditional [spirit level](https://en.wikipedia.org/wiki/Spirit_level).
+Update your program to provide visual feedback on the tilt angle following the top section of the guide below, where dark gray indicates that an LED is off and LEDs are numbered 0-7 from left to right. Use a brightness value of 0.05 to avoid any power consumption issues.  Note that the scheme we are using is intended to simulate the bubble in a traditional [spirit level](https://en.wikipedia.org/wiki/Spirit_level).  Ideally, we would combine the neopixel strip with the IMU in a package that keeps them rigidly connected and aligned, but in this prototype they move independently. However, the feedback you implement will make more sense if you keep them approximately aligned with each other.
 
 Rotate your IMU and verify that only the 9 configurations in the guide are ever displayed and that they correspond to the printed tilt values.  I recommend using `auto_write=False` with `leds.show()` to prevent any intermediate states of the LEDs being displayed momentarily.
 
@@ -67,5 +73,12 @@ Rotate your IMU and verify that only the 9 configurations in the guide are ever 
 Finally, update your visual feedback code to overlay the tilt feedback on top of the turn feedback, i.e. with a white tilt pixel taking precedence over a background red/green/blue turn pixel. Notice how all 81  possible combinations of the individual turn and tilt feedbacks are still distinguishable after being overlayed like this, so we have not sacrificed any information with this scheme.
 
 Rotate your IMU and verify that you now get it level and pointing north using only the visual feedback provided.
+
+Define two boolean variables near the top of your program
+```
+TURN_FEEDBACK = True
+TILT_FEEDBACK = True
+```
+and implement your code so that all 4 combinations of `True/False` work correctly.
 
 Finally, remove the print statements and the timing delay from your main loop so your circuit provides more responsive feedback.
