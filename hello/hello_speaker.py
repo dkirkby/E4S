@@ -5,7 +5,7 @@
 # Connect the JST cable to the speaker and wire to the M4:
 # RED => 3.3V
 # BLACK => GND
-# WHITE => A0
+# WHITE => A1
 import time
 import math
 
@@ -13,6 +13,9 @@ import board
 import audiocore
 import audioio
 import array
+
+# Initialize an analog audio output driver.
+DAC = audioio.AudioOut(board.A1)
 
 # Fill a buffer with a 16-bit unsigned integer sine waveform.
 NSINE = 64
@@ -55,3 +58,5 @@ def play_notes(notes, tempo, DAC, gap=0.1):
         duration = (beats - gap) * beat_duration
         play_tone(note_frequency[note[1:-1]] * (1 << octave), duration, DAC)
         time.sleep(gap_duration)
+
+play_notes('1C1,1C1,1D2,1C2,1F2,1E4', 180, DAC)
