@@ -10,7 +10,7 @@
 #  adafruit_bus_device/*
 #  adafruit_register/*
 #
-# Connect the QT-pin cable to the display and wire to the M4:
+# Connect the QT-pin cable to the multispec and wire to the M4:
 # BLACK => GND
 # RED => 3.3V
 # BLUE => SDA (serial data)
