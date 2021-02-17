@@ -30,3 +30,15 @@ The [hack-a-day](https://hackaday.com/) and (instructables)[https://www.instruct
 3. Describe your testing plan, broken down into 2-4 steps.  Each step should clearly describe the purpose, test setup, sequence of operations, and expected outcomes. Taken together, the steps should demonstrate that design accomplishes what you described in part 1.
 
 4. Make a diagram or sketch showing what your project might look like in use as a finished product.  Think carefully about a realistic size and enclosure.  How is it powered?
+
+## Phase 2: Design Documents
+
+1. Prepare a "bill of materials" (BOM) for your project: this is a table (e.g. exported from a spreadsheet) with one row for each item of your prototype design (including wiring) that lists:
+  - The item label, e.g. R1, R2, ... for resistors and Q1, Q2, ... for more complex components. You can invent your own labeling scheme to use here.
+  - A brief description of the item.
+  - A link to more details about the component, e.g. a datasheet or vendor page.
+  - The estimated cost of the item.
+
+Include a total cost estimate with your BOM.
+
+2. Prepare a schematic for the prototype circuit as you plan to build it.  Items on the schematic should use the same labels that appear in the BOM.  A clear hand drawn schematic is fine.  Use [standard schematic symbols](https://en.wikipedia.org/wiki/Electronic_symbol) for any resistors, capacitors, etc.
