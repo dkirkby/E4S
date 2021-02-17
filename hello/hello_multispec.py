@@ -16,6 +16,7 @@
 # BLUE => SDA (serial data)
 # YELLOW => SCL (serial clock)
 import time
+import math
 
 import board
 
@@ -27,20 +28,35 @@ i2c = board.I2C()
 
 multispec = adafruit_as7341.AS7341(i2c)
 
+# The clear and NIR sensor readings are not yet supported.
 wavelengths = [415, 445, 480, 515, 555, 590, 630, 680]
-names = [f'channel_{w}nm' for w in wavelengths]
 
-LINE_LENGTH = 80
+# On board "white" LED provides consistent illumination for measuring
+# the spectrum of reflected light from a surface.
+USE_LED = True
+
+# Configure the LED.
+multispec.led_current = 25 # mA
+multispec.led = USE_LED
+
+# Disable flicker detection.
+multispec.flicker_detection_enabled = False
+
+# Display a simple horizontal histogram using text.
+LINE_LENGTH = 120
 
 separator = '-' * LINE_LENGTH
 
-def bar(value, max_value=10000, max_length=LINE_LENGTH - 6):
+def bar(value, max_value=10000, max_length=LINE_LENGTH - 11):
     length = int(round((value / max_value) * max_length))
     return '#' * length
 
+# Main loop reads sensors and displays the measured spectrum.
+LOG2 = math.log(2)
 while True:
-    fluxes = [getattr(multispec, name) for name in names]
-    for (wavelength, flux) in zip(wavelengths, fluxes):
-        print(f'{wavelength}nm {bar(flux)}')
+    fluxes = multispec.all_channels
+    log2_fluxes = [math.log(max(1,flux)) / LOG2 for flux in fluxes]
+    for i, wavelength in enumerate(wavelengths):
+        print(f'{wavelength}nm {fluxes[i]:04x} {bar(log2_fluxes[i], max_value=16)}')
     print(separator)
-    time.sleep(1)
+    time.sleep(0.5)
