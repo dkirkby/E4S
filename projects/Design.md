@@ -33,7 +33,7 @@ The [hack-a-day](https://hackaday.com/) and (instructables)[https://www.instruct
 
 ## Phase 2: Design Documents
 
-1. Prepare a "bill of materials" (BOM) for your project: this is a table (e.g. exported from a spreadsheet) with one row for each item of your prototype design (including wiring) that lists:
+1. Prepare a [bill of materials](https://en.wikipedia.org/wiki/Bill_of_materials) (BOM) for your project: this is a table (e.g. exported from a spreadsheet) with one row for each item of your prototype design (including wiring) that lists:
   - The item label, e.g. R1, R2, ... for resistors and Q1, Q2, ... for more complex components. You can invent your own labeling scheme to use here.
   - A brief description of the item.
   - A link to more details about the component, e.g. a datasheet or vendor page.
