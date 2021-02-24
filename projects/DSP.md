@@ -77,15 +77,20 @@ To perform a Fourier transform using the standard formulas requires on the order
 
 Comment out your plotting loop and add code to calculate the Fourier transform of your averaged samples:
 ```
-fft_real, fft_imag = ulab.fft.ifft(ulab.array(measurements))
+measurements = ulab.array(measurements)
+fft_real, fft_imag = ulab.fft.ifft(measurements)
 ```
-Note that the Fourier transform of the original real-valued measurements are now complex valued. This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, which contradicts what we claimed earlier. However, there is a symmetry that ensures information is conserved,
+The first line converts your python list of measurement values to the [ulab.array format](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/index.html#ulab.array), which is similar to the [array.array format](https://circuitpython.readthedocs.io/en/6.1.x/docs/library/array.html#array.array.array) we have used earlier.  The second line calculates the FFT and returns two arrays that represent the real and imaginary parts of the complex result.
+
+Why is the FFT result complex valued? This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, which contradicts what we claimed earlier. However, there is a symmetry that ensures information is conserved,
 ```
 (fft_real[i] == +fft_real[NMEASURE - i]) and (fft_imag[i] == -fft_real[NMEASURE - i])
 ```
 for `0 < i < NMEASURE/2`.  Print a few values to convince yourself that this is true.  Because of this symmetry,
 all of the information in FFT is contained within the first half of the array `i < NMEASURE/2`. (Technically,
 the values with `i > NMEASURE/2` correspond to negative frequencies.)
+
+Although we will not use it in this project, a simple modification of the FFT, known as the "inverse FFT", transforms from the frequency to time domains. Both transforms generally expect a complex-valued input and return a complex-valued result but, when the input is real (or imaginary), the result will have a symmetry that conserves information and ensures that the reverse transform is real (or imaginary).
 
 ## Power Play
 
