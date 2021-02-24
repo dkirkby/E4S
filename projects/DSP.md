@@ -49,7 +49,7 @@ Note that the Plotter window only displays 100 points at a time, so printing mor
 
 ## Audio Test Setup
 
-Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 440 Hz sine wave through your laptop or phone speaker.  Place the microphone as close as possible to the speaker. With your sample plotting program running, you should see a clear sine wave displayed.  Adjust your setup and volume to get a signal that is 5-10 mV peak to peak.  I recommend some sound insulation between the speaker and your ears since this tone can be annoying.
+Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 440 Hz sine wave through your laptop or phone speaker.  Place the microphone as close as possible to the speaker. With your sample plotting program running, you should see a clear sine wave displayed.  Adjust your setup and volume to get a signal that is 20-30 mV peak to peak.  I recommend some sound insulation between the speaker and your ears since this tone can be annoying.
 
 Note that the Plotter Window automatically scales so the amplitude can appear to suddenly change if the signal falls below 5mV or above 10mV.
 
