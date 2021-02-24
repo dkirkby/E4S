@@ -23,4 +23,5 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 2. [Waveforms and Photons](projects/Photons.md)
 3. [Communication](projects/Chatter.md)
 4. [Motion Feedback](projects/Motion.md)
-5. [Independent Design Project](projects/Design.md)
+5. [Digital Signal Processing](projects/DSP.md)
+6. [Independent Design Project](projects/Design.md)
