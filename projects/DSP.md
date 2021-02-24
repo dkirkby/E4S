@@ -78,7 +78,7 @@ To perform a Fourier transform using the standard formulas requires on the order
 Comment out your plotting loop and add code to calculate the Fourier transform of your averaged samples:
 ```
 measurements = ulab.array(measurements)
-fft_real, fft_imag = ulab.fft.ifft(measurements)
+fft_real, fft_imag = ulab.fft.fft(measurements)
 ```
 The first line converts your python list of measurement values to the [ulab.array format](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/index.html#ulab.array), which is similar to the [array.array format](https://circuitpython.readthedocs.io/en/6.1.x/docs/library/array.html#array.array.array) we have used earlier.  The second line calculates the FFT and returns two arrays that represent the real and imaginary parts of the complex result.
 
@@ -98,11 +98,11 @@ You can think of the FFT as a recipe for building the time domain signal as a su
 
 Since we do not care about the phase differences (sine vs cosine) at each frequency, we will combine the real and imaginary FFT values into their complex magnitude squared, scaled by the number of measurements:
 ```
-power[i] = (fft_real[i] ** 2 + fft_imag[i] ** 2) * NMEASURE
+power[i] = (fft_real[i] ** 2 + fft_imag[i] ** 2) / NMEASURE
 ```
 One nice feature of ulab (and numpy) is that you can write a formula that applies to all elements of an array without any explicit loop as:
 ```
-power = (fft_real ** 2 + fft_imag ** 2) * NMEASURE
+power = (fft_real ** 2 + fft_imag ** 2) / NMEASURE
 ```
 The resulting `power` is an array, not a single number!  This trick is known as [vectorization](https://blog.paperspace.com/numpy-optimization-vectorization-and-broadcasting/) and leads to code that is cleaner and often faster.
 
