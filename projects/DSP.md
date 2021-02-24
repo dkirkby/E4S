@@ -73,13 +73,13 @@ Plot the first 100 measurements and compare the new graph with the same audio te
 
 We now want to estimate the frequency of the sine wave in our audio test setup. Our sequence of samples are in the "time domain", where a sine wave has its familar shape.  To identify the frequency of a periodic signal, it is convenient to work instead in the "frequency domain" where a sine wave is delta function at a location determined by its frequency.  Both domains contain exactly the same amount of information and we can move back and forth using [discrete Fourier transforms](https://en.wikipedia.org/wiki/Discrete_Fourier_transform).
 
-To perform a Fourier transform using the standard formulas requires on the order of `NSAMPLES**2` floating-point operations.  However, there is a clever way of reorganizing the calculation known as the [fast Fourier transform (FFT)](https://en.wikipedia.org/wiki/Fast_Fourier_transform) which only requires on the order of `NSAMPLES * log(NSAMPLES)` operations.  The FFT algorithm is implemented in the CircuitPython [ulab library](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/fft/index.html), which implements a subset of the popular [numpy library](https://numpy.org/).  One restriction of the FFT algorithm is that the input array size must be a power of 2, which is why we chose `512 = 2**9` above.
+To perform a Fourier transform using the standard formulas requires on the order of `NMEASURE**2` floating-point operations.  However, there is a clever way of reorganizing the calculation known as the [fast Fourier transform (FFT)](https://en.wikipedia.org/wiki/Fast_Fourier_transform) which only requires on the order of `NMEASURE * log(NMEASURE)` operations.  The FFT algorithm is implemented in the CircuitPython [ulab library](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/fft/index.html), which implements a subset of the popular [numpy library](https://numpy.org/).  One restriction of the FFT algorithm is that the input array size must be a power of 2, which is why we chose `512 = 2**9` above. (If you ever need the fastest possible FFT algorithm, check out [FFTW](http://www.fftw.org/) which also relaxes the power of two requirement).
 
 Comment out your plotting loop and add code to calculate the Fourier transform of your averaged samples:
 ```
 fft_real, fft_imag = ulab.fft.ifft(ulab.array(measurements))
 ```
-Note that the Fourier transform of the original real-valued measurements are now complex valued. This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, but in fact there is a symmetry that ensures information is conserved,
+Note that the Fourier transform of the original real-valued measurements are now complex valued. This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, which contradicts what we claimed earlier. However, there is a symmetry that ensures information is conserved,
 ```
 (fft_real[i] == +fft_real[NMEASURE - i]) and (fft_imag[i] == -fft_real[NMEASURE - i])
 ```
@@ -89,7 +89,7 @@ the values with `i > NMEASURE/2` correspond to negative frequencies.)
 
 ## Power Play
 
-You can think of the FFT as a recipe for reconstructing the time domain signal as a sum of sines and cosines at specific frequencies `f[i] = i * df` with `df = f0 / (NMEASURE * NAVG)` with amplitudes related to `fft_real[i]` and `fft_imag[i]` (for `i < NMEASURE/2`). The zero frequency value corresponds to a constant (in time) value, also known as the "DC component".  Since we subtracted off the mean earlier, this should be zero and we will ignore it. (In fact, it might not be exactly zero because of round-off errors in the calculation of the mean.)
+You can think of the FFT as a recipe for building the time domain signal as a sum of sines and cosines at specific frequencies `f[i] = i * df`, where `df = f0 / (NMEASURE * NAVG)`, with amplitudes related to `fft_real[i]` and `fft_imag[i]` (for `i < NMEASURE/2`). The zero frequency value corresponds to a constant (in time) value, also known as the "DC component".  Since we subtracted off the mean earlier, this should be zero and we will ignore it. (In fact, it will not be exactly zero because of round-off errors in the calculation and subtraction of the mean.)
 
 Since we do not care about the phase differences (sine vs cosine) at each frequency, we will combine the real and imaginary FFT values into their complex magnitude squared, scaled by the number of measurements:
 ```
@@ -101,7 +101,7 @@ power = (fft_real ** 2 + fft_imag ** 2) * NMEASURE
 ```
 The resulting `power` is an array, not a single number!  This trick is known as [vectorization](https://blog.paperspace.com/numpy-optimization-vectorization-and-broadcasting/) and leads to code that is cleaner and often faster.
 
-These magnitude squared FFT values are referred to as "power" since they are related to electrical power when the time-domain consists of voltage measurements (but the power terminology is often used for any measurements).
+These magnitude squared FFT values are referred to as "power" since they are related to electrical power when the time-domain consists of voltage measurements (but the power terminology is often used for non-voltage measurements).
 
 ## Noise Level
 
@@ -112,7 +112,7 @@ noise_freq = ulab.numerical.mean(power[1:NMEASURE//2])
 ```
 Calculate and print the results of both of these methods when your setup is relatively quiet. Notice how similar they are!  This is another demonstration that the two domains contain equivalent information, and a consequence of [Parseval's theorem](https://en.wikipedia.org/wiki/Parseval's_theorem).
 
-The first method calculates the [variance](https://en.wikipedia.org/wiki/Variance) of your averaged time-domain samples.  The second method calculates the average power over all (positive) frequencies, i.e. excluding the `i=0` DC component and and the `i >= NMEASURE/2` (negative) frequencies that are redundant by symmetry.
+The first method calculates the [variance](https://en.wikipedia.org/wiki/Variance) of your averaged time-domain samples, i.e. the squared width of a histogram of the samples. The second method calculates the average power over all (positive) frequencies, i.e. excluding the `i=0` DC component and and the `i >= NMEASURE/2` (negative) frequencies that are redundant by symmetry.
 
 Observe typical noise levels when your environment is quiet, then add a line near the top of your program to record the typical level:
 ```
