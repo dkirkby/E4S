@@ -84,9 +84,10 @@ The first line converts your python list of measurement values to the [ulab.arra
 
 Why is the FFT result complex valued? This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, which contradicts what we claimed earlier. However, there is a symmetry that ensures information is conserved,
 ```
-(fft_real[i] == +fft_real[NMEASURE - i]) and (fft_imag[i] == -fft_real[NMEASURE - i])
+(fft_real[i] == +fft_real[NMEASURE - i]) and (fft_imag[i] == -fft_imag[NMEASURE - i])
 ```
-for `0 < i < NMEASURE/2`.  Print a few values to convince yourself that this is true.  Because of this symmetry,
+for `0 < i < NMEASURE/2`.  Print a few values to convince yourself that this is true (it might not be true
+exactly, because of round-off errors, but should be very close).  Because of this symmetry,
 all of the information in FFT is contained within the first half of the array `i < NMEASURE/2`. (Technically,
 the values with `i > NMEASURE/2` correspond to negative frequencies.)
 
