@@ -6,6 +6,21 @@ Any extra libraries needed are always mentioned in the comments at the top of ea
 
 To install an additional library, you just copy it into the `lib` folder of your CIRCUITPY usb drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
+## Instructions for January 2022
+
+Since we are running CircuitPython 7.1.0, we need to install libraries from the 7.x bundle (we are using 7.x from the [20220105 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20220105)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
+
+Download and expand [this zip file](E4S-libaries-5.x.zip) with the libraries needed by the following kit components:
+ - OLED display
+ - pressure sensor
+ - multi-spectrum light sensor
+ - 9DoF inertial measurement unit
+
+The expanded directory contains a mixture of folders and files with an `.mpy` extension.  Copy all of these into the `lib` folder on your CIRCUITPY usb drive.  Note that copying anything to CIRCUITPY (via the Mu editor or otherwise) causing any running program to be restarted.
+
+You are now ready to use these libraries.
+
+
 ## Instructions for January 2021
 
 Since we are running CircuitPython 5.3.1, we need to install libraries from the 5.x bundle (we are using 5.x from the [20210101 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20210101)). We do not install the whole bundle since it is too big to fit in the M4.
