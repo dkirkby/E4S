@@ -48,12 +48,32 @@ The `lib` folder on your **CIRCUITPY** drive contains python modules to support 
 
 You have completed your M4 setup and are ready to install a code editor.
 
+## Libraries
+
+Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](hello.md).
+
+To install an additional library, you just copy it into the `lib` folder of your CIRCUITPY usb drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
+
+Since we are running CircuitPython 5.3.1, we need to install libraries from the 5.x bundle (we are using 5.x from the [20210101 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20210101)). We do not install the whole bundle since it is too big to fit in the M4.
+
+Download and expand [this zip file](E4S-libaries-5.x.zip) with the libraries needed by the following kit components:
+ - OLED display
+ - pressure sensor
+ - multi-spectrum light sensor
+ - 9DoF inertial measurement unit
+
+The expanded directory contains a mixture of folders and files with an `.mpy` extension.  Copy all of these into the `lib` folder on your the CIRCUITPY USB drive for each of your microcontroller boards.  Note that copying anything to CIRCUITPY (via the Mu editor or otherwise) causing any running program to be restarted.
+
+You are now ready to use these libraries.
+
 ## Install the Mu Editor
+
+You have completed the setup of your microcontroller boards and are now ready to install a code editor on your laptop.
 
 Any file named `code.py` on your **CIRCUITPY** drive will be automatically run whenever your M4 is reset.
 
 In principle, you can use any text or code editor to modify `code.py` directly from the USB drive.  However,
-we will start with the [Mu Editor]() which is specifically designed to work well with Adafruit microcontroller boards and CircuitPython.
+we will start with the [Mu Editor](https://codewith.mu/) which is specifically designed to work well with Adafruit microcontroller boards and CircuitPython.
 
 Visit this [download page](https://codewith.mu/en/download) to select the appropriate official installer for your computer.
 
