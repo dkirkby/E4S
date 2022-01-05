@@ -56,7 +56,7 @@ To install an additional library, you just copy it into the `lib` folder of your
 
 Since we are running CircuitPython 5.3.1, we need to install libraries from the 5.x bundle (we are using 5.x from the [20210101 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20210101)). We do not install the whole bundle since it is too big to fit in the M4.
 
-Download and expand [this zip file](E4S-libaries-5.x.zip) with the libraries needed by the following kit components:
+Download and expand [this zip file](E4S-libraries-5.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure sensor
  - multi-spectrum light sensor

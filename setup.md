@@ -14,11 +14,13 @@ These instructions were last updated in Jan 2022. Instructions for Jan 2021 are 
 
 ## Update the bootloader of both METRO boards to v.3.13.0
 
-Connect the M4 to your computer via USB.  It should appear on your desktop as a new USB drive named **CIRCUITPY**.
+Connect the M4 to your computer via USB.  It should appear on your desktop as a new USB drive.
 
 On a Mac, the first time you insert a new M4 device, you may trigger the "Keyboard Setup Assistant" which attempts to configure a new USB keyboard. You can safely close the popup window and ignore this.
 
-Double click the *Reset* button on the M4. The large round LED should turn green and **CIRCUITPY** will be renamed **METROM4BOOT**.  *You can safely ignore any warnings about the drive not being properly removed.*
+If the drive is named **CIRCUITPY**, open it and delete all the files it contains (e.g. by dragging them to the trash).  Next, double click the *Reset* button on the M4. The large round LED should turn green and **CIRCUITPY** will be renamed **METROM4BOOT**.  *You can safely ignore any warnings about the drive not being properly removed.*
+
+If the drive is already named **METROM4BOOT** you can skip the delete and double click steps above.
 
 Download the appropriate bootloader image to your computer then drag and drop it onto the **METROM4BOOT** USB drive:
  - [M4 Express](https://github.com/adafruit/uf2-samdx1/releases/download/v3.13.0/update-bootloader-metro_m4-v3.13.0.uf2)
@@ -84,7 +86,7 @@ To install an additional library, you just copy it into the `lib` folder of your
 
 Since we are running CircuitPython 7.1.0, we need to install libraries from the 7.x bundle (we are using 7.x from the [20220105 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20220105)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](E4S-libaries-7.x.zip) with the libraries needed by the following kit components:
+Download and expand [this zip file](E4S-libraries-7.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure sensor
  - multi-spectrum light sensor
