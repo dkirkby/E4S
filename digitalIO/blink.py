@@ -4,6 +4,12 @@
 # Blink an external LED connected to D12 of a METRO board.
 # Use a 1K resistor in series with the LED, either before or after the LED.
 # The LED will only work in one orientation so you may need to flip it before it blinks.
+#
+# Alternatively, change D12 to D13 below which uses the red LED and series resistor
+# on the METTRO board itself.
+#
+# For the Pi Pico, use GP25 for the on-board green LED or any GP0-28 for an
+# external LED.
 import board
 import digitalio
 import time
