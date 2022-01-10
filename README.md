@@ -8,8 +8,9 @@ This course uses a [standard component kit](https://docs.google.com/spreadsheets
 
 ![Image of Kit Components](https://raw.githubusercontent.com/dkirkby/E4S/master/img/kit.jpg)
 
-There are two components (9V supply, AC relay) that assume North American AC power.  The kit's jumper wires and cables are not shown in the photo.  If you are ordering components yourself, there is some soldering required to
-attached headers.
+There are two components (9V supply, AC relay) that assume North American AC power.  The kit's jumper wires and cables are not shown in the photo.  If you are ordering components yourself, there is some soldering required to attach headers (as noted in the [spreadsheet](https://docs.google.com/spreadsheets/d/1fDZMHFTLSX1ApLEP1mGgGuPPSofG94EePxDg_fpRnkw/edit#gid=0)).
+
+The kit fits comfortably in a 6 quart plastic storage box and weighs about 2.0 pounds.
 
 Most of the components are designed and manufactured by [adafruit](https://www.adafruit.com/about) which provides excellent [supporting documentation and tutorials](https://learn.adafruit.com/).
 
