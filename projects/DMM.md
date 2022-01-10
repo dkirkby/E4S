@@ -1,6 +1,16 @@
 # Project: Digital Multimeter
 
-In this project, you will use your M4 board to create a simple digital multimeter (DMM).
+In this project, you will use your M4 board to create a simple [digital multimeter](https://en.wikipedia.org/wiki/Multimeter) (DMM). You can use either the M4 express or airlift lite for this project.
+
+You have probably already used a commercial multimeter, either as a handheld device like this:
+
+![handheld multimeter](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Fluke87-V_Multimeter.jpg/285px-Fluke87-V_Multimeter.jpg)
+
+or a more expensive and accurate benchtop instrument like this:
+
+![benchtop multimeter](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Benchtop_multimeter.jpg/591px-Benchtop_multimeter.jpg)
+
+A multimeter can measure many properties of an analog signal but the most commonly needed measurement is a constant (DC) voltage level, so that is what we will focus on here.
 
 ## Analog Voltage Measurement
 
@@ -21,25 +31,29 @@ while True:
 ```
 Enter this program using the Mu editor and save to your M4 device. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.
 
-With the black and red wires floating (i.e. not connected to anything at their other end), the printed values should be varying randomly.  However, they are not quite random: what pattern do you notice in the hex values?
+With the black and red wires floating (i.e. not connected to anything at their other end), the displayed values will likely be fluctuating since the A0 pin does not have a low-impedance path to any established voltage level.
 
 ## Conversion to Volts
 
 The printed values are in "analog-to-digital units" (ADU) so we still need to convert them to physical units.
-To do this, connect the red wire to a different GND so we know the input is 0V.  Record the typical value you observe.  Note that we can leave the black wire floating since it already uses the same 0V (GND) reference as
+To do this, plug the free end of the red wire into a second GND pin on the M4, so we know the A0 voltage is 0V (relative to the black wire).  Record the typical (decimal) value you observe.  Note that we can leave the black wire floating since it already uses the same 0V (GND) reference as
 the voltage source we are measuring (which is itself!)
 
-Next, connect the red wire to 3.3V and record the typical value you observe.  Now write down a formula to
+Next, connect the red wire to 3.3V and record the typical (decimal) value you observe.  Now write down a formula to
 convert from ADUs to Volts, assuming a linear relationship.  Modify your code to print this value.
 
-Because the analog-to-digital conversion process includes some random noise you might sometimes obtain
-ADU values outside of your nominal 0 - 3.3V range.  In this case, you should "clamp" your result, for example:
-```
-ADU = min(ADUhi,max(ADUlo, ADU))
-```
+Predict what ADU value you expect with a 5.0V input.  Go ahead and try this by connected the red wire to the M4 5V pin, and compare with your prediction.  Since the `ADU` value is represented by only 16 bits, it has a possible range from zero to `2**16 - 1`, which equals 65,535 or $ffff in hex.  Does your 5V ADU value make sense with this information?  Note that you should generally be careful about introducing voltages to your circuit that exceed the power supply limits (which are 0 to 3.3V for most of the M4 board).  However, in this case, the A0 input has sufficient protection that 5V will not damage it, but a larger voltage could.
 
-The `ADU` value is represented by 16 bits, so has a range from zero to `2^16-1` which equals 65,535 or $ffff in hex.  What do you expect would happen if you try to measure the 5V level on the M4?  Go ahead and try it.  Does
-the result make sense?  (The A0 input has sufficient protection that 5V will not damage it, but a larger voltage could).
+Because the analog-to-digital conversion process includes some random noise you might sometimes obtain
+ADU values outside of your nominal 0 - 3.3V range.  To protect against this, modify your code to "clamp" the conversion result, for example:
+```
+ADU = min(ADUhi, max(ADUlo, ADU))
+```
+where `ADUlo` and `ADUhi` are the average conversion results for 0 and 3.3V, respectively.
+
+Note that the voltages we measure are always relative to the M4 GND potential. Contrast this with
+a real multimeter that measures the "differential" voltage between its two probes. In that case,
+what is the purpose of the black jumper wire in our circuit?  The answer is that the purpose of the black wire is to anchor a floating external voltage source (such as a battery) to the GND level established by the M4.  If you have a 1.5V battery handy (AA, AAA, etc) try measuring its voltage with and without the black wire connected to its negative terminal.
 
 ## Resistance Measurement
 
@@ -84,3 +98,5 @@ instead take a moment to think about how you might do this, and reflect on why m
 separate inputs to measure voltage (or resistance) and current.
 
 Think about how you might automate the manual calibration procedure we used by adding a push button to initiate a calibration sequence.  What hardware and firmware changes would be required?
+
+How does your M4 convert an analog voltage level into a corresponding digital value?  There are many possible analog-to-digital conversion (ADC) techniques, listed [here](https://en.wikipedia.org/wiki/Analog-to-digital_converter#Types), but the M4 likely uses the [sigma delta method](https://en.wikipedia.org/wiki/Delta-sigma_modulation#Analog_to_digital_conversion) to achieve its high sampling rate.
