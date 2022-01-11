@@ -17,7 +17,7 @@ A multimeter can measure many properties of an analog signal but the most common
 Start by connecting a long black jumper wire to GND and a long red jumper wire to A0.
 
 You can read the voltage on pin A0 using:
-```
+```python
 import time
 import board
 import analogio
@@ -29,7 +29,13 @@ while True:
     print(f'ADU = {ADU:5d} (dec) = ${ADU:04x} (hex)')
     time.sleep(0.5)
 ```
-Enter this program using the Mu editor and save to your M4 device. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.
+Enter this program using the Mu editor and save to your M4 device. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.  If you using linux and get an error about accessing the serial port device, you will need to update your permissions[^linuxperms].
+
+[^linuxperms]: On ubuntu and debian, this command should give your user account access to the serial port:
+  ```
+  sudo adduser $USER dialout
+  ```
+  Other flavors of linux may require something different.
 
 With the black and red wires floating (i.e. not connected to anything at their other end), the displayed values will likely be fluctuating since the A0 pin does not have a low-impedance path to any established voltage level.
 
