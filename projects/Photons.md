@@ -8,7 +8,7 @@ The schematics for this circuit are below:
 ## Analog Waveform Output
 
 Construct schematic 1 and enter the following program to drive the M4 A0 pin with a "sawtooth" waveform:
-```
+```python
 import time
 import board
 import analogio
@@ -42,7 +42,7 @@ Details on the Mu editor plotter are [here](https://codewith.mu/en/tutorials/1.0
 ## Analog Waveform Input
 
 Connect a jumper wire to the M4 A1 as shown in schematic 2.  Modify your code to configure A1 for analog input, then read and display its value within the loop (changes are indicated with comments):
-```
+```python
 import time
 import board
 import analogio
@@ -59,7 +59,7 @@ ADU0 = LO
 while True:
     A0.value = ADU0
     ADU1 = A1.value                # new
-    print((ADU0,ADU1))             # edited
+    print((ADU0, ADU1))             # edited
     time.sleep(0.05)
     ADU0 += STEP
     if ADU0 > HI:
@@ -82,14 +82,14 @@ There are two distinct phases to each cycle: describe them.  How is the LED emis
 The roughly constant voltage across the diode during the second phase is referred to as the *Forward Voltage* in the datasheet, and is also known as the "diode drop".  Refer to Figure 1 in the datasheet to see that the
 forward voltage is not actually constant, but depends on the forward current flowing through the LED.
 
-Write an equation for the forward current `iLED` flowing through the LED in terms of the voltages V0 at A0 and V1 at A1, and the known resistance R.  Modify your code to calculate and this current in milliamps (mA).  You can use the following conversion from ADU to volts (where we are neglecting the small offset you measured in the [DMM Project](DMM.md)):
-```
+Write an equation for the forward current `iLED` flowing through the LED in terms of the voltages V0 (at pin A0) and V1 (at pin A1), both in Volts, and the known resistance R in Ohms.  Modify your code to calculate and this current in milliamps (mA).  You can use the following conversion from ADU to volts (where we are neglecting the small offset you measured in the [DMM Project](DMM.md)):
+```python
     V0 = ADU0 * 3.3 / 0xffff
     V1 = ADU1 * 3.3 / 0xffff
 ```
 Modify your code to print `V0` and `iLED` for display in the plotter:
-```
-    print((V0,iLED,))
+```python
+    print((V0, iLED,))
 ```
 
 ## Startup Calibration
@@ -100,7 +100,7 @@ To restrict our cycle to the second phase, we need to find a suitable value of t
 We could manually calibrate this circuit and hardcode the resulting `LO` value, but this is not a very good design since it only works for your particular circuit, and might not even work well tomorrow when the temperature is different.  Alternatively, you could pay for more expensive resistors and LEDs with factory calibrated parameters so that different circuits would have similar calibrations.  However, the best solution is generally to use uncalibrated (cheap) components and then leverage the processing power of your design to implement a self-calibration sequence at start up (power on or system reset).
 
 To do this, add the following skeleton functions to the top of your code:
-```
+```python
 ...
 A0 = analogio.AnalogOut(board.A0)
 A1 = analogio.AnalogIn(board.A1)
@@ -129,7 +129,8 @@ When these functions are implemented correctly, you should see the graph of `iLE
 
 ## A Different Function: Apple Power
 
-Modify your loop to modulate the LED brightness using a smooth sine function with a period of about 5 seconds, similar to the glowing logo on some laptops.  Remove the `print` and `time.sleep` statements from your code and watch the LED to fine tune your code.  You will need to `import math` to evaluate the sine function.
+Modify your loop to modulate the LED brightness using a smooth sine function with a period of about 5 seconds, similar to the glowing logo on some laptops.  Remove the `print` and `time.sleep` statements from your code and watch the LED to fine tune your code.  You will need to `import math` to evaluate the [sine function](https://docs.python.org/3/library/math.html#math.sin). Note
+that the trig functions all expect their input angles in radians.
 
 ## Photon Control
 
@@ -137,7 +138,7 @@ Your design is now directly controlling the forward current flowing through the 
 
 Modify your code so that a constant forward current of 0.1mA flows through the LED.  Hint: you can do this by passing a value of `y0 = ADU0-ADU1` to `calibrate()` that is different from the default `y0 = 0`.  Use the
 resulting value in ADU to set A0 for the desired LED current. In your program's main loop, toggle the LED current on and off, once per second, i.e.
-```
+```python
 while True:
     A0.value = ADU0
     time.sleep(0.5)
@@ -159,6 +160,6 @@ Figure 6 of the datasheet shows the LED's **field pattern** of relative luminous
 Figure 5 of the datasheet shows that the LED photons are emitted within a narrow range of wavelengths centered
 around 620 nanometers (nm).
 
-Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Assume that the LED is always on for the purposes of this calculation, i.e. you do not need to account for the slow on/off toggle. Modify your program to print the rates at 2,4,6,...,40 meters.
+Combine the factors above to estimate the rate of 620nm photons entering your eye, per second, at an 80 degree viewing angle, as a function of distance from the LED in meters.  Assume that the LED is always on for the purposes of this calculation, i.e. you do not need to account for the slow on/off toggle. Modify your program to calculate and print the rates at 2,4,6,...,40 meters (even values only).
 
-Find a dark location and determine the distance at which you can just barely detect the blinking LED with your eye.  What is your corresponding detection threshold rate in photons per second?  Note that the human eye can detect single photons under the [special conditions](https://en.wikipedia.org/wiki/Absolute_threshold#Vision) but your experiment will likely be limited by the ambient light levels.  Covering the M4's on-board LEDs should help.
+Find a dark location and determine the distance at which you can just barely detect the blinking LED with your eye.  What is your corresponding detection threshold rate in photons per second?  Note that the human eye can detect single photons under [special conditions](https://en.wikipedia.org/wiki/Absolute_threshold#Vision) but your experiment will likely be limited by the ambient light levels.  You can cover the M4's on-board LEDs to reduce these ambient levels.

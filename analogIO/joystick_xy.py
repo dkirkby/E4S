@@ -2,6 +2,12 @@
 # https://github.com/dkirkby/E4S
 #
 # Read and print joystick (x,y) coordinates as analog values.
+#
+# Make the following connections between the joystick module and microcontroller board:
+# Joystick VCC == 3.3V
+# Joystick GND == GND
+# Joystick Xout == A0
+# Joystick Yout == A1
 import board
 import analogio
 import time
