@@ -1,13 +1,23 @@
 # UCI Electronics for Scientists
 # https://github.com/dkirkby/E4S
 #
-# Read and print joystick (x,y) coordinates as analog values.
+# Read and display joystick (x,y) coordinates as analog values.
 #
-# Make the following connections between the joystick module and microcontroller board:
-# Joystick VCC == 3.3V
-# Joystick GND == GND
-# Joystick Xout == A0
-# Joystick Yout == A1
+# Make the following connections between the joystick module and microcontroller board
+# (either of the M4s or the Pico):
+#
+# Joystick    M4     Pico
+# ---------  -----  ------
+#   GND       GND  = GND
+#   VCC       3.3V = 3.3V(OUT)
+#   Xout      A0   = ADC0
+#   Yout      A1   = ADC1
+#
+# Pi Pico pinouts are list here:
+# https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/pinouts
+#
+# Open the Plotter tab in the Mu editor to see a plot of the numbers printed.
+
 import board
 import analogio
 import time
