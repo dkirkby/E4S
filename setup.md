@@ -61,6 +61,7 @@ or (for M4 Airlift Lite):
 Adafruit CircuitPython 7.1.0 on 2021-12-28; Adafruit Metro M4 Airlift Lite with samd51j19
 Board ID:metro_m4_airlift_lite
 ```
+If you deleted all the files on your M4 before installing CircuitPython, `boot_out.txt` will be the only file you see now.
 
 ### Pi Pico Instructions
 
@@ -76,13 +77,13 @@ Adafruit CircuitPython 7.1.0 on 2021-12-28; Raspberry Pi Pico with rp2040
 Board ID:raspberry_pi_pico
 ```
 
-You now have three microcontroller boards all called **CIRCUITPY** but you will not need to connect more than one at a time via USB.
+You now have three microcontroller boards, all called **CIRCUITPY**, but you will not need to connect more than one at a time via USB.
 
 ## Libraries
 
 Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](hello.md).
 
-To install an additional library, you just copy it into the `lib` folder of your CIRCUITPY usb drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
+To install an additional library, you just copy it into a `lib` folder of your **CIRCUITPY** USB drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
 Since we are running CircuitPython 7.1.0, we need to install libraries from the 7.x bundle (we are using 7.x from the [20220105 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20220105)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
@@ -92,7 +93,9 @@ Download and expand [this zip file](E4S-libraries-7.x.zip?raw=true) with the lib
  - multi-spectrum light sensor
  - 9DoF inertial measurement unit
 
-The expanded directory contains a mixture of folders and files with an `.mpy` extension.  Copy all of these into the `lib` folder on your the CIRCUITPY USB drive for each of your microcontroller boards.  Note that copying anything to CIRCUITPY (via the Mu editor or otherwise) causing any running program to be restarted.
+Open your **CIRCUITPY** USB drive and create an empty folder named `lib`. (If you did not delete
+files earlier, you may already have a `lib` folder). The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
+Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
 
 You are now ready to use these libraries.
 
@@ -107,8 +110,9 @@ we will start with the [Mu Editor](https://codewith.mu/) which is specifically d
 
 Visit this [download page](https://codewith.mu/en/download) to select the appropriate official installer for your computer.
 
-The first time you run the Mu Editor, you will be prompted to select a [mode](https://codewith.mu/en/tutorials/1.0/modes): select the *Adafruit CircuitPython* mode (or, *CircuitPython* if that is not available).  Whenever you
-are running Mu, you can view and change your mode by clicking on the *Mode*  button in the toolbar.
+The first time you run the Mu Editor, you will be prompted to select a [mode](https://codewith.mu/en/tutorials/1.0/modes): select the *Adafruit CircuitPython* mode (or, *CircuitPython* if that is not available).  Whenever you are running Mu, you can view and change your mode by clicking on the *Mode*  button in the toolbar.
+
+The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` and you will be prompted for a name: use `code.py`.
 
 I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22).
 

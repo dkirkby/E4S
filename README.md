@@ -14,7 +14,7 @@ The kit fits comfortably in a 6 quart plastic storage box and weighs about 2.0 p
 
 Most of the components are designed and manufactured by [adafruit](https://www.adafruit.com/about) which provides excellent [supporting documentation and tutorials](https://learn.adafruit.com/).
 
-The two microcontroller boards (Metro M4) are programmable and require some initial setup: instructions are [here](setup.md).
+The three included microcontroller boards (2 x Metro M4 and a Pi Pico) are programmable and require some initial setup: instructions are [here](setup.md).
 
 For basic examples that demonstrate each of the kit's components, start [here](hello.md).
 
