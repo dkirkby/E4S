@@ -1,8 +1,8 @@
 # UCI Electronics for Scientists
 # https://github.com/dkirkby/E4S
 #
-# Demonstrate PWM output driving the internal red LED.
-# https://circuitpython.readthedocs.io/en/7.0.x/shared-bindings/pulseio/index.html
+# Demonstrate PWM output driving the on-board LED.
+# https://circuitpython.readthedocs.io/en/7.1.x/shared-bindings/pwmio/index.html#pwmio.PWMOut
 #
 # For the M4, use board.D13 for the on-board LED.
 # For the Pi Pico, use board.GP25 for the on-board LED.
