@@ -2,17 +2,19 @@
 # https://github.com/dkirkby/E4S
 #
 # Demonstrate PWM output driving the internal red LED.
-# https://circuitpython.readthedocs.io/en/6.0.x/shared-bindings/pulseio/index.html
-# Note that PWMOut is moving to a new pwmio module.
+# https://circuitpython.readthedocs.io/en/7.0.x/shared-bindings/pulseio/index.html
+#
+# For the M4, use board.D13 for the on-board LED.
+# For the Pi Pico, use board.GP25 for the on-board LED.
 import time
 import board
-import pulseio
+import pwmio
 
 # Use 2 to see individual flashes, 100 for apparent dimming, 20 to see the transition.
 FREQUENCY = 2 # Hertz
 
 # Could also drive an external LED from any digital pin (via a series resistor).
-PWM = pulseio.PWMOut(board.D13, frequency=FREQUENCY)
+PWM = pulseio.PWMOut(board.GP25, frequency=FREQUENCY)
 
 while True:
     for duty_cycle_divisor in (2, 4, 8, 16, 32):
