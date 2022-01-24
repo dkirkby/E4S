@@ -14,7 +14,7 @@ import pwmio
 FREQUENCY = 2 # Hertz
 
 # Could also drive an external LED from any digital pin (via a series resistor).
-PWM = pulseio.PWMOut(board.GP25, frequency=FREQUENCY)
+PWM = pwmio.PWMOut(board.GP25, frequency=FREQUENCY)
 
 while True:
     for duty_cycle_divisor in (2, 4, 8, 16, 32):
