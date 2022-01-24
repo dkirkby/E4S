@@ -14,6 +14,9 @@
 # M4 GND - GND strip (only need to connect one of these)
 # M4 D2 - DIN strip
 # M4 3.3V - 5VDC strip (less than 5V is ok)
+#
+# For the Pi Pico, use GP28 instead of D2 since that is conveniently
+# close to the GND and 3V3(OUT) pins.
 import time
 import board
 import neopixel

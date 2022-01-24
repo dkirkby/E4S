@@ -4,8 +4,7 @@ In this project you will explore how two circuits can communicate. You will firs
 
 ## Build the Transmitter
 
-In this project, you will use both M4: one to transmit and one to receive.  Only one M4 can be connected to the Mu editor at once, with convenient debugging with print statements, and the
-other will be powered and running independently using a 9VDC supply.
+In this project, you will use both of the M4 microcontroller boards: one to transmit and one to receive.  Only one M4 can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently using the 9VDC supply.
 
 Connect one M4 to the Mu editor and set it up to transmit using the following program:
 ```
@@ -58,7 +57,8 @@ Although this is a simple communication protcol, there are still a few things we
  - How many bits are sent together as a single message?
  - How is each message "framed", i.e. how can a receiver identify the start of a new message?
 
-Study the code above and make a note of your answers to each question.  We use the [array library](https://docs.python.org/3/library/array.html) instead of the more general purpose python lists in the `transmit` function to provide faster and more reproducible timing.
+Study the code above carefully and make a note of your answers to each question.  We use the [array library](https://docs.python.org/3/library/array.html) instead of the more general purpose python lists in the `transmit` function to provide faster and more reproducible timing. Notice how the
+code specifies voltage levels at a logical level, as either `False` (0V) or `True` (3.3V).
 
 The timing diagrams below show graphs of voltage versus time for a single 4-bit message transmitted with `TX_IDLE_VALUE=False` (top) or `TX_IDLE_VALUE=True` (bottom):
 
