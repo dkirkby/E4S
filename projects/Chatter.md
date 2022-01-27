@@ -7,7 +7,7 @@ In this project you will explore how two circuits can communicate. You will firs
 In this project, you will use both of the M4 microcontroller boards: one to transmit and one to receive.  Only one M4 can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently using the 9VDC supply.
 
 Connect one M4 to the Mu editor and set it up to transmit using the following program:
-```
+```python
 import time
 import array
 import board
@@ -88,7 +88,7 @@ Instead of writing a separate receiver program, we will add receiving capability
 Connect the second M4 to the USB cable and download the same transmitter program to get started. Check that the red LEDs on both M4s are flashing the same sequence (although not in synch with each other).
 
 We first need to configure the receiver's digital input by adding these lines:
-```
+```python
 # Configure the receive digital input.
 RX_IDLE_VALUE = False
 RX = digitalio.DigitalInOut(board.D0)
@@ -102,17 +102,17 @@ Next, make the electrical connection that constitutes our "bus":
  - Connect the transmitter's D1 (TX) to the receiver's D0 (RX).
 Note that we are using D0 and D1 for this project since these are already labeled RX and TX on the M4 circuit board, but any pair of digital pins would work equally well.
 
-Next, paste the following skeleton receive function:
-```
+Next, use the following skeleton receive function:
+```python
 def receive():
     # Allocate an efficient array of the received bits.
     bits_array = array.array('B', [0] * MSG_BITS)
     # Loop until we find a valid start bit.
     while True:
-        # Wait for the bus to be idle.
+        # Wait for the bus level to be RX_IDLE_VALUE (if it isn't already)
         # ...
         print('idle start')
-        # Wait for the minimum idle period.
+        # Keep checking for RX_IDLE_VALUE for the minimum idle period.
         wait_until = time.monotonic() + MIN_IDLE_BITS * BIT_DURATION
         # ...
         print('min idle completed')
@@ -129,8 +129,22 @@ def receive():
         print(bits_array[i])
     return bits_array
 ```
-Why does the code sleep for a `HALF_BIT_DURATION` before sampling each bit of the message? You will need to fill in the three `...` sections before this code will work.  You will also need to change the main loop:
+We control the timing of our code using the [sleep](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.sleep) and [monotonic](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.monotonic) functions.  The sleep function is easier to use but does not allow us to do anything else while we wait the requested amount of time.  The monotonic function operates at a lower level, just reporting the current time (as elapsed seconds since an arbitrary zero), but allows us to implement an active delay, where we do something useful while waiting (such as checking a logic level). Here is a simple standalone example of using monotonic to wait 5 seconds while printing periodic update messages:
+```python
+import time
+
+now = time.monotonic()
+wait_until = now + 5
+
+while now < wait_until:
+    now = time.monotonic()
+    print('now', now, 'remaining', wait_until - now)
+    time.sleep(1)
 ```
+Since the monotonic time is represented as a floating-point number, you should never test for `now == wait_until` since that is very unlikely to be exactly true.  Instead, always use an inequality test, as in the example above.
+
+Why does the code sleep for a `HALF_BIT_DURATION` before sampling each bit of the message? You will need to fill in the three `...` sections before this code will work.  You will also need to change the main loop:
+```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     #transmit([1,0,1,0])
@@ -163,7 +177,7 @@ MSG_BITS = 8
 ```
 Finally, remove (or comment out) the `print` calls in your `receive` function (since they would
 slow us down now) and update the main loop:
-```
+```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     transmit([1,0,1,0,0,1,1,0]); time.sleep(1)
@@ -174,7 +188,7 @@ After you download this code, your slow receiver is now a fast transmitter. Note
 sequence of red LED flashes.  Although this protocol transmits each message 100 times faster, we added a one second delay between messages in the main loop so you can distinguish the individual messages.
 
 Repeat the untethering steps above to power your fast transmitter from the 9VDC supply. Connect the second M4 (the original slow transmitter) to usb and download the same program with the following small change required to make it a fast receiver:
-```
+```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     #transmit([1,0,1,0,0,1,1,0]); time.sleep(1)
@@ -197,7 +211,7 @@ We have now established a communication protocol that operates at 200 bits per s
 Most communication protocols are organized into [stacks](https://en.wikipedia.org/wiki/Protocol_stack) of progressively more abstract layers, each one building on the one below it.  For example, a USB keyboard uses a [human-interface device](https://en.wikipedia.org/wiki/USB_human_interface_device_class) protocol layered above a lower-level bit oriented electrical protocol.  Similarly, the web sends HTTP messages, defined in a protocol above a tall stack of lower-level networking protocols.
 
 We will now implement a layer to exchange text messages that builds on top of our existing "high-speed" bit protocol.  Starting with the sending side, we can send each character like this:
-```
+```python
 def send_text(text):
     """Send each character of the text then 8 zeros.
     """
@@ -210,7 +224,7 @@ Note that we need some way to indicate when a message is complete.  We accomplis
 a sequence of 8 zeros, which is not a valid character. (Many programming languages use this same convention to indicate where a string ends in memory.)
 
 This `send_text` function relies on a `char_to_bits` function that you will need to complete:
-```
+```python
 def char_to_bits(char, nbits=8):
     """Encode a single character as a sequence of nbit binary values
     representing its numeric code, starting with the least-significant bit.
@@ -223,7 +237,7 @@ Since this function makes no use of any special M4 features, you can test it in 
 Test your `char_to_bits` by checking that `A` returns `[1, 0, 0, 0, 0, 0, 1, 0]` and `z` returns `[0, 1, 0, 1, 1, 1, 1, 0]`.  If your arrays are backwards, you have implemented most-significant bit (MSB) ordering instead of the desired LSB ordering.
 
 Next, implement the receiving end of this text message protocol with:
-```
+```python
 def get_text():
     """Get characters until we see 8 zeros.
     """
@@ -237,13 +251,13 @@ def get_text():
             return text
 ```
 You will need to implement the `bits_to_char` function to make this work but, again, you can develop and test it in any python environment.  The [chr function](https://docs.python.org/3/library/functions.html#chr) should help. A useful way to test pairs of functions like these is to perform a round trip, e.g.
-```
+```python
 print(bits_to_char(char_to_bits('A')))
 ```
 If the result is not `A`, then something is wrong...
 
 Finally, update your main loop:
-```
+```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     send_text('Hello, world!'); time.sleep(1)
@@ -286,7 +300,7 @@ Verify that blocking the light path between the IR pairs suspends the communicat
 ## RSVP
 
 All of our communication so far has been in one direction.  In this final section, you will implement bidirectional communication.  Since we have implemented the transmit and receive functions in a single program, the only firmware change needed to accomplish this is a new main loop:
-```
+```python
 msg = 'Hello, world!'
 
 while True:
