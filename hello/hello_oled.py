@@ -27,7 +27,7 @@ import adafruit_displayio_ssd1306
 displayio.release_displays()
 
 i2c = board.I2C()
-display_bus = displayio.I2CDisplay(i2c)
+display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
 
 WIDTH = 128
 HEIGHT = 32
@@ -38,14 +38,13 @@ DISPLAY_LINES = 3
 LINE_HEIGHT = 12
 MAX_DISPLAY_CHARS = 21
 
-splash = displayio.Group(max_size=DISPLAY_LINES)
+splash = displayio.Group()
 display.show(splash)
 display_lines = []
 
 for i in range(DISPLAY_LINES):
     display_lines.append(
-        label.Label(terminalio.FONT, text='', color=0xffffff, x=0,
-        y=LINE_HEIGHT * i + 3, max_glyphs=MAX_DISPLAY_CHARS))
+        label.Label(terminalio.FONT, text='', color=0xffffff, x=0, y=LINE_HEIGHT * i + 3))
     splash.append(display_lines[-1])
 
 ALIGN_LEFT = 0
