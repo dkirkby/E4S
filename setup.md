@@ -12,6 +12,8 @@ The steps described below ensure that you have current working versions of these
 
 These instructions were last updated in Jan 2022. Instructions for Jan 2021 are archived [here](setup2021.md).
 
+The Pico board was added in 2022. More details on Pico and comparisons with M4 are [here](Pico.md).
+
 ## Update the bootloader of both METRO boards to v.3.13.0
 
 Connect the M4 to your computer via USB.  It should appear on your desktop as a new USB drive.
