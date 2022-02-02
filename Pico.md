@@ -49,3 +49,18 @@ import busio
 
 i2c = busio.I2C(sda=board.GP0, scl=board.GP1)
 ```
+To establish an I2C with the same code running on a board with dedicated SDA,SCL pins or a Pico, use:
+```python
+import board
+import busio
+
+try:
+    # SDA, SCL are predefined on M4
+    sda, scl = board.SDA, board.SCL
+except:
+    # Use SDA=GP0, SCL=GP1 on Pico
+    sda, scl = board.GP0, board.GP1
+
+i2c = busio.I2C(sda=sda, scl=scl)
+```
+This pattern is used in the `hello_i2c,imu,multispec,oled,pressure` examples [here](hello/).
