@@ -16,6 +16,17 @@
 import time
 
 import board
+import busio
+
+try:
+    # SDA, SCL are predefined on M4
+    sda, scl = board.SDA, board.SCL
+except:
+    # Use SDA=GP0, SCL=GP1 on Pico
+    sda, scl = board.GP0, board.GP1
+
+i2c = busio.I2C(sda=sda, scl=scl)
+
 import displayio
 import terminalio
 
@@ -26,7 +37,6 @@ import adafruit_displayio_ssd1306
 
 displayio.release_displays()
 
-i2c = board.I2C()
 display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
 
 WIDTH = 128

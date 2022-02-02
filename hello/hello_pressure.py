@@ -18,12 +18,20 @@
 import time
 
 import board
+import busio
+
+try:
+    # SDA, SCL are predefined on M4
+    sda, scl = board.SDA, board.SCL
+except:
+    # Use SDA=GP0, SCL=GP1 on Pico
+    sda, scl = board.GP0, board.GP1
+
+i2c = busio.I2C(sda=sda, scl=scl)
 
 # This file is not in the base CircuitPython installation.
 # See instructions above for installing it and its dependencies.
 import adafruit_dps310
-
-i2c = board.I2C()
 
 tpsensor = adafruit_dps310.DPS310(i2c)
 

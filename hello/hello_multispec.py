@@ -19,12 +19,20 @@ import time
 import math
 
 import board
+import busio
+
+try:
+    # SDA, SCL are predefined on M4
+    sda, scl = board.SDA, board.SCL
+except:
+    # Use SDA=GP0, SCL=GP1 on Pico
+    sda, scl = board.GP0, board.GP1
+
+i2c = busio.I2C(sda=sda, scl=scl)
 
 # These files are not in the base CircuitPython installation.
 # See instructions above for installing them.
 import adafruit_as7341
-
-i2c = board.I2C()
 
 multispec = adafruit_as7341.AS7341(i2c)
 
