@@ -1,49 +1,53 @@
 # UCI Electronics for Scientists
 # https://github.com/dkirkby/E4S
 #
-# Digitize the audio signal captured by the MEMS microphone.
+# Digitize the audio signal captured by either the MEMS or Electret microphone.
 #
-# Connect:
-# Mic Vin - M4 3.3V
-# Mic GND - M4 GND
-# Mic DC - M4 A0
+# There are 3 wires to connect, depending on your microphone + microcontroller:
+#
+# MEMS Electret |  M4   Pico
+# --------------+----------------
+#  Vin    Vcc   | 3.3V  3V3(OUT)
+#  DC     OUT   | A0    A0
+#  GND    GND   | GND   GND
+# --------------+----------------
+#
+# The M4 boards can sample the ADC at 28KHz while the Pico achieves 80KHz.
+# The electret module is more sensitive than the MEMS module since it includes an
+# amplifier.  It also has about double the resolution since it provides a DC offset
+# of 50% full scale, instead of about 22% fullscale for the MEMS module.
+
 import time
+import math
 
 import board
 import analogio
-import array
 
-BUFFER_SIZE = 1024
-BUFFER_DURATION = 0.1
+LOG10 = math.log(10)
+NSAMPLES = 1024
+FULLSCALE = float(0xffff)
 
 mic = analogio.AnalogIn(board.A0)
 
-buffer = array.array("H", [0] * BUFFER_SIZE)
-
-fullscale = float(0xffff)
-
 while True:
-    print('Sampling...')
-    nsamples = 0
-    start = time.monotonic()
-    stop_by = start + BUFFER_DURATION
-    while (time.monotonic() < stop_by) and (nsamples < BUFFER_SIZE):
-        buffer[nsamples] = mic.value
-        nsamples += 1
-    # Calculate the actual sampling parameters.
-    duration = time.monotonic() - start
-    sampling_rate = nsamples / duration
-    print(f'Captured {nsamples} samples over {duration:.4f}s at {sampling_rate:.1f}Hz.')
-    # Calculate sampled signal statistics.
-    sum = 0
-    sumsq = 0
-    for i in range(nsamples):
-        value = buffer[i]
+    start = time.monotonic_ns()
+    samples = [mic.value for i in range(NSAMPLES)]
+    stop = time.monotonic_ns()
+    # Calculate sampling rate in kHz
+    sampling_rate = 1e6 * NSAMPLES / (stop - start)
+    # Calculate mean and standard deviation of samples in ADU.
+    sum, sumsq = 0, 0
+    for i in range(NSAMPLES):
+        value = samples[i]
         sum += value
         sumsq += value * value
-    mean = sum / nsamples
-    stddev = sumsq / nsamples - mean * mean
-
-    print(f'Sample mean = {mean:.1f} ADU ({1e2*mean/fullscale:.1f}%), std dev = {stddev:.1f} ADU ({stddev/fullscale:.1f}%)')
-
-    time.sleep(0.5)
+    mean = sum / NSAMPLES
+    stddev = math.sqrt(sumsq / NSAMPLES - mean * mean)
+    # Convert to percentages of full scale.
+    mean *= 100 / FULLSCALE
+    stddev *= 100 / FULLSCALE
+    # Calculate a logarithmic "decibel" loudness to display as a horizontal bar.
+    loudness = round(25 * max(0, math.log(stddev)/LOG10 + 2))
+    bar = '#' * loudness
+    print(f'rate:{sampling_rate:4.1f}kHz mean:{mean:.1f}% stddev:{stddev:.3f}% {bar}')
+    time.sleep(0.1)
