@@ -42,9 +42,10 @@ The visual feedback for this project is based on two angles that you can calcula
  - **tilt**: the angle of the IMU y axis relative to "level", i.e. a plane tangent to the earth's surface.
  - **turn**: the angle of the IMU y axis relative to the component of the magnetic field in the IMU's x-y plane.
 
-These calculations will require trig functions, which are available in the [math library](https://circuitpython.readthedocs.io/en/6.0.x/shared-bindings/math/index.html).  Most trig functions work in radians but you should convert your angles to degrees (and there is a `math` function for that).
+These calculations will require trig functions, which are available in the [math library](https://circuitpython.readthedocs.io/en/6.0.x/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for
+display purposes (and there is a `math` function for that).
 
-Your angles should be in the 360-degree range (-180, +180) degrees, but the inverse trig functions `acos`, `asin` and `atan` return results only within a 180-degree range.  Therefore you will need to use the `atan2` function, documented [here](https://docs.python.org/3/library/math.html#math.atan2).
+Your angles should be in the 360-degree range (-180, +180) degrees, but the inverse trig functions `acos`, `asin` and `atan` return results only within a 180-degree range, i.e. using only 2 out of the 4 possible quadrants).  However, there is a useful `atan2` function, documented [here](https://docs.python.org/3/library/math.html#math.atan2), that will return angles in all 4 quadrants.
 
 The sign of your angles should indicate which way to rotate the IMU in order to make its y axis level and pointing towards "north" (the magnetic field measures magnetic north, which is generally different from true north by an [angle that depends on your location](https://en.wikipedia.org/wiki/Magnetic_declination)):
  - tilt < 0 indicates that the +y end of the IMU should be raised.
@@ -56,9 +57,9 @@ Update your code to calculate and display the tilt and turn values every 0.5 sec
 
 ## Implement Visual Tilt Feedback
 
-Update your program to provide visual feedback on the tilt angle following the top section of the guide below, where dark gray indicates that an LED is off and LEDs are numbered 0-7 from left to right. Use a brightness value of 0.05 to avoid any power consumption issues.  Note that the scheme we are using is intended to simulate the bubble in a traditional [spirit level](https://en.wikipedia.org/wiki/Spirit_level).  Ideally, we would combine the neopixel strip with the IMU in a package that keeps them rigidly connected and aligned, but in this prototype they move independently. However, the feedback you implement will make more sense if you keep them approximately aligned with each other.
+Update your program to provide visual feedback on the tilt angle following the top section of the figure below, where dark gray indicates that an LED is off and LEDs are numbered 0-7 from left to right. Use a brightness value of 0.05 to avoid any power consumption issues.  Note that the scheme we are using is intended to simulate the bubble in a traditional [spirit level](https://en.wikipedia.org/wiki/Spirit_level).  Ideally, we would combine the neopixel strip with the IMU in a package that keeps them rigidly connected and aligned, but in this prototype they move independently. However, the feedback you implement will make more sense if you keep them approximately aligned with each other.
 
-Rotate your IMU and verify that only the 9 configurations in the guide are ever displayed and that they correspond to the printed tilt values.  I recommend using `auto_write=False` with `leds.show()` to prevent any intermediate states of the LEDs being displayed momentarily.
+Rotate your IMU and verify that only the 9 configurations in the figure are ever displayed and that they correspond to the printed tilt values.  I recommend using `auto_write=False` with `leds.show()` to prevent any intermediate states of the LEDs being displayed momentarily (see [here](https://circuitpython.readthedocs.io/projects/neopixel/en/latest/api.html) for more details.)
 
 ![Motion visual feedback scheme](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/MotionFeedback.png)
 
@@ -66,7 +67,7 @@ Rotate your IMU and verify that only the 9 configurations in the guide are ever 
 
 Comment out your code for visual tilt feedback and replace it with code for visual feedback on the turn angle, following the bottom section of the guide.
 
-Rotate your IMU and verify that only the 9 configurations in the guide are ever displayed and that they correspond to the printed turn values.
+Rotate your IMU and verify that only the 9 configurations in the figure are ever displayed and that they correspond to the printed turn values.
 
 ## Implement Simultaneous Tilt and Turn Feedback
 
@@ -75,7 +76,7 @@ Finally, update your visual feedback code to overlay the tilt feedback on top of
 Rotate your IMU and verify that you now get it level and pointing north using only the visual feedback provided.
 
 Define two boolean variables near the top of your program
-```
+```python
 TURN_FEEDBACK = True
 TILT_FEEDBACK = True
 ```
