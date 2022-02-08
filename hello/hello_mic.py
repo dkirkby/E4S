@@ -47,7 +47,8 @@ while True:
     mean *= 100 / FULLSCALE
     stddev *= 100 / FULLSCALE
     # Calculate a logarithmic "decibel" loudness to display as a horizontal bar.
-    loudness = round(25 * max(0, math.log(stddev)/LOG10 + 2))
+    # Add eps=1e-8 to avoid log(0).
+    loudness = round(25 * max(0, math.log(stddev+1e-8)/LOG10 + 2))
     bar = '#' * loudness
     print(f'rate:{sampling_rate:4.1f}kHz mean:{mean:.1f}% stddev:{stddev:.3f}% {bar}')
     time.sleep(0.1)
