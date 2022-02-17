@@ -6,10 +6,12 @@ You will learn about and apply two digital signal processing techniques: downsam
 
 ## Build the Circuit
 
-Power down your Pico then connect the Electret microphone as follows:
+Power down your Pico (pinout [here](https://raw.githubusercontent.com/dkirkby/E4S/master/img/pico-pinout.png)) then use the breadboard to connect the Electret microphone to the Pico as follows:
  - Mic Vcc to Pico 3V3(OUT)
- - Mic OUT to Pico A0
+ - Mic OUT to Pico ADC0
  - Mic GND to Pico GND
+
+![DSP breadboard](https://raw.githubusercontent.com/dkirkby/E4S/master/img/DSP-breadboard.jpg)
 
 Start [here](https://en.wikipedia.org/wiki/Electret_microphone) for a brief introduction to electret microphones.  The [adafruit product page](https://www.adafruit.com/product/1063) has more details on the board we are using.
 
@@ -21,7 +23,6 @@ import time
 
 import board
 import analogio
-
 
 NSAMPLES = 512
 
@@ -35,60 +36,62 @@ while True:
     duration_ns = stop - start
     print(f'duration = {1e-6*duration_ns:.1f}ms')
 ```
-Each sampling loop should have a duration of about 19ms.  Add code to calculate and print the sampling rate in KHz. Call this sampling rate `f0`.  How does it compare with the upper limit of typical human hearing?
+Each sampling loop should have a duration of about 6ms.  Add code to calculate and print the sampling rate in KHz. Call this sampling rate `f0` in your code.  How does your calculated value of `f0` compare with the upper limit of typical human hearing?
 
 ## Plot Samples
 
-Update your code to convert the samples in ADU to millivolts, assuming that the 16-bit full scale corresponds to 3.3V.
+Update your code to convert the samples in ADU to millivolts. Note that the Pico analog-to-digital converter resolution is only 12 bits, compared with the 16-bit resolution of the M4. However,
+the Pico and M4 both return 16-bit ADU values where 0xffff represents 3.3V, so the appropriate conversion factor is `3300/0xffff mV/ADU`.
 
-Calculate and display the mean signal in mV and compare this with the DC bias printed on the back silkscreen of the microphone module.
-
-Print the first 100 mean-subtracted sample values so that the Mu Editor will display them in its Plotter window.
-Note that the Plotter window only displays 100 points at a time, so printing more values to plot would only slow us down without showing more data.
+Print the first 100 mean-subtracted sample values so that the Mu Editor will display them in its Plotter window. Note that the Plotter window only displays 100 points at a time, so printing more values to plot would only slow the program down without plotting any more data.
 
 ## Audio Test Setup
 
-Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 440 Hz sine wave through your laptop or phone speaker.  Place the microphone as close as possible to the speaker. With your sample plotting program running, you should see a clear sine wave displayed.  Adjust your setup and volume to get a signal that is 20-30 mV peak to peak.  I recommend some sound insulation between the speaker and your ears since this tone can be annoying.
+Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 1600 Hz sine wave through your laptop or phone speaker (you will need to change the frequency from the default 440 Hz).  Adjust the position of your microphone relative to your laptop or phone speakers and the output volume until the Mu Editor plot clearly shows two cycles of a sine wave with an amplitude of about 250 mV.  Be sure to protect your ears by using the lowest output volume possible and wearing ear plugs if necessary. You can also place your phone and breadboard close together under some sound insulation (jacket, blanket, etc).
 
-Note that the Plotter Window automatically scales so the amplitude can appear to suddenly change if the signal falls below 5mV or above 10mV.
+Note that the Plotter Window automatically scales its y axis so the plot amplitude can appear to suddenly change when the signal level crosses certain thresholds.
 
 ## Enhanced Resolution
 
-Since we are able to read samples relatively fast compared with a 440 Hz tone, we can afford to sacrifice some speed for accuracy.  The easiest way to accomplish this is to average consecutive samples, also known as "downsampling".
+Since we are able to read samples relatively fast compared with a typical audio frequency, we can afford to sacrifice some speed for accuracy.  The easiest way to accomplish this is to average consecutive samples, which is a signal-processing technique known as "downsampling".
 
 Modify your code as follows:
 ```python
-NAVG = 8
+NAVG = 4
 NMEASURE = 512
 NSAMPLES = NAVG * NMEASURE
 ```
 then add code to downsample from `NSAMPLES` samples to `NMEASURE` averages. Call your array of averaged values `measurements`.
 
-Plot the first 100 measurements and compare the new graph with the same audio test setup.  If you did this correctly, the new graph should be compressed along the time axis (by a factor of `NAVG`) and have less noise (by a factor of `sqrt(NAVG)`).  Since `NAVG=2**3` this digital signal processing method has effectively given three extra bits of resolution, at the expense of 8x slower sampling.
+Plot the first 100 measurements and compare the new graph with the same audio test setup.  If you did this correctly, the new graph should be compressed along the time axis (by a factor of `NAVG`) and have less noise (by a factor of `sqrt(NAVG)`).  Since `NAVG=2**2` this digital signal processing method has effectively provided two extra bits of resolution, at the expense of 4x slower sampling.
+
+Verify that, instead of 2 sine cycles, you now see 8 cycles in your plot, with about the same amplitude as before.
 
 ## Enter the Frequency Domain
 
 We now want to estimate the frequency of the sine wave in our audio test setup. Our sequence of samples are in the "time domain", where a sine wave has its familar shape.  To identify the frequency of a periodic signal, it is convenient to work instead in the "frequency domain" where a sine wave is delta function at a location determined by its frequency.  Both domains contain exactly the same amount of information and we can move back and forth using [discrete Fourier transforms](https://en.wikipedia.org/wiki/Discrete_Fourier_transform).
 
-To perform a Fourier transform using the standard formulas requires on the order of `NMEASURE**2` floating-point operations.  However, there is a clever way of reorganizing the calculation known as the [fast Fourier transform (FFT)](https://en.wikipedia.org/wiki/Fast_Fourier_transform) which only requires on the order of `NMEASURE * log(NMEASURE)` operations.  The FFT algorithm is implemented in the CircuitPython [ulab library](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/fft/index.html), which implements a subset of the popular [numpy library](https://numpy.org/).  One restriction of the FFT algorithm is that the input array size must be a power of 2, which is why we chose `512 = 2**9` above. (If you ever need the fastest possible FFT algorithm, check out [FFTW](http://www.fftw.org/) which also relaxes the power of two requirement).
+To perform a Fourier transform using the standard formulas requires on the order of `NMEASURE**2` floating-point operations.  However, there is a clever way of reorganizing the calculation known as the [fast Fourier transform (FFT)](https://en.wikipedia.org/wiki/Fast_Fourier_transform) which only requires on the order of `NMEASURE * log(NMEASURE)` operations.  The FFT algorithm is implemented in the CircuitPython [ulab library](https://docs.circuitpython.org/en/latest/shared-bindings/ulab/numpy/fft/index.html), which implements a subset of the popular [numpy library](https://numpy.org/).  One restriction of the FFT algorithm is that the input array size must be a power of 2, which is why we chose `512 = 2**9` above. (If you ever need the fastest possible FFT algorithm, check out [FFTW](http://www.fftw.org/) which also relaxes the power of two requirement).
 
-Comment out your plotting loop and add code to calculate the Fourier transform of your averaged samples:
+Comment out your plotting loop (which will disable the Mu Editor plot display) and add the following code to calculate the Fourier transform of your averaged samples:
 ```python
-measurements = ulab.array(measurements)
-fft_real, fft_imag = ulab.fft.fft(measurements)
+measurements = ulab.numpy.array(measurements)
+fft_real, fft_imag = ulab.numpy.fft.fft(measurements)
 ```
-The first line converts your python list of measurement values to the [ulab.array format](https://circuitpython.readthedocs.io/en/6.1.x/shared-bindings/ulab/index.html#ulab.array), which is similar to the [array.array format](https://circuitpython.readthedocs.io/en/6.1.x/docs/library/array.html#array.array.array) we have used earlier.  The second line calculates the FFT and returns two arrays that represent the real and imaginary parts of the complex result.
+The first line converts your python list of measurement values to the ulab internal array format, which is more efficient than a python list when all elements have the same data type.  The second line calculates the FFT and returns two arrays that represent the real and imaginary parts of the complex-valued result. You will also need to
+```python
+import ulab
+```
+near the top of your code, in order to use any of the `ulab` library routines.
 
 Why is the FFT result complex valued? This seems to indicate that there is more information in the frequency domain, since we have twice as many array elements, which contradicts what we claimed earlier. However, there is a symmetry that ensures information is conserved,
 ```python
 (fft_real[i] == +fft_real[NMEASURE - i]) and (fft_imag[i] == -fft_imag[NMEASURE - i])
 ```
-for `0 < i < NMEASURE/2`.  Print a few values to convince yourself that this is true (it might not be true
-exactly, because of round-off errors, but should be very close).  Because of this symmetry,
-all of the information in FFT is contained within the first half of the array `i < NMEASURE/2`. (Technically,
-the values with `i > NMEASURE/2` correspond to negative frequencies.)
+for `0 < i < NMEASURE/2`.  Print a few values to convince yourself that this is true (it might not be true exactly, because of round-off errors, but should be very close).  Because of this symmetry,
+all of the information in FFT is contained within the first half of the array `i < NMEASURE/2`. (Technically, the values with `i > NMEASURE/2` correspond to negative frequencies.)
 
-Although we will not use it in this project, a simple modification of the FFT, known as the "inverse FFT", transforms from the frequency to time domains. Both transforms generally expect a complex-valued input and return a complex-valued result but, when the input is real (or imaginary), the result will have a symmetry that conserves information and ensures that the reverse transform is real (or imaginary).
+Although we will not use it in this project, a simple modification of the FFT, known as the "inverse FFT", transforms from the frequency domain back to the time domain. Both transforms generally expect a complex-valued input and return a complex-valued result but, when the input is real (or imaginary), the result will have a symmetry that conserves information and ensures that the reverse transform is real (or imaginary).
 
 ## Power Play
 
@@ -102,16 +105,16 @@ One nice feature of ulab (and numpy) is that you can write a formula that applie
 ```python
 power = (fft_real ** 2 + fft_imag ** 2) / NMEASURE
 ```
-The resulting `power` is an array, not a single number!  This trick is known as [vectorization](https://blog.paperspace.com/numpy-optimization-vectorization-and-broadcasting/) and leads to code that is cleaner and often faster.
+The resulting `power` is an array, not a single number!  This trick is known as [vectorization](https://blog.paperspace.com/numpy-optimization-vectorization-and-broadcasting/) and leads to code that is easier to read and often much faster.
 
-These magnitude squared FFT values are referred to as "power" since they are related to electrical power when the time-domain consists of voltage measurements (but the power terminology is often used for non-voltage measurements).
+These magnitude squared FFT values are referred to as "power" since they are related to electrical power when the time-domain consists of voltage measurements (but the power terminology is often also used for non-voltage measurements).
 
 ## Noise Level
 
 Estimate the amount of noise in your measurements with two different methods, one in the time domain and other in the frequency domain:
 ```python
-noise_time = ulab.numerical.std(measurements) ** 2
-noise_freq = ulab.numerical.mean(power[1:NMEASURE//2])
+noise_time = ulab.numpy.std(measurements) ** 2
+noise_freq = ulab.numpy.mean(power[1:NMEASURE//2])
 ```
 Calculate and print the results of both of these methods when your setup is relatively quiet. Notice how similar they are!  This is another demonstration that the two domains contain equivalent information, and a consequence of [Parseval's theorem](https://en.wikipedia.org/wiki/Parseval's_theorem).
 
@@ -126,8 +129,8 @@ NOISE_LEVEL = ...
 
 Now that you have established the typical noise level of your audio environment, you are ready to identify a signal with a dominant frequency that is significantly above the noise level.
 
-Modify your code to loop over the power values for `0 < i < NMEASURE // 2` and find the largest value. If this is at least 1000 times larger than your `NOISE_LEVEL`, then print the corresponding frequency in Hertz, `i * df`.
+Modify your code to loop over the power values for `0 < i < NMEASURE // 2` and find the largest value. If this is at least 100 times larger than your `NOISE_LEVEL`, then print the corresponding frequency in Hertz, `i * df`.
 
-Test your frequency measurement program with the reference 440 Hz tone.  What is the frequency resolution of your measurement, i.e. what is the smallest difference in frequency that you can detect?  Is your measurement consistent with the known value of 440 Hz given this resolution?  Is this resolution sufficient for a musical instrument tuner?
+Test your frequency measurement program with the reference 1600 Hz tone.  What is the frequency resolution of your measurement, i.e. what is the smallest difference in frequency that you can detect?  Is your measurement consistent with the known value of 1600 Hz given this resolution?  Is this resolution sufficient for a musical instrument tuner?
 
-Test your frequency measurement at different tone frequencies from 220 - 880 Hz (a two octave range).
+Try varying the tone frequency over the range 800 - 3200 Hz (2 octaves) and see how accurately you are able to measure different frequencies.  You may need to increase the volume at lower frequencies in order to reach the 100x noise detection threshold.

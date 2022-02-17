@@ -8,7 +8,7 @@
 # MEMS Electret |  M4   Pico
 # --------------+----------------
 #  Vin    Vcc   | 3.3V  3V3(OUT)
-#  DC     OUT   | A0    A0
+#  DC     OUT   | A0    ADC0
 #  GND    GND   | GND   GND
 # --------------+----------------
 #
