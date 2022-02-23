@@ -10,6 +10,9 @@
 #  adafruit_bus_device/*
 #  adafruit_register/*
 #
+# See https://github.com/adafruit/Adafruit_CircuitPython_AS7341
+# for details on the AS7341 library and examples.
+#
 # Connect the QT-pin cable to the multispec and wire to the M4:
 # BLACK => GND
 # RED => 3.3V
@@ -36,12 +39,15 @@ import adafruit_as7341
 
 multispec = adafruit_as7341.AS7341(i2c)
 
-# The clear and NIR sensor readings are not yet supported.
-wavelengths = [415, 445, 480, 515, 555, 590, 630, 680]
+# Use a gain of 256X to match most of the curves in Fig.18 of the datasheet.
+multispec.gain = adafruit_as7341.Gain.GAIN_256X
 
-# On board "white" LED provides consistent illumination for measuring
+# List the available bands.
+bands = ['415nm','445nm','480nm','515nm','555nm','590nm','630nm','680nm','clear','nir']
+
+# An on-board "white" LED provides consistent illumination for measuring
 # the spectrum of reflected light from a surface.
-USE_LED = True
+USE_LED = False
 
 # Configure the LED.
 multispec.led_current = 25 # mA
@@ -62,9 +68,9 @@ def bar(value, max_value=10000, max_length=LINE_LENGTH - 11):
 # Main loop reads sensors and displays the measured spectrum.
 LOG2 = math.log(2)
 while True:
-    fluxes = multispec.all_channels
+    fluxes = [getattr(multispec, 'channel_' + band) for band in bands]
     log2_fluxes = [math.log(max(1,flux)) / LOG2 for flux in fluxes]
-    for i, wavelength in enumerate(wavelengths):
-        print(f'{wavelength}nm {fluxes[i]:04x} {bar(log2_fluxes[i], max_value=16)}')
+    for i, band in enumerate(bands):
+        print(f'{band:5s} {fluxes[i]:04x} {bar(log2_fluxes[i], max_value=16)}')
     print(separator)
     time.sleep(0.5)
