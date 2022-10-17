@@ -10,7 +10,7 @@ The final piece of software you will need is an editor that works well with the 
 
 The steps described below ensure that you have current working versions of these programs, and are based on the general instructions for the [M4 Express](https://circuitpython.org/board/metro_m4_express/), [M4 Airlift Lite](https://circuitpython.org/board/metro_m4_airlift_lite/) and [Pi Pico](https://circuitpython.org/board/raspberry_pi_pico/).
 
-These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2022](setup2022.md) or [Jan 2021](setup2021.md).
+These instructions were last updated in Jan 2022. Instructions for Jan 2021 are archived [here](setup2021.md).
 
 The Pico board was added in 2022. More details on Pico and comparisons with M4 are [here](Pico.md).
 
