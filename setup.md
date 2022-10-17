@@ -69,14 +69,16 @@ If you deleted all the files on your M4 before installing CircuitPython, `boot_o
 
 The Pi Pico instructions are similar:
  - Connect your pico via USB and look for the **RPI-RP2** USB drive.
- - Download the [main program image](https://downloads.circuitpython.org/bin/raspberry_pi_pico/en_US/adafruit-circuitpython-raspberry_pi_pico-en_US-7.1.0.uf2)
+ - Download the [main program image](https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.2.uf2)
  - Drag and drop this download onto the **RPI-RP2** USB drive.
  - After a short delay, you should see **RPI-RP2** replaced with **CIRCUITPY**.
+   - You can safely ignore any "Disk Not Ejected Properly" popup on a Mac.
+   - Click "Quit" if the Mac "Keyboard Setup Assistant" launches.
 
-Check that the `boot_out.txt` file contains:
- ```
-Adafruit CircuitPython 7.1.0 on 2021-12-28; Raspberry Pi Pico with rp2040
-Board ID:raspberry_pi_pico
+Check that the `boot_out.txt` file starts with:
+```
+Adafruit CircuitPython 8.0.0-beta.2 on 2022-10-14; Raspberry Pi Pico W with rp2040
+Board ID:raspberry_pi_pico_w
 ```
 
 You now have three microcontroller boards, all called **CIRCUITPY**, but you will not need to connect more than one at a time via USB.
