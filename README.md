@@ -1,6 +1,6 @@
 # E4S: Electronics for Scientists
 
-Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and taught by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).
+Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).
 
 ## Equipment
 
