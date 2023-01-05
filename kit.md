@@ -29,9 +29,10 @@ Material for a [UC Irvine](https://uci.edu/) course offered by the [Department o
 ## Miscellaneous
 
 - analog joystick
-- speaker with audio amplifier
-- continuous servo motor
-- 128x32 OLED display
+- [electret microphone with amplifier](https://www.adafruit.com/product/1063)
+- [speaker with audio amplifier](https://www.adafruit.com/product/3885)
+- [continuous servo motor](https://www.adafruit.com/product/2442)
+- [128x32 OLED display](https://www.adafruit.com/product/4440)
 
 ## Wiring
 
