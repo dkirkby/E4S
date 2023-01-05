@@ -2,7 +2,7 @@
 
 Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).
 
-## Simple Components
+## Passive Linear Components
 
 - 2 x 10KOhm resistors
 - 2 x 1KOhm resistors
@@ -11,6 +11,9 @@ Material for a [UC Irvine](https://uci.edu/) course offered by the [Department o
 - 1 x 470uF electrolytic capacitor
 - 1 x 1uF capacitor
 - 1 x 0.1uF capacitor
+
+## Optoelectronic Components
+
 - 1 x red LED
 - 1 x green LED
 - 5 x IR LED + photodiode pair
@@ -28,7 +31,7 @@ Material for a [UC Irvine](https://uci.edu/) course offered by the [Department o
 
 ## Miscellaneous
 
-- analog joystick
+- [analog joystick](https://www.adafruit.com/product/512)
 - [electret microphone with amplifier](https://www.adafruit.com/product/1063)
 - [speaker with audio amplifier](https://www.adafruit.com/product/3885)
 - [continuous servo motor](https://www.adafruit.com/product/2442)
