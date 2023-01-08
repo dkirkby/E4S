@@ -4,13 +4,13 @@
 
 Welcome to your **Electronics for Scientists** kit!  Your kit should include a page of the images below, showing each component at full size (but you can also download the PDF [here](img/kit.pdf)):
 
-![kit components](img/kit-1.jpg|width=50)
-![kit wiring](img/kit-2.jpg|width=50)
+![kit components](img/kit-1.jpg)
+![kit wiring](img/kit-2.jpg)
 
 To get started, place one of each component over its image. Most components are easily distinguised except for the 1μF and 0.1μF capacitors: look for a "K" marking on the 1μF capacitor. Note which ziploc bag each component is stored in so you can keep them organized when you put them away:
  - bag 1: passive linear components and optoelectronic components
  - bag 2: I2C modules
-   - 2 x Pico W pprocessors
+   - 2 x Pico W processors
    - sensors: pressure & altitude, acceleration & rotation & magnetic field; 10-band photodetector
    - OLED display
  - bag 3: miscellaneous
