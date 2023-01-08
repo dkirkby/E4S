@@ -24,6 +24,8 @@ Next, put away your components then turn the page over and place examples of the
 
 All of the circuits we will build with this kit use temporary wiring connections. For examples of permanent wiring, study the [printed circuit board (PCB)](https://en.wikipedia.org/wiki/Printed_circuit_board) used by your processor or sensor modules.  Can you identify the resistors, capacitors and LEDs on these PCBs?  They look very different from those in the kit because they use [surface-mount technology](https://en.wikipedia.org/wiki/Surface-mount_technology).
 
+A complete list of the kit components is below, including links to relevant datasheets or articles.
+
 ## Passive Linear Components
 
 - 2 x 10KΩ resistors (0.5W)
@@ -62,5 +64,5 @@ All of the circuits we will build with this kit use temporary wiring connections
 ## Wiring
 
 - [breadboard](https://www.makeuseof.com/tag/what-is-breadboard/)
-- jumper cables
+- jumper cables of various colors and lengths
 - [QT](https://learn.adafruit.com/introducing-adafruit-stemma-qt/what-is-stemma-qt) / [QWIIC](https://www.sparkfun.com/qwiic) cables for digital communication cables with the [I2C bus](https://en.wikipedia.org/wiki/I%C2%B2C)
