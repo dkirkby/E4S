@@ -20,9 +20,9 @@ To get started, place one of each component over its image. Most components are 
 
 The blue and pink shapes show how to connect components: a round shape connects to a square of the same color. Blue are single-wire connections carrying a current at some voltage, and pink are communication links (using the [I2C bus](https://en.wikipedia.org/wiki/I%C2%B2C)) that carry digital packets of data using four wires.
 
-Next, put away your components then turn the page over and place examples of the different wiring over their images. Note the blue and pink shapes again.  Although the [breadboard](https://www.makeuseof.com/tag/what-is-breadboard/) does not look like wiring, it is a very convenient way to connect components once you understand how it works.
+Next, put away your components then turn the page over and place examples of the different wiring over their images. Note the blue and pink shapes again.  Although the breadboard does not look like wiring, it is a very convenient way to connect components once you [understand how it works](https://www.makeuseof.com/tag/what-is-breadboard/).
 
-All of the circuits we will build with this kit use temporary wiring connections. For examples of permanent wiring, study the [printed circuit board (PCB)](https://en.wikipedia.org/wiki/Printed_circuit_board) used by your processor or sensor modules.  Can you identify the resistors, capacitors and LEDs on these PCBs?
+All of the circuits we will build with this kit use temporary wiring connections. For examples of permanent wiring, study the [printed circuit board (PCB)](https://en.wikipedia.org/wiki/Printed_circuit_board) used by your processor or sensor modules.  Can you identify the resistors, capacitors and LEDs on these PCBs?  They look very different from those in the kit because they use [surface-mount technology](https://en.wikipedia.org/wiki/Surface-mount_technology).
 
 ## Passive Linear Components
 
