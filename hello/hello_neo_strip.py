@@ -22,7 +22,7 @@ import board
 import neopixel
 
 NLEDS = 8
-leds = neopixel.NeoPixel(board.D2, NLEDS, auto_write=False)
+leds = neopixel.NeoPixel(board.GP28, NLEDS, auto_write=False)
 leds.brightness = 0.01
 
 OFF = (0, 0, 0)

@@ -1,87 +1,40 @@
 # Initial Microcontroller Setup
 
-The kit includes two METRO microcontroller boards that we refer to as "M4" and "Airlift".  The Airlift can be used as a regular M4, but has additional hardware to enable WiFi and Bluetooth communications.  There is also a Raspberry Pi Pico microcontroller board in each kit.
+Each kit includes two Raspberry Pi Pico-W microcontroller boards. You will use these to bring your circuits to life with
+some python programs that you write.  A microcontroller is a simple device that runs a single relatively simple program. It is not what you normally think of as a "computer", with an operating system or file system, unlike its bigger sister the [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/).
 
-Each microcontroller contains two "firmware" programs: a bootloader (similar to a computer's BIOS program) and a main program (similar to computer's operating system kernel).
+Each microcontroller contains two "firmware" programs: a bootloader (similar to a computer's BIOS program) and a main program (similar to computer's operating system kernel).  The traditional way of working with a microcontroller is to install a new main program (often written in C) every time you make a change to your code, using the bootloader.  However, these devices are now capable enough to run a python interpreter, which enables simpler programming and allows you to focus more on design and less on low-level details. Therefore, the steps below install [CircuitPython](https://circuitpython.org/) as the main program.
 
-The traditional way of working with a microcontroller is to install a new main program (often written in C) every time you make a change to your firmware.  However, these devices are now capable enough to run a python interpreter, which enables simpler programming and allows you to focus more on design and less on software details. Therefore, the steps below install [CircuitPython](https://circuitpython.org/) as the main program.
+The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the M4, the editor runs on your computer and communicates with the M4 over USB.
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2022](setup2022.md) or [Jan 2021](setup2021.md).
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions for the [M4 Express](https://circuitpython.org/board/metro_m4_express/), [M4 Airlift Lite](https://circuitpython.org/board/metro_m4_airlift_lite/) and [Pi Pico](https://circuitpython.org/board/raspberry_pi_pico/).
+## Install CircuitPython 8.0 on each Pico W
 
-These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2022](setup2022.md) or [Jan 2021](setup2021.md).
+Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.6.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
-The Pico board was added in 2022. More details on Pico and comparisons with M4 are [here](Pico.md).
+Connect the Pico W to your laptop with a USB cable and look for a new USB drive called **RPI-RP2**.
 
-## Update the bootloader of both METRO boards to v.3.13.0
+> In case the Mac "Keyboard Setup Assistant" launches, just click "Quit" to close it.
 
-Connect the M4 to your computer via USB.  It should appear on your desktop as a new USB drive.
+> If your new USB drive is called **CIRCUITPYTHON** this means someone else has already done this installation, but perhaps for an older version. To reset your drive and continue with the instructions below, follow these steps:
+ - unmount the **CIRCUITPYTHON** drive and uplug the USB from your laptop
+ - press down the small white button while you plug the USB back into your laptop
+ - you should now see the drive called **RPI-RP2** and can proceed with the steps below.
 
-On a Mac, the first time you insert a new M4 device, you may trigger the "Keyboard Setup Assistant" which attempts to configure a new USB keyboard. You can safely close the popup window and ignore this.
+Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a short while (10-20 secs) the **RPI-RP2** drive should be replaced with one called **CIRCUITPYTHON**.  This indicates that you have successfully installed the CircuitPython program on your microcontroller.
 
-If the drive is named **CIRCUITPY**, open it and delete all the files it contains (e.g. by dragging them to the trash).  Next, double click the *Reset* button on the M4. The large round LED should turn green and **CIRCUITPY** will be renamed **METROM4BOOT**.  *You can safely ignore any warnings about the drive not being properly removed.*
+> Mac users will probably get a warning about "Disk Not Ejected Properly" that you can safely ignore.
 
-If the drive is already named **METROM4BOOT** you can skip the delete and double click steps above.
-
-Download the appropriate bootloader image to your computer then drag and drop it onto the **METROM4BOOT** USB drive:
- - [M4 Express](https://github.com/adafruit/uf2-samdx1/releases/download/v3.13.0/update-bootloader-metro_m4-v3.13.0.uf2)
- - [M4 Airlift Lite](https://github.com/adafruit/uf2-samdx1/releases/download/v3.13.0/update-bootloader-metro_m4_airlift-v3.13.0.uf2)
- - The Pico bootloader does not need updating.
-
-The **METROM4BOOT** USB drive should disappear from your desktop then, after a delay of up to a minute, reappear.  Open the drive and check that the text file `INFO_UF2.TXT` contains either (M4 Express):
+If you open your **CIRCUITPYTHON** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
 ```
-UF2 Bootloader v3.13.0 SFHWRO
-Model: Metro M4 Express
-Board-ID: SAMD51J19A-Metro-v0
-```
-or else (M4 Airlift Lite):
-```
-UF2 Bootloader v3.13.0 SFHWRO
-Model: Metro M4 AirLift
-Board-ID: SAMD51J19A-Metro-AirLift-v0
-```
-Remember to close `INFO_UF2.TXT` before you try to eject the **METROM4BOOT** USB drive.
-
-You have now completed the METRO bootloader updates and are ready to install CircuitPython on your microcontroller boards.
-
-## Update CircuitPython to 7.1.0
-
-### METRO Instructions
-
-With your M4 mounted as **METROM4BOOT** (double click *Reset* if necessary), download the appropriate main program image and copy it to your M4:
- - [M4 Express](https://downloads.circuitpython.org/bin/metro_m4_express/en_US/adafruit-circuitpython-metro_m4_express-en_US-7.1.0.uf2)
- - [M4 Airlift Lite](https://downloads.circuitpython.org/bin/metro_m4_airlift_lite/en_US/adafruit-circuitpython-metro_m4_airlift_lite-en_US-7.1.0.uf2)
-
-The **METROM4BOOT** USB drive should again disappear from your desktop and, after a short delay, reppear as **CIRCUITPY**.  Open the drive and check that the text file `boot_out.txt` contains either (for M4 Express):
-```
-Adafruit CircuitPython 7.1.0 on 2021-12-28; Adafruit Metro M4 Express with samd51j19
-Board ID:metro_m4_express
-```
-or (for M4 Airlift Lite):
-```
-Adafruit CircuitPython 7.1.0 on 2021-12-28; Adafruit Metro M4 Airlift Lite with samd51j19
-Board ID:metro_m4_airlift_lite
-```
-If you deleted all the files on your M4 before installing CircuitPython, `boot_out.txt` will be the only file you see now.
-
-### Pi Pico Instructions
-
-The Pi Pico instructions are similar:
- - Connect your pico via USB and look for the **RPI-RP2** USB drive.
- - Download the [main program image](https://downloads.circuitpython.org/bin/raspberry_pi_pico_w/en_US/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.2.uf2)
- - Drag and drop this download onto the **RPI-RP2** USB drive.
- - After a short delay, you should see **RPI-RP2** replaced with **CIRCUITPY**.
-   - You can safely ignore any "Disk Not Ejected Properly" popup on a Mac.
-   - Click "Quit" if the Mac "Keyboard Setup Assistant" launches.
-
-Check that the `boot_out.txt` file starts with:
-```
-Adafruit CircuitPython 8.0.0-beta.2 on 2022-10-14; Raspberry Pi Pico W with rp2040
+Adafruit CircuitPython 8.0.0-beta.6 on 2022-12-21; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
 
-You now have three microcontroller boards, all called **CIRCUITPY**, but you will not need to connect more than one at a time via USB.
+Unmount your **CIRCUITPYTHON** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
+
+> Since both of your microcontrollers now have the same USB drive name, it would be confusing to have them both connected to your laptop at the same time.  However, while we will sometimes use both at once in a project, we will not need them both connected via USB at once.
 
 ## Libraries
 
@@ -89,16 +42,17 @@ Some of the components in the kit need additional libraries that are not install
 
 To install an additional library, you just copy it into a `lib` folder of your **CIRCUITPY** USB drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
-Since we are running CircuitPython 7.1.0, we need to install libraries from the 7.x bundle (we are using 7.x from the [20220105 release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20220105)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
+Since we are running CircuitPython 8.0, we need to install libraries from the 8.x bundle (we are using 8.x from the [20230109 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20230109)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](E4S-libraries-7.x.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](bin/E4S-libraries-8.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
- - pressure sensor
- - multi-spectrum light sensor
- - 9DoF inertial measurement unit
+ - pressure & altitude sensor
+ - acceleration & rotation & magnetic field sensor
+ - 10-band photodetector
+ - ultrasonic distance sensor
+ - Pico-W wifi networking
 
-Open your **CIRCUITPY** USB drive and create an empty folder named `lib`. (If you did not delete
-files earlier, you may already have a `lib` folder). The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
+Open your **CIRCUITPY** USB drive and open the folder named `lib`, which should be empty if you just installed CircuitPython using the steps above. The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
 Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
 
 You are now ready to use these libraries.
@@ -107,7 +61,7 @@ You are now ready to use these libraries.
 
 You have completed the setup of your microcontroller boards and are now ready to install a code editor on your laptop.
 
-Any file named `code.py` on your **CIRCUITPY** drive will be automatically run whenever your M4 is reset.
+Any file named `code.py` on your **CIRCUITPY** drive will be automatically run whenever your microcontroller is reset, either when you initially connect it via USB or when you press its reset button.
 
 In principle, you can use any text or code editor to modify `code.py` directly from the USB drive.  However,
 we will start with the [Mu Editor](https://codewith.mu/) which is specifically designed to work well with Adafruit microcontroller boards and CircuitPython.

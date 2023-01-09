@@ -12,10 +12,11 @@
 # Any devices found are identified by their 7-bit ID in the
 # range 0x08 - 0x77. The IDs for the I2C kit components are:
 #
-#  0x1c & 0x6a = 9 DoF IMU
-#  0x39 = multi-spectrum sensor
+#  0x1c = acceleration & rotation sensor (on same IMU as 0x6a)
+#  0x6a = magnetic field sensor (on same IMU as 0x1c)
+#  0x39 = 10-band photodetector
 #  0x3c = OLED display
-#  0x77 = pressure sensor
+#  0x77 = pressure & altitude sensor
 #
 # The M4 has fixed pins with hardware support for the I2C protocol,
 # but the Pico is more flexible due to its PIO hardware.

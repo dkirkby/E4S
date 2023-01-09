@@ -7,18 +7,21 @@ Welcome to your **Electronics for Scientists** kit!  Your kit should include a p
 [![kit components](img/kit-1.jpg)](img/kit-1.jpg)
 [![kit wiring](img/kit-2.jpg)](img/kit-2.jpg)
 
-To get started, place one of each component over its image. Most components are easily distinguised except for the 1μF and 0.1μF capacitors: look for a "K" marking on the 1μF capacitor. Note which ziploc bag each component is stored in so you can keep them organized when you put them away:
+To get started, place one of each component over its image. Note which ziploc bag each component is stored in so you can keep them organized when you put them away:
  - bag 1: passive linear components and optoelectronic components
  - bag 2: I2C modules
    - 2 x Pico W processors
-   - sensors: pressure & altitude, acceleration & rotation & magnetic field; 10-band photodetector
+   - sensors: pressure & altitude; acceleration & rotation & magnetic field; 10-band photodetector
+   - neopixel strip
    - OLED display
  - bag 3: miscellaneous
    - joystick, speaker, microphone, ultrasonic distance
 - bag 4: jumper wires
 - bag 5: QT/QWIIC cables for I2C communication
 
-The blue and pink shapes show how to connect components: a round shape connects to a square of the same color. Blue are single-wire connections carrying a current at some voltage, and pink are communication links (using the [I2C bus](https://en.wikipedia.org/wiki/I%C2%B2C)) that carry digital packets of data using four wires.
+Most components are easily distinguised except for the 1μF and 0.1μF capacitors: look for a "K" marking on the 1μF capacitor.
+
+The blue and pink shapes show how to connect components: a round shape connects to a square of the same color. Blue are single-wire connections carrying a current at some voltage, and pink are communication links (using the [I2C bus](https://en.wikipedia.org/wiki/I%C2%B2C)) that carry digital packets of data using four wires. Just because a connection is (mechanically) possible does not mean it necessarily makes (electrical) sense.  For example, connecting the microphone directly to the joystick is possible but not useful.
 
 Next, put away your components then turn the page over and place examples of the different wiring over their images. Note the blue and pink shapes again.  Although the breadboard does not look like wiring, it is a very convenient way to connect components once you [understand how it works](https://www.makeuseof.com/tag/what-is-breadboard/).
 
@@ -60,6 +63,7 @@ A complete list of the kit components is below, including links to relevant data
 - [speaker with audio amplifier](https://www.adafruit.com/product/3885)
 - [continuous servo motor](https://www.adafruit.com/product/2442)
 - [128x32 OLED display](https://www.adafruit.com/product/4440)
+- [neopixel strip](https://www.adafruit.com/product/1426)
 
 ## Wiring
 

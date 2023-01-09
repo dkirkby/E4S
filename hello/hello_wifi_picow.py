@@ -2,6 +2,8 @@
 # https://github.com/dkirkby/E4S
 #
 # Demonstrate basic wifi communication with the Pico W.
+# See https://learn.adafruit.com/pico-w-wifi-with-circuitpython for more details.
+# Requires adafruit_requests.py in the lib/ folder
 #
 # No wiring is required.
 import os

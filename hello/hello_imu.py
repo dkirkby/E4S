@@ -10,6 +10,8 @@
 #  adafruit_lsm_6ds/*
 #  adafruit_register/*
 #
+# For details see https://learn.adafruit.com/adafruit-lsm6ds3tr-c-lis3mdl-precision-9-dof-imu/python-circuitpython
+#
 # Connect the QT-pin cable to the IMU and wire to the M4:
 # BLACK => GND
 # RED => 3.3V
@@ -33,10 +35,10 @@ i2c = busio.I2C(sda=sda, scl=scl)
 # These files are not in the base CircuitPython installation.
 # See instructions above for installing them and their dependencies.
 import adafruit_lis3mdl
-import adafruit_lsm6ds.lsm6ds33
+import adafruit_lsm6ds.lsm6ds3
 
 bsens = adafruit_lis3mdl.LIS3MDL(i2c)
-imu = adafruit_lsm6ds.lsm6ds33.LSM6DS33(i2c)
+imu = adafruit_lsm6ds.lsm6ds3.LSM6DS3(i2c)
 
 def magnitude(vec):
     return math.sqrt(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2])

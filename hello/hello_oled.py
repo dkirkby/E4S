@@ -54,7 +54,7 @@ display_lines = []
 
 for i in range(DISPLAY_LINES):
     display_lines.append(
-        label.Label(terminalio.FONT, text='', color=0xffffff, x=0, y=LINE_HEIGHT * i + 3))
+        label.Label(terminalio.FONT, text='', color=0xffffff, x=0, y=LINE_HEIGHT * i + 4))
     splash.append(display_lines[-1])
 
 ALIGN_LEFT = 0
