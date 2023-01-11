@@ -6,7 +6,7 @@ Build the circuit below using a Pico W microcontroller (not yet connected to you
 
 ![First circuit construction](img/first-circuit.jpg)
 
-Note that an LED is directional, i.e. does not work the same way forwards and backwards. This means you need to insert it into your breadboard with the correct orientation.  Don't worry if you get this wrong since it will do any damage. In this case, the longer wire on the LED should be connected to the resistor (through a hidden breadboard wire).
+Note that an LED is directional, i.e. does not work the same way forwards and backwards. This means you need to insert it into your breadboard with the correct orientation.  Don't worry if you get this wrong since it will not do any damage. In this case, the longer wire on the LED should be connected to the resistor (through a hidden breadboard wire).
 
 The corresponding electrical diagram is:
 
