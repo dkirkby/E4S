@@ -53,7 +53,7 @@ Predict what ADU value you expect with a 5.0V input.  Go ahead and try this by c
 
 Because the analog-to-digital conversion process includes some random noise you might sometimes obtain
 ADU values outside of your nominal 0 - 3.3V range.  To protect against this, modify your code to "clamp" the conversion result, for example:
-```
+```python
 ADU = min(ADUhi, max(ADUlo, ADU))
 ```
 where `ADUlo` and `ADUhi` are the average conversion results for 0 and 3.3V, respectively.
@@ -87,7 +87,7 @@ Review the [datasheet](../datasheets/thermistor.pdf) for this thermistor, which 
 
 Update your code to calculate and display the temperature in Kelvin, Celsius and Fahrenheit.  The python
 [math library](https://docs.python.org/3/library/math.html) is available in CircuitPython, so you can evaluate a [natural logarithm](https://docs.python.org/3/library/math.html#power-and-logarithmic-functions) using, e.g.
-```
+```python
 import math
 
 math.log(1.23)
