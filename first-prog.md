@@ -30,6 +30,8 @@ while True:
 ```
 To load this program into the RP2020 processor on your Pico W board, you simply save it in the Mu editor.  This triggers the Mu editor to download your program via the USB cable and reset the processor so it starts running your code.  If all goes well, you should now see your LED blinking once per second.
 
+If you already have experience with python programming, you might notice a few new features in the MicroPython world. First, the imported `board` and `digitalio` modules are specific to your Pico W microcontroller board. Second, the `digitalio` module allows you to control a (digital) voltage in your circuit as if it were a normal python variable, with `True` corresponding to the "high" (3.3V) logic level and `False` corresponding to "low" (0V). You will soon learn how to control an analog voltage (with values anywhere between 0 and 3.3V) and measure both digital and analog voltages in your circuit.
+
 Here are some experiments to try with your circuit and code. For each one, predict what might happen, try it then, in case you are surprised, think about why:
  - Remove the resistor
  - Turn the LED around
