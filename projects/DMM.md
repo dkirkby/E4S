@@ -67,7 +67,7 @@ what is the purpose of the black jumper wire in our circuit?  The answer is that
 At this point, you have created a digital *voltmeter*.  To make this more of a *multimeter*, let's now add
 resistance measurements using this [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers#ideal-voltage-divider) with resistors R1 and R2 in series between the microcontroller 3.3V and GND voltages:
 
-![voltage divider circuit](img/voltage-divider.jpg)
+![voltage divider circuit](../img/voltage-divider.jpg)
 
 Write the equation for the voltage **Vout** at the point between R1 and R2.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1, Vin and Vout.
 

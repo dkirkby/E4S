@@ -12,7 +12,7 @@ The corresponding electrical circuit diagram is:
 
 ![First circuit diagram](img/first-circuit-diagram.jpg)
 
-The light-green microcontroller pins labeled **GP2, GP3, GP4, ...* are for general-purpose digital input and output. In this context, *digital* means that signals are represented by a voltage that is either close to 0V ("low") or close to 3.3V ("high").
+The light-green microcontroller pins labeled **GP2, GP3, GP4, ...** are for general-purpose digital input and output. In this context, *digital* means that signals are represented by a voltage that is either close to 0V ("low") or close to 3.3V ("high").
 To complete your circuit, connect the Pico W to your laptop with a USB cable.  This will apply power to your circuit (from your laptop's USB port) and start running any previously loaded program, but there probably won't be any sign of this.
 
 To bring this circuit to life, enter the following program into your Mu editor:
