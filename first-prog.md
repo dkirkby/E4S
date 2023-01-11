@@ -4,7 +4,7 @@
 
 Build the circuit below using a Pico W microcontroller (not yet connected to your laptop via USB), a 1KΩ resistor, a red or green LED (your choice), your breadboard and some jumper wires:
 
-![First circuit construction](img/first-circuit.png)
+![First circuit construction](img/first-circuit.jpg)
 
 Note that an LED is directional, i.e. does not work the same way forwards and backwards. This means you need to insert it into your breadboard with the correct orientation.  Don't worry if you get this wrong since it will do any damage. In this case, the longer wire on the LED should be connected to the resistor (through a hidden breadboard wire).
 
