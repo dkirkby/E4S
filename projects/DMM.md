@@ -14,7 +14,7 @@ A multimeter can measure many properties of an analog signal or simple component
 
 ## Analog Voltage Measurement
 
-Start by connecting a long black jumper wire to any of the Pico GND pins (GND stands for **ground** and represents the 0V reference) and a long red jumper wire to the Pico ADC input labeled **ADC0** (there are also inputs labeled **ADC1** and **ADC2**).  Refer to the [pinout diagram](Pico) for help finding these pins.
+Start by connecting a long black jumper wire to any of the Pico GND pins (GND stands for **ground** and represents the 0V reference) and a long red jumper wire to the Pico ADC input labeled **ADC0** (there are also inputs labeled **ADC1** and **ADC2**).  Refer to the [pinout diagram](../Pico.md) for help finding these pins.
 
 You can read the voltage on pin ADC0 using:
 ```python
