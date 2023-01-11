@@ -76,4 +76,4 @@ The name of the file you are currrently editing appears in the editor title bar,
 
 I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22).
 
-You are now ready to [start programming your microcontroller boards](start-prog.md).
+You are now ready to [start programming your microcontroller boards](first-prog.md).
