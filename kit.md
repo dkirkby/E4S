@@ -47,7 +47,7 @@ A complete list of the kit components is below, including links to relevant data
 
 ## Processor
 
-- 2 x [Raspberry Pi Pico W](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html)
+- 2 x [Raspberry Pi Pico W](Pico)
 
 ## Sensor Modules
 

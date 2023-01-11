@@ -14,7 +14,7 @@ A multimeter can measure many properties of an analog signal or simple component
 
 ## Analog Voltage Measurement
 
-Start by connecting a long black jumper wire to any of the Pico GND pins (GND stands for **ground** and represents the 0V reference) and a long red jumper wire to the Pico ADC input labeled **ADC0** (there are also inputs labeled **ADC1** and **ADC2**).
+Start by connecting a long black jumper wire to any of the Pico GND pins (GND stands for **ground** and represents the 0V reference) and a long red jumper wire to the Pico ADC input labeled **ADC0** (there are also inputs labeled **ADC1** and **ADC2**).  Refer to the [pinout diagram](Pico) for help finding these pins.
 
 You can read the voltage on pin ADC0 using:
 ```python
@@ -29,7 +29,7 @@ while True:
     print(f'ADU = {ADU:5d} (dec) = ${ADU:04x} (hex)')
     time.sleep(0.5)
 ```
-Enter this program using the Mu editor and save to your microcontroller. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.  If you using linux and get an error about accessing the serial port device, you will need to update your permissions[^linuxperms].
+Enter this program using the Mu editor and save to your microcontroller. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.  If you are using linux and get an error about accessing the serial port device, you will need to update your permissions[^linuxperms].
 
 [^linuxperms]:
     On ubuntu and debian, this command should give your user account access to the serial port:
