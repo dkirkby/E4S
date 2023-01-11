@@ -4,7 +4,7 @@
 
 ## Equipment
 
-This course uses a standard component kit for each student whose total cost is about US$200 and fits comfortably in a 6-quart plastic storage box, weighing about ?? g.
+This course uses a standard component kit for each student whose total cost is about US$200 and fits comfortably in a 6-quart plastic storage box, weighing about 365g (less than a pound).
 
 Many of the components are designed and manufactured by [adafruit](https://www.adafruit.com/about) which provides excellent [supporting documentation and tutorials](https://learn.adafruit.com/).
 
