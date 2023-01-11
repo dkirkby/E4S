@@ -47,9 +47,9 @@ With the black and yellow wires floating (i.e. not connected to anything at thei
 The printed values are in "analog-to-digital units" (ADU) so we still need to convert them to physical units.
 To do this, plug the free end of the yellow wire into a second GND pin on the microcontroller, so we know the ADC0 voltage is 0V (relative to the black wire).  Record the typical (decimal) value you observe.  Note that we can leave the black wire floating since it already uses the same 0V (GND) reference as the voltage source we are measuring (which is itself!)
 
-Next, connect the yellow wire to 3.3V (labeled **3V3(OUT)** on the Pico) and record the typical (decimal) value you observe.  Now write down a formula to convert from ADUs to Volts, assuming a linear relationship.  Modify your code to print this value.
+Next, connect the yellow wire to 3.3V and record the typical (decimal) value you observe.  Now write down a formula to convert from ADUs to Volts, assuming a linear relationship.  Modify your code to print this value.
 
-Predict what ADU value you expect with a 5.0V input.  Go ahead and try this by connected the yellow wire to the microcontroller pin labeled **VBUS**, which is nominally 5V coming directly from your laptop via the USB cable, and compare with your prediction.  Since the `ADU` value is represented by only 16 bits, it has a possible range from zero to `2**16 - 1`, which equals 65,535 or $ffff in hex.  Does your 5V ADU value make sense with this information?  Note that you should generally be careful about introducing voltages to your circuit that exceed the power supply limits (which are 0 to 3.3V for most of your microcontoller board).  However, in this case, the ADC0 input has sufficient protection that 5V will not damage it, but a larger voltage could.
+Predict what ADU value you expect with a 5.0V input.  Go ahead and try this by connected the yellow wire to the microcontroller 5V pin (which comes directly from your laptop via the USB cable) and compare with your prediction.  Since the `ADU` value is represented by only 16 bits, it has a possible range from zero to `2**16 - 1`, which equals 65,535 or $ffff in hex.  Does your 5V ADU value make sense with this information?  Note that you should generally be careful about introducing voltages to your circuit that exceed the power supply limits (which are 0 to 3.3V for most of your microcontoller board).  However, in this case, the ADC0 input has sufficient protection that 5V will not damage it, but a larger voltage could.
 
 Because the analog-to-digital conversion process includes some random noise you might sometimes obtain
 ADU values outside of your nominal 0 - 3.3V range.  To protect against this, modify your code to "clamp" the conversion result, for example:
@@ -65,9 +65,13 @@ what is the purpose of the black jumper wire in our circuit?  The answer is that
 ## Resistance Measurement
 
 At this point, you have created a digital *voltmeter*.  To make this more of a *multimeter*, let's now add
-resistance measurements.  Draw a [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers#ideal-voltage-divider) with resistors R1 and R2 and write the equation for the voltage Vout between R1 and R2 when the circuit is powered by Vin=3.3V.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1 and Vout.
+resistance measurements using this [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers#ideal-voltage-divider) with resistors R1 and R2 in series between the microcontroller 3.3V and GND voltages:
 
-Modify your circuit by adding R1=1KΩ and R2=1KΩ to the breadboard then construct a voltage divider, adding a long red jumper wire from the microcontroller to provide Vin=3.3V and using the existing long black jumper wire for GND=0V. Connect your yellow wire between the resistors to measure Vout.  What value of Vout do you expect with R1 = R2? Run your program to confirm this prediction.  Modify your program to calculate and display the value of R2 assuming R1 = 1KΩ.
+![voltage divider circuit](img/voltage-divider.jpg)
+
+Write the equation for the voltage **Vout** at the point between R1 and R2.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1, Vin and Vout.
+
+Add R1=1KΩ and R2=1KΩ to the breadboard then construct this voltage divider circuit, adding a long red jumper wire from the microcontroller to provide Vin=3.3V and using the existing long black jumper wire for GND=0V. Connect your yellow wire between the resistors to measure Vout with ADC0.  What value of Vout do you expect with R1 = R2? Run your program to confirm this prediction.  Modify your program to calculate and display the value of R2 assuming R1 = 1KΩ.
 
 Next, replace R2 with a pair of new long jumper wires that will serve as your multimeter's probe wires.  Verify that you get the expected 1K measurement when you touch these wires to the ends of the 1KΩ resistor you just removed from the breadboard.
 
