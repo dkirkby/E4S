@@ -63,7 +63,7 @@ what is the purpose of the black jumper wire in our circuit?  The answer is that
 ## Resistance Measurement
 
 At this point, you have created a digital *voltmeter*.  To make this more of a *multimeter*, let's now add
-resistance measurements.  Draw a [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers) with resistors R1 and R2 and write the equation for the voltage Vout between R1 and R2 when the circuit is powered by Vin=3.3V.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1 and Vout.
+resistance measurements.  Draw a [voltage divider circuit](https://learn.sparkfun.com/tutorials/voltage-dividers#ideal-voltage-divider) with resistors R1 and R2 and write the equation for the voltage Vout between R1 and R2 when the circuit is powered by Vin=3.3V.  Next, assume that R1 (connected to 3.3V) is known, and write an equation for the unknown R2 (connected to GND) in terms of R1 and Vout.
 
 Modify your circuit by adding R1=1K to the breadboard so that there are two long jumper wires that can be connected to the ends of an unknown resistance, forming a voltage divider whose output voltage is measured by ADC0. Adapt your code to print the value of the unknown resistance in Ohms.
 
@@ -81,8 +81,7 @@ your microcontroller is measuring its resistance.  The values should be roughly 
 
 Put your fingers over the thermistor bead for for 30 seconds to warm it up and observe the changing resistance. Does it increase or decrease with increasing temperature?  Hint: this is a "NTC" thermistor.
 
-Review the [datasheet](https://github.com/dkirkby/E4S/raw/main/datasheets/thermistor.pdf) for this thermistor, which is surprisingly long for such a simple component!  Finding key information in dense datasheets is a valuable skill.  Locate a formula for converting from resistance to temperature.  The formula has 5 unknown parameters: Rref, A1, B1, C1, D1.  What are suitable values of these parameters to use?  Hint: the thermistor
-is color coded.
+Review the [datasheet](../datasheets/thermistor.pdf) for this thermistor, which is surprisingly long for such a simple component!  Finding key information in dense datasheets is a valuable skill.  Locate a formula for converting from resistance to temperature.  The formula has 5 unknown parameters: Rref, A1, B1, C1, D1.  What are suitable values of these parameters to use?  Hint: the thermistor is color coded.
 
 Update your code to calculate and display the temperature in Kelvin, Celsius and Fahrenheit.  The python
 [math library](https://docs.python.org/3/library/math.html) is available in CircuitPython, so you can evaluate a [natural logarithm](https://docs.python.org/3/library/math.html#power-and-logarithmic-functions) using, e.g.
