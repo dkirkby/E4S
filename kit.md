@@ -33,7 +33,7 @@ A complete list of the kit components is below, including links to relevant data
 
 - 2 x 10KΩ resistors (0.5W)
 - 2 x 1KΩ resistors (0.25W)
-- 1 x 50Ω resistor (5W)
+- 1 x 5Ω resistor (5W)
 - 1 x [NTC thermistor](datasheets/thermistor.pdf) (1KΩ at 25°C)
 - 1 x 470μF electrolytic capacitor (25V)
 - 1 x 1μF capacitor (25V, looks similar to the 0.1μF but has a "K" marking)
