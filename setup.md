@@ -1,5 +1,7 @@
 # Initial Microcontroller Setup
 
+*Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).*
+
 Each kit includes two Raspberry Pi Pico-W microcontroller boards. You will use these to bring your circuits to life with
 some python programs that you write.  A microcontroller is a simple device that runs a single relatively simple program. It is not what you normally think of as a "computer", with an operating system or file system, unlike its bigger sister the [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/).
 

@@ -1,5 +1,7 @@
 # Project: Digital Multimeter
 
+*Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).*
+
 In this project, you will use your microcontroller to create a simple [digital multimeter](https://en.wikipedia.org/wiki/Multimeter) (DMM), taking advantage of its internal [analog-to-digital converter (ADC)](https://en.wikipedia.org/wiki/Analog-to-digital_converter) circuitry.
 
 You have probably already used a dedicated multimeter, either as a handheld device like this:

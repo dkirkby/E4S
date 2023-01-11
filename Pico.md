@@ -1,5 +1,7 @@
 # Raspberry Pi Pico W
 
+*Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).*
+
 The Pico-W is a small, low cost ($6) microcontroller board designed by the Raspberry Pi foundation based on a powerful and low-cost chip, the RP2040. It also contains a 2.4 GHz module for wifi communications (and there is an even cheaper Pico
 without this wifi module).
 
