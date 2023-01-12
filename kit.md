@@ -29,6 +29,8 @@ All of the circuits we will build with this kit use temporary wiring connections
 
 A complete list of the kit components is below, including links to relevant datasheets or articles.
 
+You are now ready to [setup your Pico W processors](setup.md).
+
 ## Passive Linear Components
 
 - 2 x 10KΩ resistors (0.5W)

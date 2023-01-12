@@ -19,22 +19,22 @@ Connect the Pico W to your laptop with a USB cable and look for a new USB drive 
 
 > In case the Mac "Keyboard Setup Assistant" launches, just click "Quit" to close it.
 
-> If your new USB drive is called **CIRCUITPYTHON** this means someone else has already done this installation, but perhaps for an older version. To reset your drive and continue with the instructions below, follow these steps:
- - unmount the **CIRCUITPYTHON** drive and uplug the USB from your laptop
+> If your new USB drive is called **CIRCUITPY** this means someone else has already done this installation, but perhaps for an older version. To reset your drive and continue with the instructions below, follow these steps:
+ - unmount the **CIRCUITPY** drive and uplug the USB from your laptop
  - press down the small white button while you plug the USB back into your laptop
  - you should now see the drive called **RPI-RP2** and can proceed with the steps below.
 
-Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a short while (10-20 secs) the **RPI-RP2** drive should be replaced with one called **CIRCUITPYTHON**.  This indicates that you have successfully installed the CircuitPython program on your microcontroller.
+Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a short while (10-20 secs) the **RPI-RP2** drive should be replaced with one called **CIRCUITPY**.  This indicates that you have successfully installed the CircuitPython program on your microcontroller.
 
 > Mac users will probably get a warning about "Disk Not Ejected Properly" that you can safely ignore.
 
-If you open your **CIRCUITPYTHON** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
+If you open your **CIRCUITPY** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
 ```
 Adafruit CircuitPython 8.0.0-beta.6 on 2022-12-21; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
 
-Unmount your **CIRCUITPYTHON** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
+Unmount your **CIRCUITPY** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
 
 > Since both of your microcontrollers now have the same USB drive name, it would be confusing to have them both connected to your laptop at the same time.  However, while we will sometimes use both at once in a project, we will not need them both connected via USB at once.
 

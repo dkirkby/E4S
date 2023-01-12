@@ -8,9 +8,13 @@ This course uses a standard component kit for each student whose total cost is a
 
 Many of the components are designed and manufactured by [adafruit](https://www.adafruit.com/about) which provides excellent [supporting documentation and tutorials](https://learn.adafruit.com/).
 
-The two included [microcontroller boards](Pico.md) are programmable and require some initial setup: instructions are [here](setup.md).
-
 For basic examples that demonstrate each of the kit's components, start [here](hello.md).
+
+## Curriculum
+
+- [Introduction to the kit components](kit.md)
+- [Perform initial setup of the microcontrollers](setup.md)
+- [Build your first circuit and program](first-prog.md)
 
 ## Projects
 
