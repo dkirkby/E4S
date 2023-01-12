@@ -57,6 +57,16 @@ Download and expand [this zip file](bin/E4S-libraries-8.x.zip?raw=true) with the
 Open your **CIRCUITPY** USB drive and open the folder named `lib`, which should be empty if you just installed CircuitPython using the steps above. The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
 Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
 
+> Make sure you copy the **contents** of the zip directory into the `lib` folder (and not the zip file or the `E4S-libraries-8.x` folder).
+
+Your **CIRCUITPY** drive should now have the following contents:
+
+![top-level files](img/top-level-files.jpg)
+
+and the `lib` folder should contain:
+
+![lib folder](img/lib-folder.jpg)
+
 You are now ready to use these libraries.
 
 ## Install the Mu Editor
