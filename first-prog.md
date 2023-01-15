@@ -12,6 +12,8 @@ The corresponding electrical circuit diagram is:
 
 ![First circuit diagram](img/first-circuit-diagram.jpg)
 
+> **Why the resistor?** A diode is not a linear component that obeys $V = iR$. Instead, it has a [non-linear voltage versus current curve](https://learn.sparkfun.com/tutorials/diodes/real-diode-characteristics). In this circuit, the diode operates in its forward-biased mode, so effectively has a fixed voltage drop of $\Delta V = 2--3$ V. The remaining voltage drop across the resistor $V_{3.3} - \Delta V$ determines the current flowing through both the resistor and diode, $i = (V_{3.3} - \Delta V)/R$, which is proportional to the resulting light intensity. Therefore a forward-biased diode always requires a sufficiently large series resistance $R$ to avoid $i \rightarrow \infty$.
+
 The light-green microcontroller pins labeled **GP2, GP3, GP4, ...** are for general-purpose digital input and output. In this context, *digital* means that signals are represented by a voltage that is either close to 0V ("low") or close to 3.3V ("high").
 To complete your circuit, connect the Pico W to your laptop with a USB cable.  This will apply power to your circuit (from your laptop's USB port) and start running any previously loaded program, but there probably won't be any sign of this.
 
@@ -36,9 +38,10 @@ To load this program into the RP2020 processor on your Pico W board, you simply 
 
 If you already have experience with python programming, you might notice a few new features in the MicroPython world. First, the imported `board` and `digitalio` modules are specific to your Pico W microcontroller board. Second, the `digitalio` module allows you to control a (digital) voltage in your circuit as if it were a normal python variable, with `True` corresponding to the "high" (3.3V) logic level and `False` corresponding to "low" (0V). You will soon learn how to control an analog voltage (with values anywhere between 0 and 3.3V) and measure both digital and analog voltages in your circuit.
 
-Here are some experiments to try with your circuit and code. For each one, predict what might happen, try it then, in case you are surprised, think about why:
- - Remove the resistor
+Here are some experiments to try with your circuit and code. For each one, predict what might happen, try it then, in case you are surprised, think about why. The circuit changes below can be safely performed while your Pico is powered via USB.
  - Turn the LED around
+ - Remove the resistor
+ - Replace the 1KΩ resistor with a 10KΩ resistor (and review **Why the resistor?** above)
  - Change the 0.5 second delay to something much smaller or bigger
  - Use a different GND pin on the Pico W
  - Use a different GPn pin on the Pico W (can you modify your code to make this work?)
