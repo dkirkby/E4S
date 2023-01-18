@@ -14,7 +14,7 @@ The corresponding circuit diagram is:
 
 ![LED circuit diagram](img/led-usb-diag.jpg)
 
-The completed circuit should illuminate the LED. If it doesn't, check the polarity of your LED and trace the current path from 3.3V to GND through your breadboard, making sure that it matches the circuit diagram.
+The completed circuit should illuminate the LED. If it doesn't, check the polarity of your LED and trace the current path from 3.3V to GND through your breadboard, making sure that it matches the circuit diagram. Notice how we connect the power (3.3V) and ground (GND) to opposite sides of the breadboard, instead of using the + and - lines on one side: this is to minimize the chances of accidentally shorting power and ground, which will crash your microcontroller (without doing permanent damage).
 
 Although this circuit looks similar to your [first circuit](first-prog.md), here we are only connecting to the Pico W power (3.3V) and ground pins. This is a convenient way to power a breadboard circuit via your laptop's USB cable. Since there are no connections to any GPn or ADCn pins, there is nothing for a python program to do in this circuit, and any program already loaded in your Pico W will have no effect.
 
@@ -55,6 +55,8 @@ By moving the joystick left to right you can now smoothly vary the resistance RL
 
 ## Read a Digital Input with the Microcontroller
 
+Earlier you built a circuit where your joystick switch provided digital control of an LED. Now we look at how to capture the digital state of a switch with microcontroller code.
+
 Build the circuit below using a Pico W microcontroller (not yet connected to your laptop via USB), a 1KΩ resistor, the joystick, your breadboard and some jumper wires:
 
 ![joystick digital input circuit](img/joystick-digital-in.jpg)
@@ -68,17 +70,58 @@ Enter this program in the Mu editor to read the switch:
 import board
 import digitalio
 
-switch = digitalio.DigitalInOut(board.D2)
+switch = digitalio.DigitalInOut(board.GP22)
 switch.direction = digitalio.Direction.INPUT
 
-state = switch.value
+state = None
 
 while True:
     if switch.value != state:
         state = switch.value
-        print('state is now', state)
+        print('Switch state is', state)
 ```
+This program tracks and prints any changes to the switch state.  You will need to view the Mu editor serial pane to see this print output (click the "Serial" button in the top toolbar if it is not already open). Note how the microcontroller captures the switch state as a True/False boolean value. Which state corresponds to the button being pressed?  This circuit could use any of the **GPn** microcontroller pins as long as the wiring and code are consistent.
+
+> **Why the resistor?** This circuit includes a 1KΩ "pullup" resistor.  Why is this necessary?  The reason is that the two electrical states of a switch are open- and closed-circuit, but the microcontroller expects digital states corresponding to voltages near 3.3V and 0V.  Therefore we need to convert open/closed circuit conditions into high/low voltage conditions.  Since the presence of any voltage requires some current flow, we need to define a current path during the open-circuit condition. The simplest way to accomplish this is with a single resistor to 3.3V ("pullup") or GND ("pulldown"):
+
+![pull up/down circuits](img/pullupdown.jpg)
 
 ## Read an Analog Input with the Microcontroller
 
+Earlier you used the left/right joystick potentiometer for analog control of the LED brightness. Now we will look at how to read the analog state of a potentiometer with microcontroller code.
+
+Build the circuit below using a Pico W microcontroller (not yet connected to your laptop via USB), the joystick, your breadboard and some jumper wires:
+
+![joystick analog input circuit](img/joystick-analog-in.jpg)
+
+The corresponding circuit diagram is:
+
+![joystick analog input circuit diagram](img/joystick-analog-in-diag.jpg)
+
+The microcontroller expects an analog signal to be a voltage between 0V and 3.3V.  Since the joystick instead presents a varying *resistance* we need to convert resistance to voltage.  The easiest way to do this is to use both resistors R1 and R2 of the potentiometer as a voltage divider, by connecting the joystick **VCC** and **GND** pins to the microcontroller **3.3V** and **GND**. This arrangement means that the voltage at **Xout** varies linearly from 0V to 3.3V.
+
+To read this analog voltage we must use of the three **ADCn** pins with code like:
+```python
+import board
+import analogio
+import time
+
+Xout = analogio.AnalogIn(board.A0)
+
+while True:
+    print(Xout.value)
+    time.sleep(0.5)
+```
+This program reads and prints the **Xout** voltage twice a second. Test that moving the joystick left and right has the expected effect. What happens when you move the joystick up and down, or rotating in a circle so X and Y are both varying?
+
+Note how the microcontroller captures the analog voltage as a large integer value, which is not simply the measured voltage.  The range of these values is roughly 0 - 65,535, which tells us that it is represented by a 16-bit value since $$65,535 = 2^{16} - 1$$.  In the [DMM project](projects/DMM.md) you will learn how to convert these values to voltages.
+
+## Exercise: Simultaneous X and Y Analog Input
+
+Modify your circuit and code to simultaneously read and print analog values derived from **Xout** and **Yout**.  Test that left/right and up/down motions of the joystick have the expected results.
+
 ## Exercise: Connect Digital Inputs and Outputs with the Microcontroller
+
+Build a circuit and write code so that pressing the button causes a green LED to flash on/off twice over two seconds.  What happens if you press the button twice in less than two seconds?  How could you modify your code to change this behavior?
+
+Once that is working, modify your circuit and code so that, in addition to flashing green when the button is pressed, a red LED flashes whenever the button is released.  What would you like to happen when you release the button after less than two seconds?  Can you write code to achieve this?
