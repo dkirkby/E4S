@@ -92,7 +92,7 @@ This program tracks and prints any changes to the switch state.  You will need t
 
 **Why the resistor?** This circuit includes a 1KΩ "pullup" resistor.  Why is this necessary?  The reason is that the two electrical states of a switch are open- and closed-circuit, but the microcontroller expects digital states corresponding to voltages near 3.3V and 0V.  Therefore we need to convert open/closed circuit conditions into high/low voltage conditions.  Since the presence of any voltage requires some current flow, we need to define a current path during the open-circuit condition. The simplest way to accomplish this is with a single resistor to 3.3V ("pullup") or GND ("pulldown"). The exact value of the pull up/down resistance is not critical both 1KΩ or 10KΩ work fine in this circuit.
 
-![pull up/down circuits](img/pullupdown.jpg)
+![pull up/down circuits](img/pull-up-down.jpg)
 
 ## Read an Analog Input with the Microcontroller
 
