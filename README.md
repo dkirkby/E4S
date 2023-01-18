@@ -15,6 +15,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Introduction to the kit components](kit.md)
 - [Perform initial setup of the microcontrollers](setup.md)
 - [Build your first circuit and program](first-prog.md)
+- [Digital and analog inputs](inputs.md)
 
 ## Projects
 
