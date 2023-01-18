@@ -26,8 +26,8 @@ Recall that a digital signal has only two states, which we can label HI / LO (or
 
 Experiment with the joystick in your kit to discover the three different ways you can iteract with it:
  - Press and release (which should both produce an audible click) to open and close a switch between the **GND** and **Sel** pins.
- - Push left and right to vary the resistances between the **GND** - **XOUT** and **XOUT** - **VCC** pins.
- - Push up and down to  vary the resistances between the **GND** - **YOUT** and **YOUT** - **VCC** pins.
+ - Push left and right to vary the resistances between the **GND** - **Xout** and **Xout** - **VCC** pins.
+ - Push up and down to  vary the resistances between the **GND** - **Yout** and **Yout** - **VCC** pins.
 
 Note that the **GND** and **VCC** joystick pin labels are slightly misleading since you are not *required* to connect these to the **GND** and **VCC** (3.3V) signals in your circuit, even though that is often a good idea.
 
@@ -41,11 +41,11 @@ What do you think would happen if you replaced other wires in the original circu
 
 ## Use a Joystick as an Analog Input
 
-Next, we will use the left-right motion of the joystick as an analog signal to control the LED brightness. In this mode, each axis (X/Y) of the joystick serves as an independent [variable resistor or potentiometer ("pot")](https://learn.adafruit.com/make-it-change-potentiometers?view=all).  A potentiometer consists of two resistors R1 and R2 connected in series, within a single package, such that R1 + R2 = RTOT is fixed (at 10KΩ for the joystick).  The three pins of a potentiometer connect as shown below, and moving the joystick left/right or up/down (or rotating a rotary potentiometer) varies how RTOT is split between R1 and R2.  The pin between R1 and R2 for left/right joystick motion is labeled **XOUT**. There pin **YOUT** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.
+Next, we will use the left-right motion of the joystick as an analog signal to control the LED brightness. In this mode, each axis (X/Y) of the joystick serves as an independent [variable resistor or potentiometer ("pot")](https://learn.adafruit.com/make-it-change-potentiometers?view=all).  A potentiometer consists of two resistors R1 and R2 connected in series, within a single package, such that R1 + R2 = RTOT is fixed (at 10KΩ for the joystick).  The three pins of a potentiometer connect as shown below, and moving the joystick left/right or up/down (or rotating a rotary potentiometer) varies how RTOT is split between R1 and R2.  The pin between R1 and R2 for left/right joystick motion is labeled **Xout**. There pin **Yout** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.
 
 ![Potentiometer circuit diagram](img/potentiometer-diag.jpg)
 
-The circuit already has a 1KΩ resistor that controls the LED brightness.  To vary this smoothly (i.e. in an "analog" fashion), add the left/right potentiometer's R1 in series with the existing 1KΩ resistor. In other words, replace the jumper wire between the 1KΩ resistor and LED with two jumper wires connected to the joystick **GND** and **XOUT** pins, as shown below:
+The circuit already has a 1KΩ resistor that controls the LED brightness.  To vary this smoothly (i.e. in an "analog" fashion), add the left/right potentiometer's R1 in series with the existing 1KΩ resistor. In other words, replace the jumper wire between the 1KΩ resistor and LED with two jumper wires connected to the joystick **GND** and **Xout** pins, as shown below:
 
 ![LED circuit with potentiometer](img/led-pot.jpg)
 
