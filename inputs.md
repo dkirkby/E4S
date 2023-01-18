@@ -45,13 +45,15 @@ There are several different ways that switches are draw in circuit diagrams, inc
 
 ## Use a Joystick as an Analog Input
 
-Next, we will use the left-right motion of the joystick as an analog signal to control the LED brightness. In this mode, each axis (X/Y) of the joystick serves as an independent [variable resistor or potentiometer ("pot")](https://learn.adafruit.com/make-it-change-potentiometers?view=all).  A potentiometer consists of two resistors R1 and R2 connected in series, within a single package, such that R1 + R2 = RTOT is fixed (at 10KΩ for the joystick).  The three pins of a potentiometer connect as shown below, and moving the joystick left/right or up/down (or rotating a rotary potentiometer) varies how RTOT is split between R1 and R2.  The pin between R1 and R2 for left/right joystick motion is labeled **Xout**. There pin **Yout** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.
+Next, we will use the left-right motion of the joystick as an analog signal to control the LED brightness. In this mode, each axis (X/Y) of the joystick serves as an independent [variable resistor or potentiometer ("pot")](https://learn.adafruit.com/make-it-change-potentiometers?view=all).  A potentiometer consists of two resistors R1 and R2 connected in series, within a single package, such that R1 + R2 = RTOT is fixed (at 10KΩ for the joystick). The diagram shows a standard potentiometer circuit symbol next to its equivalent circuit involving R1 and R2:
 
 ![Potentiometer circuit diagram](img/potentiometer-diag.jpg)
 
-Moving the joystick varies how RTOT is split between R1 and R2:
+Moving the joystick left/right or up/down (or rotating a rotary potentiometer) varies how RTOT is split between R1 and R2:
 
 ![Potentiometer resistance](img/potentiometer-resistance.jpg)
+
+The pin between R1 and R2 for left/right joystick motion is labeled **Xout**. There pin **Yout** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.  Both joystick potentiometers have RTOT = 10KΩ.
 
 The circuit already has a 1KΩ resistor that controls the LED brightness.  To vary this resistance smoothly (i.e. in an "analog" fashion), add the left/right potentiometer's R1 in series with the existing 1KΩ resistor. In other words, replace the jumper wire between the 1KΩ resistor and LED with two jumper wires connected to the joystick **GND** and **Xout** pins, as shown below:
 
@@ -90,9 +92,18 @@ while True:
 ```
 This program tracks and prints any changes to the switch state.  You will need to view the Mu editor serial pane to see this print output (click the "Serial" button in the top toolbar if it is not already open). Note how the microcontroller captures the switch state as a True/False boolean value. Which state corresponds to the button being pressed?  This circuit could use any of the **GPn** microcontroller pins as long as the wiring and code are consistent.
 
-**Why the resistor?** This circuit includes a 1KΩ "pullup" resistor.  Why is this necessary?  The reason is that the two electrical states of a switch are open- and closed-circuit, but the microcontroller expects digital states corresponding to voltages near 3.3V and 0V.  Therefore we need to convert open/closed circuit conditions into high/low voltage conditions.  Since the presence of any voltage requires some current flow, we need to define a current path during the open-circuit condition. The simplest way to accomplish this is with a single resistor to 3.3V ("pullup") or GND ("pulldown"). The exact value of the pull up/down resistance is not critical both 1KΩ or 10KΩ work fine in this circuit.
+**Why the resistor?** This circuit includes a 1KΩ "pullup" resistor.  Why is this necessary?  The reason is that the two electrical states of a switch are open- and closed-circuit, but the microcontroller expects digital states corresponding to voltages near 3.3V and 0V.  Therefore we need to convert open/closed circuit conditions into high/low voltage conditions.  Since the presence of any voltage requires some current flow, we need to define a current path during the open-circuit condition. The simplest way to accomplish this is with a single resistor to 3.3V ("pullup") or GND ("pulldown"). The exact value of the pull up/down resistance is not critical and both 1KΩ or 10KΩ work fine in this circuit.
 
 ![pull up/down circuits](img/pull-up-down.jpg)
+
+Each digital input needs its own resistor so a circuit with many inputs (up to 22 with the Pico W) needs a lot of resistors. Fortunately, the generic digital input/output pins on most microcontrollers have an internal pull-up and pull-down resistor for each **GPn** pin that you can optionally enable. Add this line just below `switch.direction = digitalio.Direction.INPUT` to enable an internal pull-up resistor:
+```python
+switch.pull = digitalio.Pull.UP
+```
+Now replace your 1KΩ resistor with a jumper wire and verify that the circuit still operates the same. If instead you want an internal pull-down resistor, use:
+```python
+switch.pull = digitalio.Pull.DOWN
+```
 
 ## Read an Analog Input with the Microcontroller
 
