@@ -135,6 +135,8 @@ while True:
 ```
 This program reads and prints the **Xout** voltage twice a second. Test that moving the joystick left and right has the expected effect. What happens when you move the joystick up and down, or rotating in a circle so X and Y are both varying?
 
+> The Pico W analog-input pins are labeled **ADC0**, **ADC1*** and **ADC2** but the corresponding names in MicroPython are `board.A0`, `board.A1` and `board.A2`.
+
 Note how the microcontroller captures the analog voltage as a large integer value, which is not simply the measured voltage.  The range of these values is roughly 0 - 65,535, which tells us that it is represented by a 16-bit value since $$65,535 = 2^{16} - 1$$.  In the [DMM project](projects/DMM.md) you will learn how to convert these values to voltages.
 
 ## Exercise: Simultaneous X and Y Analog Input
