@@ -100,7 +100,9 @@ Each digital input needs its own resistor so a circuit with many inputs (up to 2
 ```python
 switch.pull = digitalio.Pull.UP
 ```
-Now replace your 1KΩ resistor with a jumper wire and verify that the circuit still operates the same. If instead you want an internal pull-down resistor, use:
+Now remove your 1KΩ resistor and verify that the circuit still operates the same.  You can also remove the red wire from 3.3V to the breadboard since it no longer serves any purpose.  With this modification, the circuit diagram has not changed, but the location of the resistor (and its connections to 3.3V and GP22) have moved from your breadboard to inside the RP2040 chip on your Pico W module!
+
+> If instead you want an internal pull-down resistor, use:
 ```python
 switch.pull = digitalio.Pull.DOWN
 ```
@@ -144,3 +146,5 @@ Modify your circuit and code to simultaneously read and print analog values deri
 Build a circuit and write code so that pressing the button causes a green LED to flash on/off twice over two seconds.  What happens if you press the button twice in less than two seconds?  How could you modify your code to change this behavior?
 
 Once that is working, modify your circuit and code so that, in addition to flashing green when the button is pressed, a red LED flashes whenever the button is released.  What would you like to happen when you release the button after less than two seconds?  Can you write code to achieve this?
+
+*Hint: use a separate GPn pin to control the LED and use a python [for loop](https://wiki.python.org/moin/ForLoop) to flash it.*
