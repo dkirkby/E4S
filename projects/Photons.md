@@ -80,7 +80,7 @@ a crude (and slow) [function generator](https://en.wikipedia.org/wiki/Function_g
 Replace the 10KΩ resistor connected to ground with the red LED, whose datasheet is
 [here](../datasheets/LED.pdf). Your LED should now be emitting light during part of the cycle.  If not, try turning it around (the shorter leg of the LED should be connected to ground).
 
-Notice how the displayed ADUout waveform has changed with the LED replacing one of the resistors.  The relationship between ADUin and ADUout is now *non-linear*, i.e. we cannot write a linear equation for Vout in terms of Vin
+Notice how the displayed `ADUout` waveform has changed with the LED replacing one of the resistors.  The relationship between `ADUin` and `ADUout` is now *non-linear*, i.e. we cannot write a linear equation for Vout in terms of Vin
 that is valid throughout the cycle.  This is because diodes are non-linear devices, like transistors (which are basically a pair of diodes) and unlike resistors and capacitors.
 
 There are two distinct phases to each cycle: describe them.  How is the LED emission different in each phase?
