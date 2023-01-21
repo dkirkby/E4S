@@ -6,11 +6,11 @@ In this project, you will generate and monitor analog waveforms to control photo
 
 Build the circuit shown below with your microcontroller, a pair of 10KΩ resistors, a 1μF capacitor, your breadboard and some jumper wires:
 
-![Voltage divider circuit](img/voltage-divider-photo.jpg)
+![Voltage divider circuit](../img/voltage-divider-photo.jpg)
 
 The corresponding schematic diagram is:
 
-![Voltage divider schematic](img/voltage-divider-diag.jpg)
+![Voltage divider schematic](../img/voltage-divider-diag.jpg)
 
 This is another voltage divider but with a capacitor added. The purpose of the capacitor is to smooth the PWM output from **GP22* by shunting frequencies above 1/RC ~ 100 Hz to ground instead of the ADC input.
 
@@ -68,7 +68,7 @@ Download your program and click on the **Serial** icon in the Mu editor toolbar:
 
 Next, click on the **Plotter** icon in the Mu editor toolbar to display a real-time graph of these values, which should look something like this:
 
-![Voltage divider ADU curves](img/voltage-divider-adu-curves.jpg)
+![Voltage divider ADU curves](../img/voltage-divider-adu-curves.jpg)
 
 Does the relationship between the graphs of A0 and A1 (displayed in ADU units) make sense in terms of the circuit?
 
@@ -103,7 +103,7 @@ Modify your code to plot `Vin`, `Vout` and `iLED` using:
 ```
 You should see something like this:
 
-![LED voltage and current](led-curves.jpg)
+![LED voltage and current](../img/led-curves.jpg)
 
 The curves of `Vin` and `Vout` are similar to the earlier curves for `ADUin` and `ADUout` but rescaled from ADU to Volts.  If you get a different `iLED` curve, check your calculation of the current and that you have converted to 0.1 mA units.
 
