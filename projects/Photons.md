@@ -12,7 +12,7 @@ The corresponding schematic diagram is:
 
 ![Voltage divider schematic](../img/voltage-divider-diag.jpg)
 
-This is another voltage divider but with a capacitor added. The purpose of the capacitor is to smooth the PWM output from **GP22* by shunting frequencies above 1/RC ~ 100 Hz to ground instead of the ADC input.
+This is another voltage divider but with a capacitor added. The purpose of the capacitor is to smooth the PWM output from **GP22** by shunting frequencies above 1/RC ~ 100 Hz to ground instead of the ADC input.
 
 Use the following program to test this circuit:
 ```python
@@ -70,7 +70,7 @@ Next, click on the **Plotter** icon in the Mu editor toolbar to display a real-t
 
 ![Voltage divider ADU curves](../img/voltage-divider-adu-curves.jpg)
 
-Does the relationship between the graphs of A0 and A1 (displayed in ADU units) make sense in terms of the circuit?
+Does the relationship between the graphs of `ADUin` and `ADUout` make sense in terms of the circuit?
 
 The Mu Plotter is very convenient but not very flexible.  For example, you cannot set the vertical range. You can drag the borders between the Mu editor panels to give the graph more space.  You have now created
 a crude (and slow) [function generator](https://en.wikipedia.org/wiki/Function_generator) and [oscilloscope](https://en.wikipedia.org/wiki/Oscilloscope) for under $10!
