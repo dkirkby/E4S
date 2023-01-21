@@ -94,7 +94,7 @@ Modify your code to calculate and this current `iLED` in units of 0.1 mA (these 
     Vin = ADUin * 3.3 / 0xffff
     Vout = ADUout * 3.3 / 0xffff
 ```
-Note the use of hexadecimal again: `0xffff` equals the maximum possible (unsigned) 16-bit value of $$2^16 - 1 = 65,535$$.
+Note the use of hexadecimal again: `0xffff` equals the maximum possible (unsigned) 16-bit value of $$2^{16} - 1 = 65,535$$.
 
 Modify your code to plot `Vin`, `Vout` and `iLED` using:
 ```python
@@ -103,7 +103,7 @@ Modify your code to plot `Vin`, `Vout` and `iLED` using:
 ```
 You should see something like this:
 
-![LED voltage and current](../img/led-curves.jpg)
+![LED voltage and current](../img/led-IV-curves.jpg)
 
 The curves of `Vin` and `Vout` are similar to the earlier curves for `ADUin` and `ADUout` but rescaled from ADU to Volts.  If you get a different `iLED` curve, check your calculation of the current and that you have converted to 0.1 mA units.
 
