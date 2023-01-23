@@ -105,7 +105,7 @@ You should see something like this:
 
 ![LED voltage and current](../img/led-IV-curves.jpg)
 
-The curves of `Vin` and `Vout` are similar to the earlier curves for `ADUin` and `ADUout` but rescaled from ADU to Volts.  If you get a different `iLED` curve, check your calculation of the current and that you have converted to 0.1 mA units.
+The curves of `Vin` and `Vout` are similar to the earlier curves for `ADUin` and `ADUout` but rescaled from ADU to Volts.  If you get a different `iLED` curve, in green, check your calculation of the current and that you have converted to 0.1 mA units.
 
 ## A Pulsing LED
 
