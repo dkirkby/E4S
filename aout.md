@@ -45,7 +45,7 @@ import pwmio
 Xout = analogio.AnalogIn(board.A0)
 #LED = digitalio.DigitalInOut(board.GP22)
 #LED.direction = digitalio.Direction.OUTPUT
-PWM = pwmio.PWMOut(board.GP22, frequency=1)
+PWM = pwmio.PWMOut(board.GP22, frequency=8)
 
 while True:
     value = Xout.value
@@ -63,7 +63,7 @@ Any **GPn** pin on the Pico W can be used for PWM output like this. The necessar
 ```python
 PWM = pwmio.PWMOut(board.GP22, frequency=1)
 ```
-to specify which pin you are using and a base frequency in Hertz.  Normally we will use much higher frequencies, but we start with a low frequency of 1 Hertz so we can see the analog variation in the LED flashing, which is controlled by:
+to specify which pin you are using and a base frequency in Hertz.  Normally we will use much higher frequencies, but we start with the lowest allowed frequency of 8 Hertz so we can see the analog variation in the LED flashing, which is controlled by:
 ```python
 PWM.duty_cycle = value
 ```
@@ -73,6 +73,7 @@ Change the PWM frequency to 10Hz and 100Hz and describe what happens.
 
 For a deeper dive into pulse-width modulation, visit this [interactive visualization](https://observablehq.com/embed/@dkirkby/pwm@450?cells=intro%2CpwmPlot%2Cviewof+dutyCycle%2Cviewof+pwmFreq%2Cviewof+filterR%2Cviewof+filterC%2Cfooter) to answer these questions:
  - Why do we call this a "pseudo" analog output technique?
+ - What hex value of the duty cycle gives an (average) output of Vcc/10?
  - Try different values of R and C for filtering the PWM output. What is the general rule for smoother output?
  - For fixed R and C values, does the smoothness of the output depend on the PWM frequency?  If so, how?
  - For fixed R and C values, does the smoothness of the output depend on the duty cycle?  If so, how?

@@ -1,23 +1,28 @@
 # UCI Electronics for Scientists
 # https://github.com/dkirkby/E4S
 #
-# Demonstrate PWM output driving the on-board LED.
-# https://circuitpython.readthedocs.io/en/7.1.x/shared-bindings/pwmio/index.html#pwmio.PWMOut
+# Demonstrate pulse-width modulation (PWM) output driving an LED.
 #
-# For the M4, use board.D13 for the on-board LED.
-# For the Pi Pico, use board.GP25 for the on-board LED.
+# See https://dkirkby.github.io/E4S/aout.html for more information.
+#
+# Use jumper wires to build the following circuit:
+# GP22 => 1K resistor => LED => GND
 import time
 import board
 import pwmio
 
-# Use 2 to see individual flashes, 100 for apparent dimming, 20 to see the transition.
-FREQUENCY = 2 # Hertz
+# Specify the PWM cycle frequency in Hertz.
+# Use 8 to see individual flashes, 100 for apparent dimming, 20 to see the transition.
+# The minimum Pico W frequency is 8 Hertz.
+FREQUENCY = 8
 
-# Could also drive an external LED from any digital pin (via a series resistor).
-PWM = pwmio.PWMOut(board.GP25, frequency=FREQUENCY)
+# Initialize a PWM output. For details, see
+# https://docs.circuitpython.org/en/latest/shared-bindings/pwmio/index.html
+PWM = pwmio.PWMOut(board.GP22, frequency=FREQUENCY)
 
 while True:
-    for duty_cycle_divisor in (2, 4, 8, 16, 32):
-        PWM.duty_cycle = 0xffff // duty_cycle_divisor
+    for value in (0xffff, 0xc000, 0x8000, 0x4000):
+        print(f'duty_cycle = 0x{value:04x} / 0xffff = {100*value/0xffff:.1f}%')
+        PWM.duty_cycle = value
         # Could replace sleep with useful work since PWM operates in parallel.
         time.sleep(2)
