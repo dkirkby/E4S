@@ -1,6 +1,6 @@
 # Project: Waveforms and Photons
 
-In this project, you will generate and monitor analog waveforms to control photons produced by a light-emitting diode (LED).
+In this project, you will generate and monitor analog waveforms to control photons produced by a light-emitting diode (LED). This project assumes you are already familiar with analog [inputs](../inputs.md) and [outputs](../aout.md).
 
 ## Analog Waveform Output
 
@@ -12,7 +12,7 @@ The corresponding schematic diagram is:
 
 ![Voltage divider schematic](../img/voltage-divider-diag.jpg)
 
-This is another voltage divider but with a capacitor added. The purpose of the capacitor is to smooth the PWM output from **GP22** by shunting frequencies above 1/RC ~ 100 Hz to ground instead of the ADC input.
+This is another voltage divider but with a capacitor added. The purpose of the capacitor is to smooth the PWM output from **GP22** by shunting frequencies above 1/RC ~ 100 Hz to ground instead of the ADC input (see [here](https://observablehq.com/embed/@dkirkby/pwm@450?cells=intro%2CpwmPlot%2Cviewof+dutyCycle%2Cviewof+pwmFreq%2Cviewof+filterR%2Cviewof+filterC%2Cfooter) for details).
 
 Use the following program to test this circuit:
 ```python

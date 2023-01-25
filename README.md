@@ -17,8 +17,9 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Build your first circuit and program](first-prog.md)
 - [Digital and analog inputs](inputs.md)
 - [Analog output](aout.md)
-  - [PWM analog output](https://observablehq.com/embed/@dkirkby/pwm@450?cells=intro%2CpwmPlot%2Cviewof+dutyCycle%2Cviewof+pwmFreq%2Cviewof+filterR%2Cviewof+filterC%2Cfooter)
+  - [Pulse-width modulation](https://observablehq.com/embed/@dkirkby/pwm@450?cells=intro%2CpwmPlot%2Cviewof+dutyCycle%2Cviewof+pwmFreq%2Cviewof+filterR%2Cviewof+filterC%2Cfooter)
   - [Analog input with successive approximation](https://observablehq.com/embed/@dkirkby/adc?cells=intro%2Cviewof+nbits%2Cviewof+theBit%2Cdiagram%2Cviewof+Vin%2Cviewof+Vcc%2Cplot%2Cfooter)
+- [Motors](motor.md)
 
 ## Projects
 
