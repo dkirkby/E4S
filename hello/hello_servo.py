@@ -17,7 +17,7 @@ import pwmio
 FREQUENCY = 50 # Hertz
 PERIOD_MS = 1000 / FREQUENCY
 
-PWM = pwmio.PWMOut(board.D2, frequency=FREQUENCY)
+PWM = pwmio.PWMOut(board.GP22, frequency=FREQUENCY)
 
 while True:
     for pulse_duration_ms in (0.7, 1.4, 1.5, 1.6, 2.3):
