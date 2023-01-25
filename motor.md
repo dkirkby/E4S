@@ -4,7 +4,7 @@
 
 ## Introduction
 
-A [motor](https://en.wikipedia.org/wiki/Electric_motor) is an electromechanical device that converts electrical energy into mechanical rotational energy. The heart of a motor is an electromagnet that allows a current flowing through a coil to control a magnetic field. Rotational motion is usually achieved via the magnetic torque between the current flowing through the coil and permanent magnets.  The inverse of a motor, to convert mechanical rotational energy to electrical energy, is a generator and operates on similar principles.
+A [motor](https://en.wikipedia.org/wiki/Electric_motor) is an electromechanical device that converts electrical energy into mechanical rotational energy. The heart of a motor are its current-carrying coils that respond to magnetic fields. Rotational motion is usually achieved via the magnetic torque between the current flowing through the coil and permanent magnets.  The inverse of a motor, to convert mechanical rotational energy to electrical energy, is a generator and operates on similar principles.
 
 Motors can be powered by direct current (DC) or alternating current (AC). The more common DC motors usually have **brushes** that establish an alternating current path as the motor spins, but the more expensive **brushless** motors are mechanically simpler and more efficient.  DC **stepper** motors move in precise repeatable small steps, instead of continuously, and are common in (2D and 3D) printers and robotics.  Continuous (non-stepper) motors can also achieve precise angular positioning using an angle-measuring **rotary encoder** and a feedback loop. This configuration is known as a **servo** motor and usually includes hard stops for internal calibration that prevent rotations of more than 360 degrees.
 
@@ -17,7 +17,7 @@ For a more-depth introduction to interfacing motors with microcontrollers, see [
 
 ## Kit Motor
 
-Your [kit](kit.md) contains a **Continuous Rotation Servo Motor**, but the [name is misleading](https://learn.adafruit.com/adafruit-motor-selection-guide?view=all#when-is-a-servo-not-a-servo-2875539) since can turn continuously, so is not limited to a 360 degree range, and has no rotary encoder or feedback.  This is a low power motor so can run directly from USB power, with the usual requirement of an external motor power supply.  If you look closely at this motor, you can see that it contains small gears and a circuit board with an H-bridge.
+Your [kit](kit.md) contains a **Continuous Rotation Servo Motor**, but the [name is misleading](https://learn.adafruit.com/adafruit-motor-selection-guide?view=all#when-is-a-servo-not-a-servo-2875539) since can turn continuously, so is not limited to a 360 degree range, and has no rotary encoder or feedback.  This is a low power motor so can run directly from USB power, with the usual requirement of an external motor power supply.  Look closely at your motor: you should be able to see that it contains small gears and a circuit board inside its semi-transparent housing.  The circuit is an H-bridge and will allow us to control the motor speed and direction using a PWM signal.  Your motor might be a bit greasy when you handle it because of the gear lubricants added by the manufacturer.
 
 Add one of the plastic indicator dials to your motor (gently pressing it onto the output shaft) then build this circuit to drive your motor:
 
@@ -28,13 +28,13 @@ The purpose of the 470μF capacitor in this circuit is to isolate the microcontr
 **Double check that your electrolytic capacitor has its negative wire connected to GND before applying USB power.**
 
 The motor has three connections:
- - Orange: power supply ground
+ - Brown: power supply ground
  - Red: power supply voltage
  - Orange: control signal input
 
 Note that the servo motor uses a brown wire for its GND connection, instead of the usual black.
 
-The control signal expects digital pulses and uses the length of each positive pulse to determine the motor speed and direction. The nominal response is:
+The control signal expects digital pulses and uses the length of each positive pulse to determine the motor speed and direction. The nominal mapping between pulse width and motor rotation is:
  - 0.7ms pulse width: maximum-speed clockwise (CW) rotation
  - 1.5ms pulse width: no rotation
  - 2.3ms pulse width: maximum-speed counter-clockwise (CCW) rotation
@@ -70,7 +70,7 @@ while True:
 ```
 Compare your motor's actual motion with the descriptions printed by the code to the Serial window.  How well do they match?
 
-If your motor is not moving during the *Slow CW* or *Slow CCW* phases, or moves at noticably different speeds (in opposite directions), then its pulse detection circuitry is not well calibrated.  In this case, one option is to measure the true center pulse width between CW and CCW rotation and use that in your code.  Alternatively, there is a small potentiometer on the internal circuit board, right below the output shaft, that you can turn to adjust the pulse-width calibration.  You will need a small slotted screwdriver for this.  Modify the program for a constant 1.5ms pulse width, then adjust the potentiometer to find the center between CW and CCW rotation. You will probably only need to adjust by a small fraction of a turn.
+If your motor is not moving during the *Slow CW* or *Slow CCW* phases, or moves at noticably different speeds (in opposite directions), then its pulse detection circuitry is not well calibrated.  In this case, one option is to measure the true center pulse width between CW and CCW rotation and use that in your code.  Alternatively, there is a small potentiometer on the internal circuit board, right below the output shaft, that you can turn to adjust the pulse-width calibration.  You will need a small slotted screwdriver for this, more often used to adjust eye glasses.  Modify the program for a constant 1.5ms pulse width, then adjust the potentiometer to find the center between CW and CCW rotation. You will probably only need to adjust by a small fraction of a turn.
 
 ![continous servo motor calibration](img/servo-calib.jpg)
 
