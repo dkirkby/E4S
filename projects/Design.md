@@ -13,10 +13,10 @@ Your project should require 10-20 hours to build and test once you have all of t
 ## Examples
 
 Here are a few examples of projects at the right level:
- - A musical tuner that identifies which note is being played and whether it is sharp or flat.
- - A heart-rate monitor to measure and record beats per minute.
- - A system for monitoring plant growth conditions such as lighting, temperature and soil moisture.
- - An air quality monitoring station similar to [this one](https://www2.purpleair.com/collections/air-quality-sensors/products/purpleair-pa-ii) from PurpleAir.
+ - A system for monitoring plant growth conditions such as lighting, temperature and soil moisture, possibly incorporating [this sensor](https://www.adafruit.com/product/4026).
+ - A heart-rate monitor to measure and record beats per minute, possibly using [this sensor](https://www.adafruit.com/product/1093).
+ - An air quality monitoring and data logging station, possibly using [this sensor](https://www.adafruit.com/product/4632).
+ - A fridge monitoring station to monitor the temperature, record how often the door is opened, sound an alarm if the door is left open too long, etc, possibly based on a [MagTag](https://www.adafruit.com/product/4800).
 
 I recommend a project that overlaps your interests since that will be more enjoyable and you can apply your expertise to the design problem. Here are some suggested resources for inspiration:
  - [Adafruit projects](https://learn.adafruit.com/guides/projects)
