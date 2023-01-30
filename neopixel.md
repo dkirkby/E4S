@@ -45,6 +45,8 @@ Using `auto_write=False` in the initialization means that changes to the LEDs do
 
 The example above uses a relatively low brightness of 0.02.  The reason for this is that turning on all 8 LEDs at maximum brightness (1.0) would require 480mA to be supplied.  However, the Pico W [datasheet](https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf) recommends not exceeding 300mA.  What might happen if you exceed this?  You probably would not do any permanent damage, but would cause the USB power to drop sufficiently that the Pico would reset and stop running its program.  Your laptop operating system might also complain about excessive current draw on its USB port.
 
+If you turn over your neopixel strip, you will notice copper pads labeled **GND**, **DOUT** and **5VDC**.  If you were to connect these to **GND**, **DIN** and **5VDC** of a second strip (e.g. using soldered jumper wires), you could then set `NLEDS = 16` in your code and control both strips at once.
+
 ## Exercise 1
 
 Look up the R,G,B values (0-255) of your favorite color [here](https://www.rapidtables.com/web/color/RGB_Color.html) and use them for the `ON` state.  Can you see the individual red, green and blue LEDs in the device?  How well does the LED mixture match the color you expected?
