@@ -10,13 +10,13 @@ Discussion questions:
  - What are the advantages and disadvantages of using a shorter wavelength?
  - Why do you think that visible light is not used?
 
-Your kit contains a cheap ultrasonic "sonar" (SOund NAvigation Ranging) device with a pair of similar looking devices, one of which transmits (labeled "T") and the other receives ("R").
+Your kit contains a [cheap ultrasonic "sonar"](https://www.adafruit.com/product/3942) (SOund NAvigation Ranging) device with a pair of similar looking round components, one of which transmits (labeled "T") and the other receives ("R").
 
 ## Test the Kit Device
 
 Build the following circuit to experiment with your sonar sensor:
 
-![sonar circuit](../img/sonar-circuit.jpg)
+![sonar circuit](img/sonar-circuit.jpg)
 
 Like most sensors, it requires power (3.3V) and ground connections. The other two pins operate at digital levels and allow you to control the device.  The **Trig** pin is an input that triggers a new ultrasonic pulse to be emitted when it receives a short high pulse.  The **Echo** pin is an output that goes to a logic high level when the pulse is emitted then stays high until an echo is received (or a timeout occurs).  The distance is encoded in the duration of the **Echo** pulse, so requires precise timing of this duration.  CircuitPython provides a [library](https://github.com/adafruit/Adafruit_CircuitPython_HCSR04) to take care of this interfacing.
 
