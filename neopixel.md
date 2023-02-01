@@ -8,6 +8,8 @@ Neopixels are devices that contain separate red, green and blue LEDs that can be
 
 A neopixel is an example of what is known generically as an **RGB LED**. Our neopixels are based on the [WS2812 device](https://cdn-shop.adafruit.com/datasheets/WS2812.pdf).  Some microcontrollers have a single neopixel included but the Pico does not.  Instead, your kit contains a strip of 8 neopixels that we will use.
 
+## Test the Kit Neopixel Strip
+
 Build the following circuit to get started:
 
 ![neopixel test circuit](img/neopix-circuit.jpg)

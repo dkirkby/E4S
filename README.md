@@ -21,6 +21,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
   - [Analog input with successive approximation](https://observablehq.com/embed/@dkirkby/adc?cells=intro%2Cviewof+nbits%2Cviewof+theBit%2Cdiagram%2Cviewof+Vin%2Cviewof+Vcc%2Cplot%2Cfooter)
 - [Motors](motor.md)
 - [Neopixels](neopixel.md)
+- [Sonar distance measurement](sonar.md)
 
 ## Projects
 

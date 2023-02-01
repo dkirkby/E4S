@@ -4,9 +4,9 @@ In this project you will explore how two circuits can communicate. You will firs
 
 ## Build the Transmitter
 
-In this project, you will use both of the M4 microcontroller boards: one to transmit and one to receive.  Only one M4 can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently using the 9VDC supply.
+In this project, you will use both of the pico W modules: one to transmit and one to receive.  Only one Pico can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently from the first Pico's USB cable via some jumper wires.
 
-Connect one M4 to the Mu editor and set it up to transmit using the following program:
+Connect one Pico to the Mu editor and set it up to transmit using the following program:
 ```python
 import time
 import array
@@ -51,6 +51,50 @@ def transmit(bits):
 while True:
     transmit([1,0,1,0])
 ```
+New:
+```python
+import time
+import array
+import board
+import digitalio
+
+# Define the transmitter idle state during a period with no communication.
+TX_IDLE_VALUE = False
+
+# Define the duration of a single bit in seconds.
+BIT_DURATION = 0.5
+HALF_BIT_DURATION = BIT_DURATION / 2
+
+# Define the length of a message in bits.
+MSG_BITS = 4
+
+# Minimum number of idle bits before a start bit.
+MIN_IDLE_BITS = MSG_BITS + 1
+
+# Configure the transmit digital output.
+TX = digitalio.DigitalInOut(board.GP22)
+TX.direction = digitalio.Direction.OUTPUT
+TX.value = TX_IDLE_VALUE # Initially idle
+
+def transmit(msg):
+    assert len(msg) == MSG_BITS
+    # Add the minimum number of idle bits then a start bit.
+    prologue = [TX_IDLE_VALUE] * MIN_IDLE_BITS + [not TX_IDLE_VALUE]
+    data = [TX_IDLE_VALUE if not bit else not TX_IDLE_VALUE for bit in msg]
+    # Allocate and fill an efficient array of the bits to transmit.
+    bits_array = array.array('B', prologue + data)
+    print('Start message')
+    for k, bit in enumerate(bits_array):
+        TX.value = bit
+        print(f'bit[{k}] = {bit}')
+        time.sleep(BIT_DURATION)
+    # Leave the bus in the idle state.
+    TX.value = TX_IDLE_VALUE
+
+while True:
+    transmit([1,0,1,0])
+```
+
 Although this is a simple communication protcol, there are still a few things we need to specify:
  - What is the state of the "bus" (communication channel) when there is no activity?
  - What is the duration of each bit?
