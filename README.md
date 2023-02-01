@@ -22,6 +22,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Motors](motor.md)
 - [Neopixels](neopixel.md)
 - [Sonar distance measurement](sonar.md)
+- [WiFi communication](wifi.md)
 
 ## Projects
 
