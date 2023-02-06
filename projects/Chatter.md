@@ -10,7 +10,9 @@ Build the following circuit using both Pico modules:
 
 ![wired communications circuit](../img/wired-comms-circuit.jpg)
 
-Connect one Pico to the Mu editor and set it up to transmit using the following program:
+The right-hand Pico will be our transmitter, using the red LED, and the left-hand Pico is our receiver using the green LED.
+
+Connect the right-hand transmitter Pico to USB and enter the following program:
 ```python
 import time
 import array
@@ -229,18 +231,18 @@ The green RX LED will also indicate the received data bits (but not the start bi
 
 ## Warp Speed
 
-The protocol configuration we used above is deliberately very slow to allow individual bits to be traced with the red LED and print output.
+The protocol configuration we used above is deliberately very slow to allow individual bits to be traced with the LEDs and serial print output.
 
-Now, speed up your code 100 times by setting:
+Now, with the receiver still connected via USB, **disconnect your communications jumper wire between GP20 and GP22**, then speed up your code 100 times by setting:
 ```
 BIT_DURATION = 0.005
 ```
-Also, double the message size, to a "byte" or 8 bits, since this is convenient for later adding higher-level protocol layers:
+Also, double the message size, to a "byte" or 8 bits, since this is convenient for later adding higher-level layers of protocol:
 ```
 MSG_BITS = 8
 ```
-Finally, remove (or comment out) the `print` calls in your `receive` function (since they would
-slow us down now) and update the main loop:
+Finally, remove (or comment out) all the `print` calls in your `receive` function (since they would
+slow us down now) and update the main loop to transmit a full byte then sleep for 1 second:
 ```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
@@ -248,25 +250,24 @@ while True:
     #print(receive())
 ```
 
-After you download this code, your slow receiver is now a fast transmitter. Note the different
-sequence of red LED flashes.  Although this protocol transmits each message 100 times faster, we added a one second delay between messages in the main loop so you can distinguish the individual messages.
+After you download this code, your slow receiver is now a fast transmitter and you should see a burst of green LED activity every second (but will not be able to resolve the individual bits at this speed).  Although this protocol transmits each message 100 times faster, we added a one second delay between messages in the main loop so you can distinguish the individual messages.
 
-Repeat the untethering steps above to power your fast transmitter from the 9VDC supply. Connect the second M4 (the original slow transmitter) to usb and download the same program with the following small change required to make it a fast receiver:
+**Make a copy of your fast transmitter code in a file on your laptop, so you don't lose you work in case something happens to the Pico.**
+
+Your original transmitter is still transmitting slow messages, as indicated by its red LED. Next, switch the USB cable to the other Pico and download the same code (from your laptop copy) with the following small change required to make it a fast receiver:
 ```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     #transmit([1,0,1,0,0,1,1,0]); time.sleep(1)
     print(receive())
 ```
-Since you are swapping the transmitter and receiver roles, you will also need to rewire the jumper wire connecting TX to RX (by swapping D0 and D1 at each M4).
+Finally, replace the jumper wire between GP20 and GP22, remembering that the transmitter and receiver roles are now reversed (as well as the green and red LEDs).
 
-You should now see this print output repeated in the Mu editor serial window:
+You should now see this print output repeated in the receiver's Mu Serial window:
 ```
 array('B', [1, 0, 1, 0, 0, 1, 1, 0])
 ```
-In case you don't see this, close and re-open the serial window then double check your code and connections.  If the high speed protocol is still not working, you may have discovered a flaw
-in your receiver code that only affects high-speed operation.  To test this theory, try
-different speeds by changing `BIT_DURATION`.  Remember that you need to update both the receiver and transmitter whenever you make a change to the protocol parameters.
+In case you don't see this, close and re-open the serial window then double check your code and connections. **Double check that you commented all print statements in the receive and transmit functions.** If the high speed protocol is still not working, you may have discovered a flaw in your receiver code that only affects high-speed operation.  To test this theory, try different speeds by changing `BIT_DURATION`.  Remember that you need to update both the receiver and transmitter whenever you make a change to the protocol parameters.
 
 ## Another Layer
 
@@ -296,7 +297,7 @@ def char_to_bits(char, nbits=8):
     value = ord(char)
     return ...
 ```
-Since this function makes no use of any special M4 features, you can test it in any python environment on your computer, if that is more convenient.  Note the use of the [ord function](https://docs.python.org/3/library/functions.html#ord) to convert any character to a corresponding integer value in the range 0-255 (for standard ASCII characters).
+Since this function makes no use of any special MicroPython or Pico features, you can test it in any python environment on your computer, if that is more convenient.  Note the use of the [ord function](https://docs.python.org/3/library/functions.html#ord) to convert any character to a corresponding integer value in the range 0-255 (for standard ASCII characters).
 
 Test your `char_to_bits` by checking that `A` returns `[1, 0, 0, 0, 0, 0, 1, 0]` and `z` returns `[0, 1, 0, 1, 1, 1, 1, 0]`.  If your arrays are backwards, you have implemented most-significant bit (MSB) ordering instead of the desired LSB ordering.
 
@@ -335,21 +336,21 @@ If you are new to python programming, or a bit rusty, you might find writing the
 
 Although the term "wireless" usually implies communication via electromagnetic waves with wavelengths measured in centimeters (microwaves), this is just one of many non-electrical channels available. We will use infrared radiation with a wavelength of about 1 micron, but you could also use sound waves, etc.
 
-To establish our wireless "bus", we will point a pair of IR transmit-receive pairs at each other on the breadboard:
+To establish our wireless "bus", first **remove the jumper wire between GP20 and GP22**. Next, we will point a pair of IR transmit-receive pairs at each other on the breadboard:
 
-![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRbus.jpg)
+![IR bus circuit](img/IRbus.jpg)
 
-Note that there is no longer any direct electrical connection between the M4s (not even a common ground voltage).  The transmitter's TX now drives the IR LED of one pair (through a 1K series resistor) and the receiver's RX listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
+The transmitter's TX (GP22) now drives the IR LED of one pair (through a 1K series resistor) and the receiver's RX (GP20) listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
 
 Before building this circuit, you will need to carefully bend the leads of each IR pair following these steps:
 
-![IR lead bending](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRleads.jpg)
+![IR lead bending](img/IRleads.jpg)
 
 You will need scissors or nail clippers (or small wire cutters if you have them) to clip the two longer leads in the final step.
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
 
-![IR pair closeup](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/IRcloseup.jpg)
+![IR pair closeup](img/IRcloseup.jpg)
 
 Make sure that all 4 leads of the IR package are inserted far enough into the breadboard to make electrical contact.  Also double check that you are using the 1K series resistor from your kit, and not the (almost indistinguishable) 10K resistor.
 
@@ -359,7 +360,7 @@ RX_IDLE_VALUE = True
 ```
 Why is this change required?  Check that your wireless setup now gives the same results as your previous wired setup.
 
-Verify that blocking the light path between the IR pairs suspends the communication (but note that you will need a lot more than a sheet of paper to block this relatively bright emitter).
+Verify that blocking the light path between the IR pairs suspends the communication (but note that you will probably need more than a sheet of paper to block this relatively bright infra-red emitter).
 
 ## RSVP
 
@@ -368,20 +369,20 @@ All of our communication so far has been in one direction.  In this final sectio
 msg = 'Hello, world!'
 
 while True:
-    # Uncomment the first line in the untethered M4 or the second in the M4 connected via usb.
+    # Uncomment the first line in the untethered Pico or the second in the Pico connected via USB.
     send_text(get_text().upper())
     #print('>>', msg); send_text(msg); print('<<', get_text()); time.sleep(0.5)
 ```
-Note that we can no longer refer to one M4 as the transmitter and the other as the receiver, but they still play different roles with this main loop: what do you predict will happen when this main loop is running in both M4s?
+Note that we can no longer refer to one Pico as the transmitter and the other as the receiver, but they still play different roles with this main loop: what do you predict will happen when this main loop is running in both Picos?
 
 In addition to updating the main loop, you will need to add another 1K resistor and two jumper wires
 to establish the second communications channel in the opposite direction.  A good choice of jumper wire colors can make it easier to visually check your circuit.
 
 Bidirectional communication is also known as [duplex](https://en.wikipedia.org/wiki/Duplex_(telecommunications)), which comes in two flavors: **full-duplex**, where communication is possible simultaneously in both directions, or **half-duplex**, where both sides must take turns.  Explain why our implementation is half-duplex and how it could be easily upgraded to full-duplex.
 
-The untethered M4 now waits for a message, processes it, then returns the result.  In this example, the processing is simply to [convert to upper case](https://docs.python.org/3/library/stdtypes.html#str.upper), leading to this repeated output in the Mu editor serial window:
+The untethered Pico now waits for a message, processes it, then returns the result.  In this example, the processing is simply to [convert to upper case](https://docs.python.org/3/library/stdtypes.html#str.upper), leading to this repeated output in the Mu editor serial window:
 ```
 >> Hello, world!
 << HELLO, WORLD!
 ```
-Although we have two M4s talking to each other, the untethered M4 could instead forward its processed message to a third M4.  You could then use this "pass-through" architecture to implement hardware compression or encryption.
+Although we have two Picos talking to each other, the untethered Pico could instead forward its processed message to a third Pico.  You could then use this "pass-through" architecture to implement hardware compression or encryption.
