@@ -340,7 +340,7 @@ To establish our wireless "bus", first **remove the jumper wire between GP20 and
 
 ![IR bus circuit](../img/wireless-comms-circuit.jpg)
 
-The (left-hand) transmitter's TX (GP22) now drives the IR LED of one pair (through a 1K series resistor) and the (right-hand) receiver's RX (GP20) listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
+The (left-hand) transmitter's TX (GP22) now drives the IR LED of one pair (through a 1K series resistor) and the (right-hand) receiver's RX (GP20) listens to the IR phototransistor of the other pair (using an internal pull-up resistor).  Note the vertical line separating the transmitter (left-hand) and reciever (right-hand) sides of the circuit.
 
 Before building this circuit, you may need to carefully bend the leads of each IR pair following these steps:
 
@@ -376,7 +376,9 @@ while True:
 Note that we can no longer refer to one Pico as the transmitter and the other as the receiver, but they still play different roles with this main loop: what do you predict will happen when this main loop is running in both Picos?
 
 In addition to updating the main loop, you will need to add another 1K resistor and two jumper wires
-to establish the second communications channel in the opposite direction.  A good choice of jumper wire colors can make it easier to visually check your circuit.
+to establish the second communications channel in the opposite direction.  A good choice of jumper wire colors can make it easier to visually check your circuit.  Your final circuit should look similar to this:
+
+![wireless duplex circuit](../img/wireless-duplex-circuit.jpg)
 
 Bidirectional communication is also known as [duplex](https://en.wikipedia.org/wiki/Duplex_(telecommunications)), which comes in two flavors: **full-duplex**, where communication is possible simultaneously in both directions, or **half-duplex**, where both sides must take turns.  Explain why our implementation is half-duplex and how it could be easily upgraded to full-duplex.
 
