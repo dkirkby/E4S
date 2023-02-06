@@ -6,52 +6,11 @@ In this project you will explore how two circuits can communicate. You will firs
 
 In this project, you will use both of the pico W modules: one to transmit and one to receive.  Only one Pico can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently from the first Pico's USB cable via some jumper wires.
 
+Build the following circuit using both Pico modules:
+
+![wired communications circuit](../img/wired-comms-circuit.jpg)
+
 Connect one Pico to the Mu editor and set it up to transmit using the following program:
-```python
-import time
-import array
-import board
-import digitalio
-
-# Define the transmitter idle state during a period with no communication.
-TX_IDLE_VALUE = False
-
-# Define the duration of a single bit in seconds.
-BIT_DURATION = 0.5
-HALF_BIT_DURATION = BIT_DURATION / 2
-
-# Define the length of a message in bits.
-MSG_BITS = 4
-
-# Minimum number of idle bits before a start bit.
-MIN_IDLE_BITS = MSG_BITS + 1
-
-# Configure the transmit digital output.
-TX = digitalio.DigitalInOut(board.D1)
-TX.direction = digitalio.Direction.OUTPUT
-TX.value = TX_IDLE_VALUE # Initially idle
-
-# Initialize the internal red LED for diagnostics.
-LED = digitalio.DigitalInOut(board.D13)
-LED.direction = digitalio.Direction.OUTPUT
-LED.value = False # Initially off
-
-def transmit(bits):
-    assert len(bits) == MSG_BITS
-    # Add the minimum number of idle bits then a start bit.
-    prologue = [TX_IDLE_VALUE] * MIN_IDLE_BITS + [not TX_IDLE_VALUE]
-    # Allocate and fill an efficient array of the bits to transmit.
-    bits_array = array.array('B', prologue + bits)
-    for bit in bits_array:
-        LED.value = TX.value = (bit != TX_IDLE_VALUE)
-        time.sleep(BIT_DURATION)
-    # Leave the bus in the idle state.
-    LED.value = TX.value = TX_IDLE_VALUE
-
-while True:
-    transmit([1,0,1,0])
-```
-New:
 ```python
 import time
 import array
@@ -74,7 +33,13 @@ MIN_IDLE_BITS = MSG_BITS + 1
 # Configure the transmit digital output.
 TX = digitalio.DigitalInOut(board.GP22)
 TX.direction = digitalio.Direction.OUTPUT
-TX.value = TX_IDLE_VALUE # Initially idle
+
+# Configure the transmit indicator LED.
+LED = digitalio.DigitalInOut(board.GP21)
+LED.direction = digitalio.Direction.OUTPUT
+
+# Start in the IDLE state.
+TX.value = LED.value = TX_IDLE_VALUE
 
 def transmit(msg):
     assert len(msg) == MSG_BITS
@@ -85,7 +50,7 @@ def transmit(msg):
     bits_array = array.array('B', prologue + data)
     print('Start message')
     for k, bit in enumerate(bits_array):
-        TX.value = bit
+        TX.value = LED.value = bit
         print(f'bit[{k}] = {bit}')
         time.sleep(BIT_DURATION)
     # Leave the bus in the idle state.
@@ -94,6 +59,7 @@ def transmit(msg):
 while True:
     transmit([1,0,1,0])
 ```
+Note how we use a dedicated digital output (GP21) to drive an indicator LED that mirrors the state of the transmit (TX) line.
 
 Although this is a simple communication protcol, there are still a few things we need to specify:
  - What is the state of the "bus" (communication channel) when there is no activity?
@@ -106,7 +72,7 @@ code specifies voltage levels at a logical level, as either `False` (0V) or `Tru
 
 The timing diagrams below show graphs of voltage versus time for a single 4-bit message transmitted with `TX_IDLE_VALUE=False` (top) or `TX_IDLE_VALUE=True` (bottom):
 
-![IR bus circuit](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/ProtocolTiming.png)
+![IR bus circuit](img/ProtocolTiming.png)
 
 The "S" label identfies a **start bit**, which is frequently used to implement [asynchronous protocols](https://en.wikipedia.org/wiki/Asynchronous_serial_communication). The sequence of bits being transmitted here correspond to this statement in your main loop:
 ```
@@ -114,16 +80,15 @@ The "S" label identfies a **start bit**, which is frequently used to implement [
 ```
 Notice that we require the bus to be idle for `MSG_BITS+1` bit durations before each message, which effectively imposes at least 50% deadtime on this protocol.  What might go wrong without this long idle-time requirement?  Modern protocols avoid this using techniques such as [bit stuffing](https://en.wikipedia.org/wiki/Bit_stuffing).
 
-We use the on-board red LED (connected to D13) to monitor the transmitter. Note its activity when this program is running. Make sure you understand why the code produces the sequence of flashes you observe before proceeding to the next step of this project.
+Open the Mu Serial window and compare the output with the indicator LED flashes. Make sure you understand why the code produces the sequence of flashes you observe before proceeding to the next step of this project.
 
-To complete this section, untether your transmitter with the following steps:
+To complete this section, untether your transmitter and power the receiver with the following steps:
  - Eject the CIRCUITPY usb drive from your computer.
  - Close the Serial window in the Mu editor (if it was open).
- - Disconnect the USB cable at the M4.
- - Plug in the 9VDC to a wall socket and connect to your M4.
- - Make sure the DC_JACK switch is ON.
+ - Disconnect the USB cable from the transmitter Pico.
+ - Plug the USB cable into your second Pico, which will be our receiver.
 
-You should now see the red LED flashing the same sequence.
+You should now see the transmitter LED flashing the same sequence as before, since it is receiving USB power (5V, GND) from the receiver Pico's USB connection via jumper wires.
 
 ## Build the Receiver
 
