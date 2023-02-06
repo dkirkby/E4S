@@ -10,7 +10,7 @@ Build the following circuit using both Pico modules:
 
 ![wired communications circuit](../img/wired-comms-circuit.jpg)
 
-The right-hand Pico will be our transmitter, using the red LED, and the left-hand Pico is our receiver using the green LED.
+The right-hand Pico will be our transmitter, using the red LED, and the left-hand Pico is our receiver using the green LED.  Note that we are using the larger 10K resistors to set the LED brightness.
 
 Connect the right-hand transmitter Pico to USB and enter the following program:
 ```python
@@ -338,15 +338,15 @@ Although the term "wireless" usually implies communication via electromagnetic w
 
 To establish our wireless "bus", first **remove the jumper wire between GP20 and GP22**. Next, we will point a pair of IR transmit-receive pairs at each other on the breadboard:
 
-![IR bus circuit](img/IRbus.jpg)
+![IR bus circuit](../img/wireless-comms-circuit.jpg)
 
-The transmitter's TX (GP22) now drives the IR LED of one pair (through a 1K series resistor) and the receiver's RX (GP20) listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
+The (left-hand) transmitter's TX (GP22) now drives the IR LED of one pair (through a 1K series resistor) and the (right-hand) receiver's RX (GP20) listens to the IR phototransistor of the other pair (using an internal pull-up resistor).
 
-Before building this circuit, you will need to carefully bend the leads of each IR pair following these steps:
+Before building this circuit, you may need to carefully bend the leads of each IR pair following these steps:
 
 ![IR lead bending](img/IRleads.jpg)
 
-You will need scissors or nail clippers (or small wire cutters if you have them) to clip the two longer leads in the final step.
+You will need scissors or nail clippers (or small wire cutters if you have them) to clip the two longer leads in the final step. The leads on each IR pair are straight when purchased, but someone may have already bent one or more of the IR pairs in your kit (but you should still check they are bent correctly).
 
 Here is a closeup of one IR pair inserted into the breadboard, with green labels identifying which rows of the breadboard are connected to the GND, RX and TX of the IR pair, and green arrows showing the locations of the IR sensor and emitter:
 
