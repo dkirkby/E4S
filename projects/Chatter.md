@@ -153,7 +153,7 @@ Carefully review the differences from the transmitter program above. Some things
  - We define the receiver's idle state independently of the transmitter's. The reason for this will become apparent later.
  - The main (infinite) loop mirrors the received level (True/False) directly on the green LED.
 
-At this point, the red TX LED should be flashing as before, but the green RX LED is always off. Next, make the electrical connection that constitutes our communications "bus": add a jumper wire between the Pico GP22 pins (TX to RX).  Note that any communication using voltage levels requires at least two wires, but the second wire in this case is the GND connection via the breadboard.  Now the green RX LED should be exactly following the red TX LED.
+At this point, the red TX LED should be flashing as before, but the green RX LED is always off. Next, make the electrical connection that constitutes our communications "bus": add a jumper wire from the transmitter GP22 to the receiver GP20.  Note that any communication using voltage levels requires at least two wires, but the second wire in this case is the GND connection via the breadboard.  Now the green RX LED should be exactly following the red TX LED.
 
 Next, enter the following skeleton receive function below the transmit function:
 ```python
