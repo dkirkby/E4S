@@ -94,24 +94,66 @@ You should now see the transmitter LED flashing the same sequence as before, sin
 
 Instead of writing a separate receiver program, we will add receiving capability to the transmitter program and re-use the same protocol specification.
 
-Connect the second M4 to the USB cable and download the same transmitter program to get started. Check that the red LEDs on both M4s are flashing the same sequence (although not in synch with each other).
-
-We first need to configure the receiver's digital input by adding these lines:
+Load this program into your receiver Pico:
 ```python
-# Configure the receive digital input.
+import time
+import array
+import board
+import digitalio
+
+# Define the transmitter and receiver idle states during a period with no communication.
+TX_IDLE_VALUE = False
 RX_IDLE_VALUE = False
-RX = digitalio.DigitalInOut(board.D0)
+
+# Define the duration of a single bit in seconds.
+BIT_DURATION = 0.5
+HALF_BIT_DURATION = BIT_DURATION / 2
+
+# Define the length of a message in bits.
+MSG_BITS = 4
+
+# Minimum number of idle bits before a start bit.
+MIN_IDLE_BITS = MSG_BITS + 1
+
+# Configure the receive digital input.
+RX = digitalio.DigitalInOut(board.GP20)
 RX.direction = digitalio.Direction.INPUT
 RX.pull = digitalio.Pull.UP if RX_IDLE_VALUE else digitalio.Pull.DOWN # Idle when disconnected
+
+# Configure the transmit digital output.
+TX = digitalio.DigitalInOut(board.GP22)
+TX.direction = digitalio.Direction.OUTPUT
+
+# Configure the transmit indicator LED.
+LED = digitalio.DigitalInOut(board.GP21)
+LED.direction = digitalio.Direction.OUTPUT
+
+def transmit(msg):
+    assert len(msg) == MSG_BITS
+    # Add the minimum number of idle bits then a start bit.
+    prologue = [TX_IDLE_VALUE] * MIN_IDLE_BITS + [not TX_IDLE_VALUE]
+    data = [TX_IDLE_VALUE if not bit else not TX_IDLE_VALUE for bit in msg]
+    # Allocate and fill an efficient array of the bits to transmit.
+    bits_array = array.array('B', prologue + data)
+    print('Start message')
+    for k, bit in enumerate(bits_array):
+        TX.value = LED.value = bit
+        print(f'bit[{k}] = {bit}')
+        time.sleep(BIT_DURATION)
+    # Leave the bus in the idle state.
+    TX.value = TX_IDLE_VALUE
+
+while True:
+    LED.value = RX.value
 ```
-Notice that we define the receiver's idle state independently of the transmitter's. The reason for this will become apparent later.
+Carefully review the differences from the transmitter program above. Some things to note are:
+ - The `transmit` function is no longer being used.
+ - We define the receiver's idle state independently of the transmitter's. The reason for this will become apparent later.
+ - The main (infinite) loop mirrors the received level (True/False) directly on the green LED.
 
-Next, make the electrical connection that constitutes our "bus":
- - Connect the GND of one M4 to the GND of the other using a black jumper wire.
- - Connect the transmitter's D1 (TX) to the receiver's D0 (RX).
-Note that we are using D0 and D1 for this project since these are already labeled RX and TX on the M4 circuit board, but any pair of digital pins would work equally well.
+At this point, the red TX LED should be flashing as before, but the green RX LED is always off. Next, make the electrical connection that constitutes our communications "bus": add a jumper wire between the Pico GP22 pins (TX to RX).  Note that any communication using voltage levels requires at least two wires, but the second wire in this case is the GND connection via the breadboard.  Now the green RX LED should be exactly following the red TX LED.
 
-Next, use the following skeleton receive function:
+Next, enter the following skeleton receive function below the transmit function:
 ```python
 def receive():
     # Allocate an efficient array of the received bits.
@@ -134,11 +176,11 @@ def receive():
     # Sample each bit at its nominal center time.
     for i in range(MSG_BITS):
         time.sleep(BIT_DURATION)
-        bits_array[i] = (RX.value != RX_IDLE_VALUE)
+        LED.value = bits_array[i] = (RX.value != RX_IDLE_VALUE)
         print(bits_array[i])
     return bits_array
 ```
-We control the timing of our code using the [sleep](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.sleep) and [monotonic](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.monotonic) functions.  The sleep function is easier to use but does not allow us to do anything else while we wait the requested amount of time.  The monotonic function operates at a lower level, just reporting the current time (as elapsed seconds since an arbitrary zero), but allows us to implement an active delay, where we do something useful while waiting (such as checking a logic level). Here is a simple standalone example of using monotonic to wait 5 seconds while printing periodic update messages:
+We control the timing of our code using the [sleep](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.sleep) and [monotonic](https://circuitpython.readthedocs.io/en/latest/shared-bindings/time/#time.monotonic) functions.  The sleep function is easier to use but does not allow us to do anything else while we wait the requested amount of time.  The monotonic function operates at a lower level, just reporting the current time (as elapsed seconds since an arbitrary zero), but allows us to implement an active delay, where we do something useful while waiting (such as checking a logic level). Here is a simple standalone example of using monotonic to wait 5 seconds while printing periodic update messages (you do not need to add this to your program):
 ```python
 import time
 
@@ -152,15 +194,27 @@ while now < wait_until:
 ```
 Since the monotonic time is represented as a floating-point number, you should never test for `now == wait_until` since that is very unlikely to be exactly true.  Instead, always use an inequality test, as in the example above.
 
-Why does the code sleep for a `HALF_BIT_DURATION` before sampling each bit of the message? You will need to fill in the three `...` sections before this code will work.  You will also need to change the main loop:
+Next, change your main (infinite) program to:
 ```python
 while True:
     # Uncomment the first line in the transmitter or the second in the receiver.
     #transmit([1,0,1,0])
     print(receive())
 ```
+When you run this code, you should see repeated output in the Mu Serial window similar to:
+```
+idle start
+min idle completed
+got start bit
+1
+1
+0
+1
+array('B', [1, 1, 0, 1])
+```
+However, the received values (1,1,0,1 in this example) will be constantly changing, instead of showing the actual transmitted values of (1,0,1,0).  Try disconnecting the communictions jumper wire between the transmitter GP21 and receiver GP20: the received values should now always be (0,0,0,0) which indicates that at least the bus is doing something.
 
-When your receiver code is working, you should see the following repeated sequence of print output in the Mu editor Serial window:
+In order to get your reciever working correctly, you will need to fill in the three `...` sections in the code, following the instructions in the comments.  Think about why the code sleeps for a `HALF_BIT_DURATION` before sampling each bit of the message. When your receiver code is working, you should see the following repeated sequence of print output in the Mu Serial window:
 ```
 idle start
 min idle completed
@@ -171,6 +225,7 @@ got start bit
 0
 array('B', [1, 0, 1, 0])
 ```
+The green RX LED will also indicate the received data bits (but not the start bit), with a half-bit (0.25s) delay.
 
 ## Warp Speed
 
