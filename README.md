@@ -23,6 +23,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Neopixels](neopixel.md)
 - [Sonar distance measurement](sonar.md)
 - [WiFi communication](wifi.md)
+- [I2C communication and modules](i2c.md)
 
 ## Projects
 
