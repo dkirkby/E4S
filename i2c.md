@@ -38,7 +38,7 @@ Pull these out now and look for the QT/QWIIC connectors. Three are sensor module
 
 The connectors are small and plastic, so can be damaged if inserted or removed with too much force. Pay special attention to the orientation of the cable connector when inserting it into a module connector. The connector is "keyed" so only inserts smoothly one way, but you could still force it the other way and do some damage.  Tip: the side of the cable connector with shiny metal showing through (circled below) should be facing down when looking at the connector side of the module:
 
-![I2C cable orientation](../fig/i2c-cable-orientation.jpg)
+![I2C cable orientation](../img/i2c-cable-orientation.jpg)
 
 To remove an I2C cable connector from a module, gently pry it out using the small tabs on each side.
 
@@ -52,7 +52,7 @@ With your Pico disconnected from USB, use one of the I2C cables with jumper pins
 
 Notice how the Pico pin sticker conveniently uses the same blue/yellow colors as the cable. Use the Pico GND next to SCL to keep your circuit tidy.  Finally, connect the pressure sensor module to the other end of this cable. Your first I2C circuit should now look like this:
 
-![I2C first circuit](../fig/i2c-first-circuit.jpg)
+![I2C first circuit](../img/i2c-first-circuit.jpg)
 
 Note that you should generally eject / unmount your Pico USB device on your laptop and disconnect the cable (to remove power) before making connecting or disconnecting I2C connectors.  If you skip this step, you will probably not do any permanent damage but may need to reset your Pico.
 
