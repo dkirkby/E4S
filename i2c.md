@@ -240,40 +240,19 @@ Does the measured rotation make sense when the module is stationary?
 The [OLED display](https://www.adafruit.com/product/4440) in your kit has a very small resolution of 128x32 pixels, but this is sufficient to display three lines of text.  CircuitPython needs several libraries to accomplish this, as you can see in this example program:
 ```python
 import time
-
 import board
 import busio
-
-sda, scl = board.GP0, board.GP1
-
-i2c = busio.I2C(sda=sda, scl=scl)
-
 import displayio
 import terminalio
 from adafruit_display_text import label
 import adafruit_displayio_ssd1306
 
-displayio.release_displays()
-
-display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
-
 WIDTH = 128
 HEIGHT = 32
-
-display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
 
 DISPLAY_LINES = 3
 LINE_HEIGHT = 12
 MAX_DISPLAY_CHARS = 21
-
-splash = displayio.Group()
-display.show(splash)
-display_lines = []
-
-for i in range(DISPLAY_LINES):
-    display_lines.append(
-        label.Label(terminalio.FONT, text='', color=0xffffff, x=0, y=LINE_HEIGHT * i + 4))
-    splash.append(display_lines[-1])
 
 ALIGN_LEFT = 0
 ALIGN_RIGHT = 1
@@ -289,12 +268,29 @@ def display_text(line, text, align=ALIGN_LEFT):
         npad = 0
     display_lines[line % DISPLAY_LINES].text = (' ' * npad) + trimmed
 
-display_text(0, 'UCI Electronics', ALIGN_LEFT)
-display_text(1, 'for Scientists', ALIGN_CENTER)
-display_text(2, 'P120/220', ALIGN_RIGHT)
+# Use GP0 and GP1 as the I2C control signals.
+sda, scl = board.GP0, board.GP1
 
-while True:
-    time.sleep(1)
+with busio.I2C(sda=sda, scl=scl) as i2c:
+
+    displayio.release_displays()
+    display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
+    display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
+
+    splash = displayio.Group()
+    display.show(splash)
+    display_lines = []
+
+    for i in range(DISPLAY_LINES):
+        display_lines.append(
+            label.Label(terminalio.FONT, text='', color=0xffffff, x=0, y=LINE_HEIGHT * i + 4))
+        splash.append(display_lines[-1])
+
+    while True:
+        display_text(0, 'Electronics', ALIGN_LEFT)
+        display_text(1, 'for Scientists', ALIGN_CENTER)
+        display_text(2, 'P120/220', ALIGN_RIGHT)
+        time.sleep(1)
 ```
 
 Power off your USB bus and connect just the IMU and OLED display, then load the program above. Check that you can read three lines of text on your display.  Study the code above to discover how the displayed text and specified and aligned (left / center / right) on each line.
