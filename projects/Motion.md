@@ -1,30 +1,30 @@
 # Project: Motion Feedback
 
-In this project, you will communicate with two different modules, using I2C and PWM protocols, to implement a visual motion feedback system:
+In this project, you will integrate two different modules to implement a visual motion feedback system:
  - the inertial measurement unit (IMU) will continuously measure the acceleration and magnetic field vectors, and
  - the 8-neopixel strip will provide real-time visual feedback to enable the circuit's user to align the IMU's y axis to be level with its y axis pointing north.
 
-The instructions in this project are deliberately less detailed, now that you have more experience with building circuits and developing M4 code with the aid of [existing examples](../hello.md).
+The instructions in this project are deliberately less detailed than previous projects, now that you have more experience with building circuits and writing code.
 
 ## Build the Circuit
 
 You will need the following components:
- - M4
+ - Pico
  - IMU
  - Neopixel strip
  - I2C cable
  - jumper wires
  - breadboard
 
-We need the breadboard since there is only one 3.3V output available from the M4, but it must be connected to both the Neopixel strip and the I2C bus.
+We need the breadboard since there is only one 3.3V output available from the Pico, but it must be connected to both the Neopixel strip and the I2C bus.
 
-With your M4 disconnected (with no power), wire the IMU and neopixel strip to the breadboard, then use jumpers to connect the breadboard signals to the M4.  You will need to be able to rotate your IMU into different orientations later, so consider this as you select jumper wire lengths.  Also, think about chosing jumper wire colors that allow you to easily identify your power and ground.
+With your Pico disconnected (i.e. with no power), wire the IMU and neopixel strip to the breadboard, then use jumpers to connect the breadboard signals to the Pico.  You will need to be able to rotate your IMU into different orientations later, so consider this as you select jumper wire lengths.  Also, think about chosing jumper wire colors that allow you to easily identify your power and ground.
 
-Power the M4 via USB and check that the small green LED on the IMU is illuminated.  Open the Mu editor and verify that you can run a simple program to print a message every second.  If the M4 is not responding, disconnect the USB and check your wiring.
+Power the Pico via USB and check that the small green LED on the IMU is illuminated.  Open the Mu editor and verify that you can run a simple program to print a message every second.  If the Pico is not responding, this could indicate that you have shorted together power and ground so disconnect the USB cable and check your wiring.
 
 ## Read out the Sensors
 
-Write a program to read out the IMU's acceleration and magnetic field vectors and print their component values every 0.5 seconds.  Check that both vector magnitudes make sense when the IMU is at rest, i.e.
+Write a program to read out the IMU's acceleration and magnetic field vectors and print their component values every 0.5 seconds.  You can adapt our [earlier example](../i2c.md) for this.  Check that both vector magnitudes make sense when the IMU is at rest, i.e.
  - acceleration magnitude is around 9.8 m/s^2 (variations over the surface of the earth are less than 1%)
  - B field magnitude is 25-65 micro Teslas (look up a more precise expected value for your location on [this map that displays nanoTeslas](img/Bfield_strength.jpg))
 
@@ -32,9 +32,9 @@ Notice the diagram of the IMU's right-handed XYZ coordinate system printed on it
 
 These sensor readings are fairly noisy so, next implement a loop to average 16 values and observe the improvement.  However, even with averaging the magnetic field measurements will still be noisy since the signal (the earth's magnetic field) is relatively weak.
 
-Try moving the speaker from your kit close to the IMU and observe the effect of the small permanent magnet it contains on your measurements.  If the B field direction is far from where you think north should be, check for any nearby magnets (or large pieces of steel which will distort the magnetic field nearby).
+Try moving the speaker from your kit close to the IMU and observe the effect of the small permanent magnet it contains on your measurements.  If the B field direction is far from where you think north should be, check for any nearby magnets (or large pieces of steel which will distort the magnetic field nearby). In case your laptop is distorting the magnetic field, position your circuit as far away as possible with the USB cable fully extended.
 
-In case your sensor values stop updating, there may be a problem with the locking of the I2C bus in the CircuitPython libraries, but power cycling (by disconnecting and reconnecting USB) should fix it.
+If your sensor values ever stop updating, there may be a problem with the locking of the I2C bus in the CircuitPython libraries: power cycling (by disconnecting and reconnecting USB) should fix this.  If this is happening continuously, there is likely a problem with your code or circuit.
 
 ## Calculate Angles
 
@@ -42,10 +42,9 @@ The visual feedback for this project is based on two angles that you can calcula
  - **tilt**: the angle of the IMU y axis relative to "level", i.e. a plane tangent to the earth's surface.
  - **turn**: the angle of the IMU y axis relative to the component of the magnetic field in the IMU's x-y plane.
 
-These calculations will require trig functions, which are available in the [math library](https://circuitpython.readthedocs.io/en/6.0.x/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for
-display purposes (and there is a `math` function for that).
+These calculations will require trig functions, which are available in the [math library](https://docs.circuitpython.org/en/latest/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for display purposes (and there is a `math` function for that).
 
-Your angles should be in the 360-degree range (-180, +180) degrees, but the inverse trig functions `acos`, `asin` and `atan` return results only within a 180-degree range, i.e. using only 2 out of the 4 possible quadrants).  However, there is a useful `atan2` function, documented [here](https://docs.python.org/3/library/math.html#math.atan2), that will return angles in all 4 quadrants.
+Your angles should be in the full range of (-180, +180) degrees, but the inverse trig functions `acos`, `asin` and `atan` return results only within a 180-degree range, i.e. using only 2 out of the 4 possible quadrants).  However, there is a useful `atan2` function, documented [here](https://docs.python.org/3/library/math.html#math.atan2), that will return angles in all 4 quadrants.
 
 The sign of your angles should indicate which way to rotate the IMU in order to make its y axis level and pointing towards "north" (the magnetic field measures magnetic north, which is generally different from true north by an [angle that depends on your location](https://en.wikipedia.org/wiki/Magnetic_declination)):
  - tilt < 0 indicates that the +y end of the IMU should be raised.
@@ -61,7 +60,7 @@ Update your program to provide visual feedback on the tilt angle following the t
 
 Rotate your IMU and verify that only the 9 configurations in the figure are ever displayed and that they correspond to the printed tilt values.  I recommend using `auto_write=False` with `leds.show()` to prevent any intermediate states of the LEDs being displayed momentarily (see [here](https://circuitpython.readthedocs.io/projects/neopixel/en/latest/api.html) for more details.)
 
-![Motion visual feedback scheme](https://raw.githubusercontent.com/dkirkby/E4S/main/projects/img/MotionFeedback.png)
+![Motion visual feedback scheme](img/MotionFeedback.png)
 
 ## Implement Visual Turn Feedback
 
