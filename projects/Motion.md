@@ -42,13 +42,17 @@ The visual feedback for this project is based on two angles that you can calcula
  - **tilt**: the angle of the IMU y axis relative to "level", i.e. a plane tangent to the earth's surface.
  - **turn**: the angle of the IMU y axis relative to the component of the magnetic field in the IMU's x-y plane.
 
-These calculations will require trig functions, which are available in the [math library](https://docs.circuitpython.org/en/latest/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for display purposes (and there is a `math` function for that).
+The diagram below shows the IMU's x,y,z unit vectors together with the measured (unit) directions of the measured acceleration (left) and magnetic (right) fields, assuming these are due primarily to gravity and the earth's magnetic field. Arrows indicate the rotation axes and sign conventions used to define tilt and turn:
+
+![IMU axes](fig/IMU-axes.png)
+
+Your calculations of tilt and turn will require trig functions, which are available in the [math library](https://docs.circuitpython.org/en/latest/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for display purposes (and there is a `math` function for that).
 
 Your angles should be in the full range of (-180, +180) degrees, but the inverse trig functions `acos`, `asin` and `atan` return results only within a 180-degree range, i.e. using only 2 out of the 4 possible quadrants).  However, there is a useful `atan2` function, documented [here](https://docs.python.org/3/library/math.html#math.atan2), that will return angles in all 4 quadrants.
 
 The sign of your angles should indicate which way to rotate the IMU in order to make its y axis level and pointing towards "north" (the magnetic field measures magnetic north, which is generally different from true north by an [angle that depends on your location](https://en.wikipedia.org/wiki/Magnetic_declination)):
- - tilt < 0 indicates that the +y end of the IMU should be raised.
- - turn < 0 indicates that the IMU should be rotated clockwise about its z axis (viewed from above).
+ - tilt > 0 indicates that the +y end of the IMU should be lowered (i.e. rotated counter-clockwise about its x axis) to make it level.
+ - turn > 0 indicates that the IMU should be turned west-wards (i.e. rotated counter-clockwise about its z axis)  to make it point north.
 
 Note that, using our definition of tilt, achieving zero tilt does not mean that the IMU x-y plane is horizontal.  Instead we only level the IMU's y axis since this simplifies the trig required and because the tilt of a plane is specified by two angles and so requires more complex visual feedback.
 
