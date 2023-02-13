@@ -44,7 +44,7 @@ The visual feedback for this project is based on two angles that you can calcula
 
 The diagram below shows the IMU's x,y,z unit vectors together with the measured (unit) directions of the measured acceleration (left) and magnetic (right) fields, assuming these are due primarily to gravity and the earth's magnetic field. Arrows indicate the rotation axes and sign conventions used to define tilt and turn:
 
-![IMU axes](fig/IMU-axes.png)
+![IMU axes](img/IMU-axes.png)
 
 Your calculations of tilt and turn will require trig functions, which are available in the [math library](https://docs.circuitpython.org/en/latest/shared-bindings/math/index.html).  The library trig functions use radians for their input and output values, but you should convert your angles to degrees for display purposes (and there is a `math` function for that).
 
