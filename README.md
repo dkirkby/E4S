@@ -10,7 +10,7 @@ Many of the components are designed and manufactured by [adafruit](https://www.a
 
 For basic examples that demonstrate each of the kit's components, start [here](hello.md).
 
-## Curriculum
+## In-Class Activities
 
 - [Introduction to the kit components](kit.md)
 - [Perform initial setup of the microcontrollers](setup.md)
@@ -24,6 +24,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Sonar distance measurement](sonar.md)
 - [WiFi communication](wifi.md)
 - [I2C communication and modules](i2c.md)
+- [Audio input and output](audio.md)
 
 ## Projects
 
