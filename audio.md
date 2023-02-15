@@ -158,7 +158,7 @@ Experiment with changing the tempo and then the notes.
 
 ## MP3 Playback
 
-The Pico has enough processing power to decode and play back MP3-encoded audio files that are suitably prepared (meaning a bit rate below 64 kbit/s and sampling rate from 8 to 24 KHz).  For example, download and listen to [slow.mp3](img/slow.mp3) on your laptop.  Next, copy it to your **CIRCUITPY** USB drive.  The maximum number and duration of MP3 files you can play from a Pico is determined by the free space on your **CIRCUITYPY** USB drive.
+The Pico has enough processing power to decode and play back MP3-encoded audio files that are suitably prepared (meaning a bit rate below 64 kbit/s and sampling rate from 8 to 24 KHz).  For example, download and listen to [slow.mp3](https://github.com/dkirkby/E4S/blob/main/img/slow.mp3?raw=true) on your laptop.  Next, copy it to your **CIRCUITPY** USB drive.  The maximum number and duration of MP3 files you can play from a Pico is determined by the free space on your **CIRCUITYPY** USB drive.
 
 To play back this file on your Pico, use:
 ```python
