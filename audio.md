@@ -56,7 +56,7 @@ In a [future project](projects/DSP.md) you will dive much deeper into ways of an
 
 ## Speaker Output
 
-The kit speaker module has three pins to connect, similar to the microphone, but expects an analog output instead of feeding an analog input:
+The kit speaker module has three pins to connect, similar to the microphone, but expects to be fed by an analog output instead of feeding an analog input:
  - Ground connects to the Pico GND
  - 3-5VDC connects to the Pico 3.3V
  - Signal connects to any Pico GP (general-purpose) pin
@@ -138,8 +138,7 @@ for i, note in enumerate('A,A#,B,C,C#,D,D#,E,F,F#,G,G#'.split(',')):
         note_frequency[equiv] = note_frequency[note]
 ```
 
-Next, allow the user to specify a sequence of notes as a string. For example, the string `'1C1,1C1,1D2,1C2,1F2,1E4'` consists of 6 notes, each specified as `<octave><note><beats>` with note being one of `'A,A#,B,C,C#,D,D#,E,F,F#,G,G#'`.
-For example, `1C2` plays the note C in the first octave for 2 beats and `2F#1` plays the note F# in the second octave for 1 beat.  Here is a simple note sequencer to accomplish this:
+Next, allow the user to specify a sequence of notes as a string. For example, the string `'1C1,1C1,1D2,1C2,1F2,1E4'` consists of 6 notes, each specified as `<octave><note><beats>` with note being one of A-G followed by an optional sharp "#" or flat "b". For example, `1C2` plays the note C in the first octave for 2 beats and `2F#1` plays the note F# in the second octave for 1 beat.  Here is a simple note sequencer to accomplish this:
 ```python
 def play_notes(notes, tempo, gap=0.1):
     beat_duration = 60 / tempo
@@ -156,3 +155,30 @@ Notice that this also requires a tempo, specified in beats per minute, and you c
 play_notes('1C1,1C1,1D2,1C2,1F2,1E4', 180)
 ```
 Experiment with changing the tempo and then the notes.
+
+## MP3 Playback
+
+The Pico has enough processing power to decode and play back MP3-encoded audio files that are suitably prepared (meaning a bit rate below 64 kbit/s and sampling rate from 8 to 24 KHz).  For example, download and listen to [slow.mp3](img/slow.mp3) on your laptop.  Next, copy it to your **CIRCUITPY** USB drive.  The maximum number and duration of MP3 files you can play from a Pico is determined by the free space on your **CIRCUITYPY** USB drive.
+
+To play back this file on your Pico, use:
+```python
+import time
+import math
+import array
+import board
+import audiopwmio
+import audiomp3
+
+AudioOut = audiopwmio.PWMAudioOut(board.GP22)
+
+decoder = audiomp3.MP3Decoder(open('slow.mp3', 'rb'))
+
+print('Starting')
+AudioOut.play(decoder)
+while AudioOut.playing:
+    pass
+print('Done')
+```
+The audio quality is not great, but that is mostly due to the [relatively cheap speaker](https://www.adafruit.com/product/3885) in the kit.
+
+Try your own MP3 clip, keeping in mind the bitrate and sampling rate restrictions above.
