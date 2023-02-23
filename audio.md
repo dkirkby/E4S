@@ -93,7 +93,7 @@ sineWave = audiocore.RawSample(sineWaveTable)
 then start looping over this sine wave 220 times per second, leading to a continuous 220 Hz tone (the A below middle C):
 ```python
 sineWave.sample_rate = 220 * NSAMPLES
-AudioOut.play(sine_wave, loop=True)
+AudioOut.play(sineWave, loop=True)
 ```
 Putting all of these pieces together, we can play the tone for 1 second with this code:
 ```python
@@ -116,7 +116,7 @@ AudioOut = audiopwmio.PWMAudioOut(board.GP22)
 def play_tone(frequency, duration):
     sineWave.sample_rate = int(frequency * NSAMPLES)
     if not AudioOut.playing:
-        AudioOut.play(waveform, loop=True)
+        AudioOut.play(sineWave, loop=True)
         time.sleep(duration)
     AudioOut.stop()
 
