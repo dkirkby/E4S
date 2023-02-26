@@ -102,11 +102,12 @@ Although we will not use it in this project, a simple modification of the FFT, k
 
 You can think of the FFT as a recipe for building the time domain signal as a sum of sines and cosines at specific frequencies `f[i] = i * df`, where `df = f0 / (NMEASURE * NAVG)`, with amplitudes related to `fft_real[i]` and `fft_imag[i]` (for `i < NMEASURE/2`). The zero frequency value corresponds to a constant (in time) value, also known as the "DC component".  Since we subtracted off the mean earlier, this should be zero and we will ignore it. (In fact, it will not be exactly zero because of round-off errors in the calculation and subtraction of the mean.)
 
-Since we do not care about the phase differences (sine vs cosine) at each frequency, we will combine the real and imaginary FFT values into their complex magnitude squared, scaled by the number of measurements:
+Since we do not care about the phase differences (sine vs cosine) at each frequency, we will combine the real and imaginary FFT values into their complex magnitude squared, scaled by the number of measurements. One way to accomplish this would be with a loop:
 ```python
-power[i] = (fft_real[i] ** 2 + fft_imag[i] ** 2) / NMEASURE
+for i in range(NMEASURE):
+    power[i] = (fft_real[i] ** 2 + fft_imag[i] ** 2) / NMEASURE
 ```
-One nice feature of ulab (and numpy) is that you can write a formula that applies to all elements of an array without any explicit loop as:
+However, a nice feature of ulab (and numpy) is that you can write a formula that applies to all elements of an array without any explicit loop as:
 ```python
 power = (fft_real ** 2 + fft_imag ** 2) / NMEASURE
 ```
@@ -129,13 +130,14 @@ Observe typical noise levels when your environment is quiet, then add a line nea
 ```python
 NOISE_LEVEL = ...
 ```
+Note that the units of power and this noise measurement are mV-squared.
 
 ## Frequency Measurement
 
 Now that you have established the typical noise level of your audio environment, you are ready to identify a signal with a dominant frequency that is significantly above the noise level.
 
-Modify your code to loop over the power values for `0 < i < NMEASURE // 2` and find the largest value. If this is at least 100 times larger than your `NOISE_LEVEL`, then print the corresponding frequency in Hertz, `i * df`.
+Modify your code to loop over the power values for `1 <= i < NMEASURE // 2` and find the largest value. If this is at least 100 times larger than your `NOISE_LEVEL`, then print the corresponding frequency in Hertz, `i * df`, with `df` defined above (but note that `df` will be in KHz if `f0` is in KHz).
 
 Test your frequency measurement program with the reference 1600 Hz tone.  What is the frequency resolution of your measurement, i.e. what is the smallest difference in frequency that you can detect?  Is your measurement consistent with the known value of 1600 Hz given this resolution?  Is this resolution sufficient for a musical instrument tuner?
 
-Try varying the tone frequency over the range 800 - 3200 Hz (2 octaves) and see how accurately you are able to measure different frequencies.  You may need to increase the volume at lower frequencies in order to reach the 100x noise detection threshold.
+Try varying the tone frequency over the range 400 - 3200 Hz (3 octaves) and see how accurately you are able to measure different frequencies.  You may need to increase the volume at lower frequencies in order to reach the 100x noise detection threshold.
