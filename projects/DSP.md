@@ -44,13 +44,13 @@ Modify your code to print the first 100 mean-subtracted sample values so that th
 
 Note that the Plotter Window automatically scales its y axis so the plot amplitude can appear to suddenly change when the signal level crosses certain thresholds.
 
-Even with no sound present, your plotted waveform might show some high-frequency "ripple". If you observe this, check that the 1μF capacitor is doing its job by temporarily removing it.
+Even with no sound present, your plotted waveform might show some high-frequency "ripple". If you observe this, check that the 1μF capacitor is doing its job by temporarily removing it.  Verify that your waveform is centered on zero: if not, check that your code is correctly calculating and subtracting the mean measurement value.
 
 ## Audio Test Setup
 
 Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 880 Hz sine wave through your laptop or phone speaker (you will need to change the frequency from the default 440 Hz).  Adjust the position of your microphone relative to your laptop or phone speakers and the output volume until the Mu Editor plot clearly shows a single cycle of a sine wave.  Be sure to protect your ears by using the lowest output volume possible and wearing ear plugs if necessary. You can also place your phone and breadboard close together under some sound insulation (jacket, blanket, etc).
 
-You should aim for an sine-wave amplitude of at least 250 mV, which will mostly be influenced by the relative positions of the speaker emitting the 800 Hz tone and your electret microphone. In case the amplitude of your waveform is still low after trying different positions, you may need to increase the amplification of the microphone circuit by turning the adjustment potentiometer screw shown below to its maximum counter-clockwise position:
+You should aim for an sine-wave amplitude of about 1000 mV, i.e. 1 Volt, which will mostly be influenced by the relative positions of the speaker emitting the 800 Hz tone and your electret microphone. In case the amplitude of your waveform is still low after trying different positions, you may need to increase the amplification of the microphone circuit by turning the adjustment potentiometer screw shown below to its maximum counter-clockwise position:
 
 ![electret amplification adjustment](../img/ElectretAdjust.jpg)
 
@@ -68,7 +68,9 @@ then add code to downsample from `NSAMPLES` samples to `NMEASURE` averages. Call
 
 Plot the first 100 measurements and compare the new graph with the same audio test setup.  If you did this correctly, the new graph should be compressed along the time axis (by a factor of `NAVG`) and have less noise (by a factor of `sqrt(NAVG)`).  This digital signal processing method has effectively provided almost three extra bits of resolution, at the expense of 8x slower sampling.
 
-Verify that, instead of 1 sine cycle, you now see about 8 cycles in your plot. Also, verify that you have about the same amplitude as before (otherwise, check the normalization of your average calculation).
+Verify that, instead of 1 sine cycle, you now see about 8 cycles in your plot. Also, verify that you have about the same amplitude as before (otherwise, check the normalization of your average calculation).  Your waveform should look similar to this:
+
+![800Hz tone waveform](../img/tone800Hz.jpg)
 
 ## Enter the Frequency Domain
 
