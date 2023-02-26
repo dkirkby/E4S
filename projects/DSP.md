@@ -1,17 +1,15 @@
 # Project: Digital Signal Processing
 
-In this project you will capture digital samples from the Electret microphone, display a waveform, then perform Fourier spectral analysis to measure the noise floor and identify the dominant frequency present.  We will use the Pico microcontroller since it can sample its ADC at a higher rate than the M4 boards.
-
-You will learn about and apply two digital signal processing techniques: downsampling and fast Fourier transforms (FFT).
+In this project you will capture digital samples from the Electret microphone, display a waveform, then perform Fourier spectral analysis to measure the noise floor and identify the dominant frequency present. You will learn about and apply two digital signal processing techniques: downsampling and fast Fourier transforms (FFT).
 
 ## Build the Circuit
 
-Power down your Pico (pinout [here](https://raw.githubusercontent.com/dkirkby/E4S/master/img/pico-pinout.png)) then use the breadboard to connect the Electret microphone to the Pico as follows:
- - Mic Vcc to Pico 3V3(OUT)
+Power down your Pico then plug the Electret microphone into your breadboard and use jumper wires for make the following connections:
+ - Mic Vcc to Pico 3.3V
  - Mic OUT to Pico ADC0
  - Mic GND to Pico GND
 
-![DSP breadboard](https://raw.githubusercontent.com/dkirkby/E4S/master/img/DSP-breadboard.jpg)
+Finally, add a 1μF capacitor (the one with a "K") to your breadboard between the Mic OUT and GND pins. This will filter out some of the high-frequency electronic noise that can contaminate the ADC measurement.
 
 Start [here](https://en.wikipedia.org/wiki/Electret_microphone) for a brief introduction to electret microphones.  The [adafruit product page](https://www.adafruit.com/product/1063) has more details on the board we are using.
 
@@ -36,20 +34,25 @@ while True:
     duration_ns = stop - start
     print(f'duration = {1e-6*duration_ns:.1f}ms')
 ```
-Each sampling loop should have a duration of about 6ms.  Add code to calculate and print the sampling rate in KHz. Call this sampling rate `f0` in your code.  How does your calculated value of `f0` compare with the upper limit of typical human hearing?
+Each sampling loop should have a duration of about 6ms.  Add code to calculate and print the sampling rate in KHz, i.e. the average frequency at which each of the `NSAMPLES` samples are recorded. Call this sampling rate `f0` in your code.  How does your calculated value of `f0` compare with the upper limit of typical human hearing?  If you value of `f0` is less than 10 KHz, check your calculation.
 
 ## Plot Samples
 
-Update your code to convert the samples in ADU to millivolts. Note that the Pico analog-to-digital converter resolution is only 12 bits, compared with the 16-bit resolution of the M4. However,
-the Pico and M4 both return 16-bit ADU values where 0xffff represents 3.3V, so the appropriate conversion factor is `3300/0xffff mV/ADU`.
+Update your code to convert the samples in ADU to millivolts. Note that the Pico analog-to-digital converter resolution is only 12 bits but the 16-bit ADU values have 16-bit resolution, where 0xffff represents 3.3V. Therefore the appropriate conversion factor is `3300/0xffff mV/ADU`.
 
-Print the first 100 mean-subtracted sample values so that the Mu Editor will display them in its Plotter window. Note that the Plotter window only displays 100 points at a time, so printing more values to plot would only slow the program down without plotting any more data.
+Modify your code to print the first 100 mean-subtracted sample values so that the [Mu Editor will display them](https://codewith.mu/en/tutorials/1.2/plotter) in its Plotter window. Note that the Plotter window only displays about 100 points at a time, so printing more values to plot would only slow the program down without plotting any more data.
+
+Note that the Plotter Window automatically scales its y axis so the plot amplitude can appear to suddenly change when the signal level crosses certain thresholds.
+
+Even with no sound present, your plotted waveform might show some high-frequency "ripple". If you observe this, check that the 1μF capacitor is doing its job by temporarily removing it.
 
 ## Audio Test Setup
 
-Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 1600 Hz sine wave through your laptop or phone speaker (you will need to change the frequency from the default 440 Hz).  Adjust the position of your microphone relative to your laptop or phone speakers and the output volume until the Mu Editor plot clearly shows two cycles of a sine wave with an amplitude of about 250 mV.  Be sure to protect your ears by using the lowest output volume possible and wearing ear plugs if necessary. You can also place your phone and breadboard close together under some sound insulation (jacket, blanket, etc).
+Use this [online tone generator](https://www.szynalski.com/tone-generator/) to play a continous 880 Hz sine wave through your laptop or phone speaker (you will need to change the frequency from the default 440 Hz).  Adjust the position of your microphone relative to your laptop or phone speakers and the output volume until the Mu Editor plot clearly shows a single cycle of a sine wave.  Be sure to protect your ears by using the lowest output volume possible and wearing ear plugs if necessary. You can also place your phone and breadboard close together under some sound insulation (jacket, blanket, etc).
 
-Note that the Plotter Window automatically scales its y axis so the plot amplitude can appear to suddenly change when the signal level crosses certain thresholds.
+You should aim for an sine-wave amplitude of at least 250 mV, which will mostly be influenced by the relative positions of the speaker emitting the 800 Hz tone and your electret microphone. In case the amplitude of your waveform is still low after trying different positions, you may need to increase the amplification of the microphone circuit by turning the adjustment potentiometer screw shown below to its maximum counter-clockwise position:
+
+![electret amplification adjustment](../img/ElectretAdjust.jpg)
 
 ## Enhanced Resolution
 
@@ -57,15 +60,15 @@ Since we are able to read samples relatively fast compared with a typical audio 
 
 Modify your code as follows:
 ```python
-NAVG = 4
+NAVG = 8
 NMEASURE = 512
 NSAMPLES = NAVG * NMEASURE
 ```
 then add code to downsample from `NSAMPLES` samples to `NMEASURE` averages. Call your array of averaged values `measurements`.
 
-Plot the first 100 measurements and compare the new graph with the same audio test setup.  If you did this correctly, the new graph should be compressed along the time axis (by a factor of `NAVG`) and have less noise (by a factor of `sqrt(NAVG)`).  Since `NAVG=2**2` this digital signal processing method has effectively provided two extra bits of resolution, at the expense of 4x slower sampling.
+Plot the first 100 measurements and compare the new graph with the same audio test setup.  If you did this correctly, the new graph should be compressed along the time axis (by a factor of `NAVG`) and have less noise (by a factor of `sqrt(NAVG)`).  This digital signal processing method has effectively provided almost three extra bits of resolution, at the expense of 8x slower sampling.
 
-Verify that, instead of 2 sine cycles, you now see 8 cycles in your plot, with about the same amplitude as before.
+Verify that, instead of 1 sine cycle, you now see about 8 cycles in your plot. Also, verify that you have about the same amplitude as before (otherwise, check the normalization of your average calculation).
 
 ## Enter the Frequency Domain
 
