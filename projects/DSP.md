@@ -9,7 +9,9 @@ Power down your Pico then plug the Electret microphone into your breadboard and 
  - Mic OUT to Pico ADC0
  - Mic GND to Pico GND
 
-Finally, add a 1μF capacitor (the one with a "K") to your breadboard between the Mic OUT and GND pins. This will filter out some of the high-frequency electronic noise that can contaminate the ADC measurement.
+Finally, add a 1μF capacitor (the one with a "K") to your breadboard between the Mic OUT and GND pins. This will filter out some of the high-frequency electronic noise that can contaminate the ADC measurement. Your completed circuit should look similar to this:
+
+![electret mic circuit](../img/mic-circuit.jpg)
 
 Start [here](https://en.wikipedia.org/wiki/Electret_microphone) for a brief introduction to electret microphones.  The [adafruit product page](https://www.adafruit.com/product/1063) has more details on the board we are using.
 
