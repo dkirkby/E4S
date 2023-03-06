@@ -25,6 +25,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [WiFi communication](wifi.md)
 - [I2C communication and modules](i2c.md)
 - [Audio input and output](audio.md)
+- [Power measurement and design considerations](power.md)
 
 ## Projects
 
