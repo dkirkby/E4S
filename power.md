@@ -6,7 +6,7 @@
 
 Power is the rate of doing work, usually measured in Watts with 1 W equal to 1 Joule of work per second. In an electrical circuit, a current I flowing across a voltage drop V has a corresponding power of P = V I (and a Volt-Amp equals a Watt).  If your circuit consists of a single resistance R across the voltage drop V, the corresponding current is I = V / R and the resulting power is P = V^2 / R.  More useful is the fact that any circuit has a corresponding (instantaneous) equivalent resistance (aka impedance) that can be plugged into this formula.
 
-**Exercise:** Calculate the power consumption for a circuit powered by USB with equivalent resistanceσ of 1Ω, 1KΩ and 1MΩ.
+**Exercise:** Calculate the power consumption for a circuit powered by USB with equivalent resistances of 1Ω, 1KΩ and 1MΩ.
 
 ## Current Measurements
 
@@ -18,7 +18,9 @@ A simple way to measure the USB current draw is to place a resistor in series wi
 
 ![power measurement circuit](img/power-circuit.jpg)
 
-Notice how we add the series resistor on the ground side of the power supply, not the 5V side.  This works because the current is the same at any point along a current loop.  It is more convenient because it means our ADC can measure the relevant voltage drop relative to ground (0V), instead of 5V (where a small voltage drop would exceed the 3.3V maximum ADC input).
+Notice how we add the series resistor on the ground side of the power supply, not the 5V side.  This works because the current is the same at any point along a current loop (where we assume that the ADC is ideal, i.e. has infinite resistance ground).  It is more convenient because it means our ADC can measure the relevant voltage drop relative to ground (0V), instead of 5V (where a small voltage drop would exceed the 3.3V maximum ADC input). Here is the circuit with both Picos:
+
+![two pico measurement circuit](img/power-measure.jpg)
 
 Load the following program into the first Pico to measure and display the current draw and power consumption of the second Pico:
 ```python
@@ -118,10 +120,12 @@ switch_alarm = alarm.pin.PinAlarm(pin=board.GP22, value=False, pull=True)
 alarm.exit_and_deep_sleep_until_alarms(time_alarm, switch_alarm)
 ```
 
-Since having a USB port and Serial connection open prevents using the low-power sleep mode, we want this circuit to run from power bridged from another Pico using jumper wires, i.e. it acts as the second Pico in our measurement setup above.  With no Serial output, we use an LED (installed on the breadboard with a 1K series resistor) driven by GP21 to signal when and why the Pico wakes up each time.
+Since having a USB port and Serial connection open prevents using the low-power sleep mode, we want this circuit to run from power bridged from another Pico using jumper wires, i.e. it acts as the second Pico in our measurement setup above.  With no Serial output, we use an LED (installed on the breadboard with a 1KΩ series resistor) driven by GP21 to signal when and why the Pico wakes up each time.  Here is the circuit:
+
+![low power test circuit](img/low-power-circuit.jpg)
 
 **Exercise:** Install the program above on the second Pico and verify (using the first Pico) that its power consumption is lower than you measured earlier.
 
 ## Alternative Power Sources
 
-You can also power your project using renewable energy sources such as solar and wind. However, since these are quite variable and unpredictable, most practical designs also require a battery and additional components. Browse solar panels suitable for using with a Pico circuit [here](https://www.adafruit.com/category/580).  Note that the current values quoted for a solar panel are generally maximum values that are only achievable when the full sun is directly overhead.
+You can also power your project using renewable energy sources such as solar and wind. However, since these are quite variable and unpredictable, most practical designs also require a battery and additional components. Browse solar panels suitable for using with a Pico circuit [here](https://www.adafruit.com/category/580).  Note that the current values quoted for a solar panel are generally maximum values that are only achievable when the full sun is directly overhead near the equator (with no clouds).
