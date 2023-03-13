@@ -73,7 +73,9 @@ It is sometimes convenient (or necessary) to run a circuit without any direct wi
 
 **Exercise:** Look up the stored energy in Joules of a gallon of gasoline. How does this compare with the batteries above?
 
-**Exercise:** Calculate the cost ($) of 1 MegaJoule of stored energy in the form of AA batteries or gasoline.  Which is more cost effective?
+**Exercise:** Look up the stored energy in Joules of a gallon of Coca-Cola Original. You will need the following conversion: 1 kcal = 4184 Joules.
+
+**Exercise:** Calculate the cost ($) of 1 MegaJoule of stored energy in the form of AA batteries, gasoline, or Coca-Cola.  Which is more cost effective?
 
 A rechargeable battery allows you to periodically add stored energy, but requires some additional components. Browse batteries that can be used to power a Pico circuit [here](https://www.adafruit.com/category/917).  To charge these, you would need [one of these](https://www.adafruit.com/category/575).
 
