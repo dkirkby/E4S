@@ -9,11 +9,11 @@ Each microcontroller contains two "firmware" programs: a bootloader (similar to 
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2024. For archived past instructions see [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
 
-## Install CircuitPython 8.0 on each Pico W
+## Install CircuitPython on each Pico W
 
-Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.6.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
+Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.9.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
 Connect the Pico W to your laptop with a USB cable and look for a new USB drive called **RPI-RP2**.
 
@@ -30,7 +30,7 @@ Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a sh
 
 If you open your **CIRCUITPY** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
 ```
-Adafruit CircuitPython 8.0.0-beta.6 on 2022-12-21; Raspberry Pi Pico W with rp2040
+Adafruit CircuitPython 8.2.9 on 2023-12-06; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
 
