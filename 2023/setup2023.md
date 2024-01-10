@@ -46,7 +46,7 @@ To install an additional library, you just copy it into a `lib` folder of your *
 
 Since we are running CircuitPython 8.0, we need to install libraries from the 8.x bundle (we are using 8.x from the [20230109 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20230109)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-8.x.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](bin/E4S-libraries-8.x-2023.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
@@ -57,7 +57,7 @@ Download and expand [this zip file](bin/E4S-libraries-8.x.zip?raw=true) with the
 Open your **CIRCUITPY** USB drive and open the folder named `lib`, which should be empty if you just installed CircuitPython using the steps above. The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
 Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
 
-> Make sure you copy the **contents** of the unzipped `E4S-libraries-8.x` folder into the **CIRCUITPY** `lib` folder (and not the zip file or the `E4S-libraries-8.x` folder itself).
+> Make sure you copy the **contents** of the unzipped `E4S-libraries-8.x-2023` folder into the **CIRCUITPY** `lib` folder (and not the zip file or the `E4S-libraries-8.x-2023` folder itself).
 
 Your **CIRCUITPY** drive should now have the following contents:
 

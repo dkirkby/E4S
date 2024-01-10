@@ -46,7 +46,7 @@ To install an additional library, you just copy it into a `lib` folder of your *
 
 Since we are running CircuitPython 8.2.9, we need to install libraries from the 8.x bundle (we are using 8.x from the [20230109 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20240109)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-8.x-2024.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](bin/E4S-libraries-8.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
