@@ -9,7 +9,7 @@ Each microcontroller contains two "firmware" programs: a bootloader (similar to 
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2023. For archived past instructions see [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
 
 ## Install CircuitPython 8.0 on each Pico W
 
