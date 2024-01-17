@@ -53,7 +53,7 @@ Moving the joystick left/right or up/down (or rotating a rotary potentiometer) v
 
 ![Potentiometer resistance](img/potentiometer-resistance.jpg)
 
-The pin between R1 and R2 for left/right joystick motion is labeled **Xout**. There pin **Yout** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.  Both joystick potentiometers have RTOT = 10KΩ.
+The pin between R1 and R2 for left/right joystick motion is labeled **Xout**. The pin **Yout** is between R1 and R2 for a separate potentiometer controlled by up/down joystick motion.  Both joystick potentiometers have RTOT = 10KΩ.
 
 The circuit already has a 1KΩ resistor that controls the LED brightness.  To vary this resistance smoothly (i.e. in an "analog" fashion), add the left/right potentiometer's R1 in series with the existing 1KΩ resistor. In other words, replace the jumper wire between the 1KΩ resistor and LED with two jumper wires connected to the joystick **GND** and **Xout** pins, as shown below:
 
