@@ -61,13 +61,13 @@ This code keeps the original digital output in comments so you can compare with 
 
 Any **GPn** pin on the Pico W can be used for PWM output like this. The necessary initialization is:
 ```python
-PWM = pwmio.PWMOut(board.GP22, frequency=1)
+PWM = pwmio.PWMOut(board.GP22, frequency=8)
 ```
 to specify which pin you are using and a base frequency in Hertz.  Normally we will use much higher frequencies, but we start with the lowest allowed frequency of 8 Hertz so we can see the analog variation in the LED flashing, which is controlled by:
 ```python
 PWM.duty_cycle = value
 ```
-A duty cycle is normally in the range 0-1 (or 0-100%) but we generally avoid floating-point value in microcontroller code so instead values are specified in the range 0x0000-0xffff, i.e. with an unsigned 16-bit integer.  Conveniently, the ADC `Xout.value` uses the same range, which simplifies our code.
+A duty cycle is normally in the range 0-1 (or 0-100%) but we generally avoid floating-point values in microcontroller code so instead values are specified in the range 0x0000-0xffff, i.e. with an unsigned 16-bit integer.  Conveniently, the ADC `Xout.value` uses the same range, which simplifies our code.
 
 Change the PWM frequency to 10Hz and 100Hz and describe what happens.
 
