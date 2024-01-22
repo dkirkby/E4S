@@ -89,7 +89,7 @@ forward voltage is not actually constant, but depends on the forward current flo
 
 Write an equation for the forward current `iLED` flowing through the LED in terms of the voltages Vin (at pin **GP22**) and Vout (at pin **ADC0**), both in Volts, and the known resistance R in Ohms. You can assume a slowly varying signal for this calculation, which means you can ignore the capacitor so that the LED current equals the current through the 10KΩ resistor.
 
-Modify your code to calculate and this current `iLED` in units of 0.1 mA (these strange units are required for plotting voltages and current on the same scale).  You can use the following conversion from ADU to volts (where we are neglecting the small offset you measured in the [DMM Project](DMM.md)):
+Modify your code to calculate this current `iLED` in units of 0.1 mA (these strange units are required for plotting voltages and current on the same scale).  You can use the following conversion from ADU to volts (where we are neglecting the small offset you measured in the [DMM Project](DMM.md)):
 ```python
     Vin = ADUin * 3.3 / 0xffff
     Vout = ADUout * 3.3 / 0xffff
