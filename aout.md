@@ -79,7 +79,7 @@ For a deeper dive into pulse-width modulation, visit this [interactive visualiza
  - For fixed R and C values, does the smoothness of the output depend on the duty cycle?  If so, how?
  - For fixed R and C values, does the smoothness of the output depend on the supply voltage Vcc?  If so, how?
 
-PWM is often used to drive a servo motors: see [here](motors.md) for details.
+PWM is often used to drive a servo motors: see [here](motor.html) for details.
 
 Now that you have seen an example of analog output, you are ready for a closer look at how analog input works, since it internally relies on analog output.  Visit this [interactive visualization](https://observablehq.com/embed/@dkirkby/adc?cells=intro%2Cviewof+nbits%2Cviewof+theBit%2Cdiagram%2Cviewof+Vin%2Cviewof+Vcc%2Cplot%2Cfooter) to answer these questions:
  - What is the 8-bit ADC value corresponding to Vcc = 1V and Vin = 0.2V?
