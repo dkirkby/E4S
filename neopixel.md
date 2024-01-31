@@ -61,4 +61,8 @@ Look up the R,G,B values (0-255) of your favorite color [here](https://www.rapid
 
 ## Exercise 2
 
-Connect your joystick to an analog input and use it to control which of the 8 neopixels is illuminated, using a scheme of your design.
+Connect your joystick to an analog input and use its left-right motion to control which of the 8 neopixels is illuminated, using a scheme of your design.
+
+## Exercise 3
+
+Building on the previous exercise, use the joystick up-down motion to control the brightness of the single illuminated neopixel.
