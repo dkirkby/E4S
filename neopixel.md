@@ -8,6 +8,12 @@ Neopixels are devices that contain separate red, green and blue LEDs that can be
 
 A neopixel is an example of what is known generically as an **RGB LED**. Our neopixels are based on the [WS2812 device](https://cdn-shop.adafruit.com/datasheets/WS2812.pdf).  Some microcontrollers have a single neopixel included but the Pico does not.  Instead, your kit contains a strip of 8 neopixels that we will use.
 
+Study the [datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812.pdf) to determine the wavelengths of the individual R,G,B LEDs in a neopixel. What is the physics behind mixing these wavelengths to produce colors such as pink or brown? A [chromaticity diagram](https://en.wikipedia.org/wiki/Chromaticity) is a helpful way to visualize this mixing process.
+
+![chromaticity diagram](https://en.wikipedia.org/wiki/Chromaticity#/media/File:PlanckianLocus.png)
+
+Explore this [interactive page](https://observablehq.com/embed/4e52fd1d782f2855@1115?cells=viewof+redWL%2Cviewof+greenWL%2Cviewof+blueWL%2Cgraph) to see how the R,G,B wavelengths determine which mixture colors can be reproduced.
+
 ## Test the Kit Neopixel Strip
 
 Build the following circuit to get started:
