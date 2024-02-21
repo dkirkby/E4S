@@ -34,7 +34,9 @@ Can you identify [ground plane](https://en.wikipedia.org/wiki/Ground_plane) area
 
 ## Power
 
-Where does power enter the circuit? Is it powered by a battery or wall power or both? (Hint: look for a transformer).
+Where does power enter the circuit? Is it powered by a battery (DC) or wall power (AC) or both? Since almost all circuits use low-voltage DC power internally, an AC-powered device will likely include an AC-to-DC [transformer](https://en.wikipedia.org/wiki/Transformer)). If your circuit uses a battery what voltage does it provide and how much capacity (mA-hours) does it have? Are the batteries rechargeable or replaceable?
+
+Can you determine what voltage your PCB operates at? The majority of digital circuits operate at 5V or 3.3V so that is always a good guess. Circuits often include a [voltage regulator](https://en.wikipedia.org/wiki/Voltage_regulator) to provide a reliable low-voltage DC output. You can look up their part number to determine what this voltage is.
 
 Where is the power conditioning section of the circuit? (Hint: look for large [electrolytic capacitors](https://en.wikipedia.org/wiki/Electrolytic_capacitor))
 
