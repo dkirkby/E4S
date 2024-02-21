@@ -32,6 +32,12 @@ Can you determine how many layers the printed circuit board has? (Hint: look for
 
 Can you identify [ground plane](https://en.wikipedia.org/wiki/Ground_plane) areas or wider traces on the PCB that likely carry significant current?
 
+Your circuit might have some components that are sealed in epoxy. This technique, known as "potting" can serve several different purposes:
+ - to improve safety by isolating high-voltage connections,
+ - to eliminate mechanical vibrations from a nearby speaker or motor that could wear out connections,
+ - to protect sensitive components from dust or liquids,
+ - to protect the intellectual property of the circuit designer.
+
 ## Power
 
 Where does power enter the circuit? Is it powered by a battery (DC) or wall power (AC) or both? Since almost all circuits use low-voltage DC power internally, an AC-powered device will likely include an AC-to-DC [transformer](https://en.wikipedia.org/wiki/Transformer)). If your circuit uses a battery what voltage does it provide and how much capacity (mA-hours) does it have? Are the batteries rechargeable or replaceable?
