@@ -6,7 +6,7 @@
 
 Power is the rate of doing work, usually measured in Watts with 1 W equal to 1 Joule of work per second. In an electrical circuit, a current I flowing across a voltage drop V has a corresponding power of P = V I (and a Volt-Amp equals a Watt).  If your circuit consists of a single resistance R across the voltage drop V, the corresponding current is I = V / R and the resulting power is P = V^2 / R.  More useful is the fact that any circuit has a corresponding (instantaneous) equivalent resistance (aka impedance) that can be plugged into this formula.
 
-**Exercise:** Calculate the power consumption for a circuit powered by USB with equivalent resistances of 1Ω, 1KΩ and 1MΩ.
+**Exercise:** Calculate the current flow and power consumption for a circuit powered by USB with equivalent resistances of 1Ω, 1KΩ and 1MΩ.
 
 ## Current Measurements
 
@@ -55,7 +55,44 @@ while True:
 
 What is the power consumption of your second Pico when you run this program?  Verify that it drops (close) to zero if you disconnect the power to the second Pico.
 
-**Activity:** Modify this program to display a graph of power consumption that updates every 0.1 seconds. Remove power from both Picos, then connect the pressure sensor module to the second Pico and load the [code we used earlier](https://dkirkby.github.io/E4S/i2c.html#pressure-sensor) to read it out. Be sure to load this code in the second Pico, keeping the code above in the first Pico. After programming the second Pico, move the USB cable back to the first Pico. Does the graph of power consumption show periodic variations with the 1-second pressure and temperature sensor readouts?
+The power consumption of your second Pico will depend on what code it is running. Connect a neopixel strip to the second Pico using `GP20` like this:
+
+![neopixel circuit](img/neopix-circuit.jpg)
+
+In order to vary the current consumption over time, move your USB cable over to the second Pico and run this program:
+```python
+import time
+import board
+import neopixel
+
+# Initialize communication with the neopixel strip using a single digital output.
+NLEDS = 8
+leds = neopixel.NeoPixel(board.GP20, NLEDS, auto_write=False)
+leds.brightness = 0.5
+
+OFF = (0,0,0)
+ON = (255,255,255)
+
+while True:
+    for i in range(NLEDS):
+        for j in range(NLEDS):
+            leds[j] = ON if i <= j else OFF
+        leds.show()
+        time.sleep(0.25)
+```
+This program should cause your 8 neopixels to light up progressively over 2 seconds (8 x 0.25 = 2). What do you expect the resulting graph of power consumption versus time should look like?
+
+Move your USB cable back to the first Pico so you can see the message printed by this statement:
+```python
+    print(f'Second pico draws {1e3*idraw:.1f}mA and consumes {power:.2f}W')
+```
+Verify that they increase over 2 seconds. What is the maximum power consumption with all LEDS on?
+
+Modify the print statement above so that you can see a graph of power consumption versus time using the Mu Plotter. You will also need to adjust the time delay of each loop to a smaller value, e.g.
+```python
+    time.sleep(0.05)
+```
+Does the resulting graph match your prediction above?
 
 ## Stored Energy
 
