@@ -121,6 +121,21 @@ for i in range(3):
     submit(version=1, MACaddr=MACaddr, IPaddr=IPaddr, data=data)
     time.sleep(1)
 ```
+Typical output from this program would be:
+```
+Connecting to WiFi...
+Connected to WiFi
+My MAC address is 28cdc10841ee
+My IP address is 169.234.42.56
+Initializing requests library...
+Success!
+sending data: {"i": 0}
+sending data: {"i": 1}
+sending data: {"i": 2}
+```
+If you see these lines, you should also see three corresponding new rows in the spreadsheet that automatically records all of the google form submissions.
+
+This template can be modified to automatically log any type of sensor data to the cloud that is recorded by your circuit, assuming that you have access to a wifi network.
 
 The example above uses a shared form but can you also create your own form for data logging. Here are the instructions to recreate a form similar to the one used above:
  1. Visit https://docs.google.com/forms/ and create a blank form
