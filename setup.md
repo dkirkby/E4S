@@ -64,11 +64,11 @@ The expanded folder should be called `lib`. Open your **CIRCUITPY** USB drive an
 
 Your **CIRCUITPY** drive should now have the following contents:
 
-![top-level files](img/top-level-files.jpg)
+![top-level files](img/top-level-files-2025.jpg)
 
 and the `lib` folder should contain:
 
-![lib folder](img/lib-folder.jpg)
+![lib folder](img/lib-folder-2025.jpg)
 
 You are now ready to use these libraries.
 
@@ -78,6 +78,8 @@ You have completed the setup of your microcontroller boards and are now ready to
 
 Any file named `code.py` on your **CIRCUITPY** drive will be automatically run whenever your microcontroller is reset, either when you initially connect it via USB or when you press its reset button.
 
+> There is no file called `code.py` on your **CIRCUITPY** drive after the initial setup, but you will create it below.
+
 In principle, you can use any text or code editor to modify `code.py` directly from the USB drive.  However,
 we will start with the [Mu Editor](https://codewith.mu/) which is specifically designed to work well with Adafruit microcontroller boards and CircuitPython.
 
@@ -86,6 +88,10 @@ Visit this [download page](https://codewith.mu/en/download) to select the approp
 The first time you run the Mu Editor, you will be prompted to select a [mode](https://codewith.mu/en/tutorials/1.0/modes): select the *Adafruit CircuitPython* mode (or, *CircuitPython* if that is not available).  Whenever you are running Mu, you can view and change your mode by clicking on the *Mode*  button in the toolbar.
 
 The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` and you will be prompted for a name: use `code.py`.
+
+> Every time you save `code.py` in the Mu editor, you are actually rebooting the Pico W processor and telling it to start running your updated program from the beginning.
+
+> A problem you may encounter later is that you are editing a file that is not called `code.py`, so your edits are having no effect. The solution is simply to save your file as `code.py`.
 
 I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22).
 
