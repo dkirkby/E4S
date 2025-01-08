@@ -15,24 +15,28 @@ The steps described below ensure that you have current working versions of these
 
 Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.2.1.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
-Connect the Pico W to your laptop with a USB cable and look for a new USB drive called **RPI-RP2**.
+Connect the Pico W to your laptop with a USB cable and look for a new USB drive in your operating system. If no USB drive appears, let the instructor know, and try using your other Pico W.
 
-> In case the Mac "Keyboard Setup Assistant" launches, just click "Quit" to close it.
+### Reset your USB drive if it is not called RPI-RP2
 
-> If your new USB drive is called **CIRCUITPY** this means someone else has already done this installation, but perhaps for an older version. To reset your drive and continue with the instructions below, follow these steps:
- - unmount the **CIRCUITPY** drive and uplug the USB from your laptop
- - press down the small white button while you plug the USB back into your laptop
- - you should now see the drive called **RPI-RP2** and can proceed with the steps below.
+If your USB drive is called **RPI-RP2**, skip to the section below. Otherwise, it is mostly likely called **CIRCUITPY** and this just means someone else has already installed an older version of the software you will need for this course. To reset your Pico W and continue with the instructions below, follow these steps:
+ - Open the drive and delete all of the files it contains. You will also need to empty the Trash on a Mac.
+ - Unmount the **CIRCUITPY** drive and uplug the USB from your laptop.
+ - Press down the small white button while you plug the USB back into your laptop.
+ - You should now see the drive called **RPI-RP2** and can release the white button and proceed with the steps below.
+
+### Install software on USB drive called RPI-RP2
 
 Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a short while (10-20 secs) the **RPI-RP2** drive should be replaced with one called **CIRCUITPY**.  This indicates that you have successfully installed the CircuitPython program on your microcontroller.
 
 > Mac users will probably get a warning about "Disk Not Ejected Properly" that you can safely ignore.
 
-If you open your **CIRCUITPY** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
+If you open your **CIRCUITPY** drive, you should see only a single small text file `boot_out.txt` that starts with the lines:
 ```
-Adafruit CircuitPython 9.2.1 on YYYY-MM-DD; Raspberry Pi Pico W with rp2040
+Adafruit CircuitPython 9.2.1 on 2024-11-20; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
+If you see other files, and you forgot to delete them in the instructions above, delete them now and repeat this section. Otherwise, let the instructor know.
 
 Unmount your **CIRCUITPY** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
 
@@ -54,10 +58,9 @@ Download and expand [this zip file](bin/E4S-libraries-9.x.zip?raw=true) with the
  - ultrasonic distance sensor
  - Pico-W wifi networking
 
-Open your **CIRCUITPY** USB drive and open the folder named `lib`, which should be empty if you just installed CircuitPython using the steps above. The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
-Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
+The expanded folder should be called `lib`. Open your **CIRCUITPY** USB drive and copy the `lib` folder (e.g. using drag and drop) to your **CIRCUITPY** USB drive.
 
-> Make sure you copy the **contents** of the unzipped `E4S-libraries-9.x` folder into the **CIRCUITPY** `lib` folder (and not the zip file or the `E4S-libraries-9.x` folder itself).
+> In case you do this later on, note that copying to **CIRCUITPY** will always restart any program that is already running on the board.
 
 Your **CIRCUITPY** drive should now have the following contents:
 
