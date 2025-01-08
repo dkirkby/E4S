@@ -9,11 +9,11 @@ Each microcontroller contains two "firmware" programs: a bootloader (similar to 
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2025. For archived past instructions see [Jan 2024](2023/setup2024.md), [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2024. For archived past instructions see [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
 
 ## Install CircuitPython on each Pico W
 
-Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.2.1.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
+Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.2.9.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
 Connect the Pico W to your laptop with a USB cable and look for a new USB drive called **RPI-RP2**.
 
@@ -30,7 +30,7 @@ Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a sh
 
 If you open your **CIRCUITPY** drive, you should see several files now, include a small text file `boot_out.txt` that starts with the lines:
 ```
-Adafruit CircuitPython 9.2.1 on YYYY-MM-DD; Raspberry Pi Pico W with rp2040
+Adafruit CircuitPython 8.2.9 on 2023-12-06; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
 
@@ -44,9 +44,9 @@ Some of the components in the kit need additional libraries that are not install
 
 To install an additional library, you just copy it into a `lib` folder of your **CIRCUITPY** USB drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
-Since we are running CircuitPython 9.2.1, we need to install libraries from the 9.x bundle (we are using 9.x from the [20250106 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20250106)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
+Since we are running CircuitPython 8.2.9, we need to install libraries from the 8.x bundle (we are using 8.x from the [20240109 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20240109)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-9.x.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](bin/E4S-libraries-8.x-2024.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
@@ -57,7 +57,7 @@ Download and expand [this zip file](bin/E4S-libraries-9.x.zip?raw=true) with the
 Open your **CIRCUITPY** USB drive and open the folder named `lib`, which should be empty if you just installed CircuitPython using the steps above. The expanded zip directory contains a mixture of folders and files with an `.mpy` extension.
 Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for each of your microcontroller boards.  Note that writing anything to **CIRCUITPY** will restart any program that is already running on the board.
 
-> Make sure you copy the **contents** of the unzipped `E4S-libraries-9.x` folder into the **CIRCUITPY** `lib` folder (and not the zip file or the `E4S-libraries-9.x` folder itself).
+> Make sure you copy the **contents** of the unzipped `E4S-libraries-8.x` folder into the **CIRCUITPY** `lib` folder (and not the zip file or the `E4S-libraries-8.x` folder itself).
 
 Your **CIRCUITPY** drive should now have the following contents:
 
