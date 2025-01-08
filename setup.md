@@ -87,7 +87,9 @@ Visit this [download page](https://codewith.mu/en/download) to select the approp
 
 The first time you run the Mu Editor, you will be prompted to select a [mode](https://codewith.mu/en/tutorials/1.0/modes): select the *Adafruit CircuitPython* mode (or, *CircuitPython* if that is not available).  Whenever you are running Mu, you can view and change your mode by clicking on the *Mode*  button in the toolbar.
 
-The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` and you will be prompted for a name: use `code.py`.
+The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` so click "Save" then enter `code.py` now:
+
+![Mu editor initial save](img/mu-save-code.jpg)
 
 > Every time you save `code.py` in the Mu editor, you are actually rebooting the Pico W processor and telling it to start running your updated program from the beginning.
 
