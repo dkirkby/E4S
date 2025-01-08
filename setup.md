@@ -15,7 +15,7 @@ The steps described below ensure that you have current working versions of these
 
 Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.2.1.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
-Connect the Pico W to your laptop with a USB cable and look for a new USB drive in your operating system. If no USB drive appears, let the instructor know, and try using your other Pico W.
+Connect the Pico W to your laptop with a USB cable and look for a new USB drive in your operating system. If no USB drive appears, let the instructor know (or try the expert [last resort steps](flash_nuke.md) yourself), and try using your other Pico W.
 
 ### Reset your USB drive if it is not called RPI-RP2
 
