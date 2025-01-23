@@ -13,7 +13,7 @@ The steps described below ensure that you have current working versions of these
 
 ## Install CircuitPython 8.0 on each Pico W
 
-Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.6.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
+Download this [circuit python program](../bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-8.0.0-beta.6.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
 Connect the Pico W to your laptop with a USB cable and look for a new USB drive called **RPI-RP2**.
 
@@ -46,7 +46,7 @@ To install an additional library, you just copy it into a `lib` folder of your *
 
 Since we are running CircuitPython 8.0, we need to install libraries from the 8.x bundle (we are using 8.x from the [20230109 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20230109)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-8.x-2023.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](../bin/E4S-libraries-8.x-2023.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
