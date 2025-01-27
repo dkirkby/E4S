@@ -25,6 +25,7 @@ A final design project project is an electronics circuit that interacts with the
  - 2x SPI, 2x I2C, 2x UART
  - 5V and 3.3V outputs
  - wifi interface
+
 The Pico W does not have sufficient processing power to interpret voice commands or camera images. It cannot generate audio waveforms more complex that simple mathematical waveforms. The Pico wifi interface can be programmed to automatically log sensor readings to a google spreadsheet.
 
 Each student has a kit of prebuild modules that includes:
