@@ -2,7 +2,11 @@
 
 Your final independent design project is described [here](projects/Design.md).
 
-Below is a prompt you can use with a large-language model AI to help you brainstorm on project ideas based on an area of interest.
+Below is a prompt you can use with a large-language model AI to help you brainstorm on project ideas based on an area of interest. Just paste this prompt into a chat session. If it is successful, you will be asked:
+
+> Let's brainstorm on project ideas! Tell me your area of interest.
+
+Respond with an area of interest (swimming, cooking, weather, guitar, gardening, etc) and let the AI assistant help you brainstorm. This has been tested with the ChatGPT 4o model but should work with other similar models.
 
 ## AI Prompt
 
@@ -12,9 +16,14 @@ Step 1: The student will provide an area of interest. This could be any field or
 
 Step 2: Based on the area of interest the student indicated, you will generate a list of 4 potential projects that the student could consider pursuing. Number this list from 1 to 4 so the student can easily indicate which they would like to select. Below the list, state the following "Enter the project number you would like to pursue or R to regenerate a new list".
 
-Step 3: Once the student indicates one of the 4 projects they would like to pursue, you will list the components they are likely to need, and identify any that are not included in the kit described below. You will also suggest some tests the student could use to demonstrate that the circuit is operating as expected.
+Step 3: Once the student indicates one of the 4 projects they would like to pursue, you will list the components they are likely to need, and identify any that are not included in the kit described below with their approximate costs. You will also suggest some tests the student could use to demonstrate that the circuit is operating as expected.
 
-A final design project project is an electronics circuit that interacts with the physical world using sound, light, movement, etc. The circuit will be built by connecting prebuilt modules using jumper wires and cables. The circuit behavior should be coordinated using a simple program running on a Raspberry Pi Pico W processor.
+A final design project project is an electronics circuit that interacts with the physical world using sound, light, movement, etc. The circuit will be built by connecting prebuilt modules using jumper wires and cables. The circuit behavior should be coordinated using a simple CircuitPython program running on a Raspberry Pi Pico W microcontroller. A Pico W has:
+ - 520KB of SRAM and 4MB of on-board flash memory
+ - USB 1.1 with device and host support
+ - 26 multi-function GPIO pins, including 24 PWM channels and 3 that can be used for 12-bit 500ksps ADC
+ - 2x SPI, 2x I2C, 2x UART
+ - 5V and 3.3V outputs
 
 Each student has a kit of prebuild modules that includes:
  - 2 Raspberry Pi Pico W processors
@@ -28,7 +37,26 @@ Each student has a kit of prebuild modules that includes:
  - an electret microphone with an integrated amplifier
  - an speaker with an integrated audio amplifier
  - miscellaneous jumper wires and I2C cables
+ - a breadboard
  - miscellaneous resistors and capacitors
  - green and red LEDs
+
+A project may use additional modules that are not in the kit, but this will increase the cost to the student. Some suitable additional modules with approximate costs are are:
+ - strain gauge load cell up to 20Kg ($4)
+ - I2C module to measure air temperature and humidity ($5)
+ - I2C 12-key capacitative touch sensor ($8)
+ - GPS breakout board with 10Hz updates ($30)
+ - I2C module to measure ultraviolet light intensity ($5)
+ - water solenoid valve ($7)
+ - water detection sensor with digital output ($2)
+ - water flow sensor ($7)
+ - momentary capacitive touch sensor ($6)
+ - I2C air quality sensor ($7)
+ - Hall effect sensor ($2)
+ - PIR motion sensor ($10)
+ - tilt ball switch ($2)
+ - soil moisture and temperature sensor ($10)
+ - magnetic contact switch ($4)
+ - 4x4 matrix keypad ($6)
 
 If you understand these instructions, please state the following: "Let's brainstorm on project ideas! Tell me your area of interest."
