@@ -10,9 +10,9 @@ A neopixel is an example of what is known generically as an **RGB LED**. Our neo
 
 Study the [datasheet](https://cdn-shop.adafruit.com/datasheets/WS2812.pdf) to determine the wavelengths of the individual R,G,B LEDs in a neopixel. What is the physics behind mixing these wavelengths to produce colors such as pink or brown? A [chromaticity diagram](https://en.wikipedia.org/wiki/Chromaticity) is a helpful way to visualize this mixing process.
 
-![chromaticity diagram](https://upload.wikimedia.org/wikipedia/commons/b/ba/PlanckianLocus.png)
+![chromaticity diagram](img/chromaticity-diag.png)
 
-Explore this [interactive page](https://observablehq.com/embed/4e52fd1d782f2855@1115?cells=viewof+redWL%2Cviewof+greenWL%2Cviewof+blueWL%2Cgraph) to see how the R,G,B wavelengths determine which mixture colors can be reproduced.
+Explore this [interactive page](https://observablehq.com/embed/@dkirkby/chromaticity-diagram?cells=viewof+gamutVertices%2Cgraph) to see how the R,G,B wavelengths determine which mixture colors can be reproduced.
 
 ## Test the Kit Neopixel Strip
 
