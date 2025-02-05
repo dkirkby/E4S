@@ -278,7 +278,7 @@ with busio.I2C(sda=sda, scl=scl) as i2c:
     display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
 
     splash = displayio.Group()
-    display.show(splash)
+    display.root_group = splash
     display_lines = []
 
     for i in range(DISPLAY_LINES):
