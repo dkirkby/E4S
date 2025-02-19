@@ -31,33 +31,46 @@ import ipaddress
 import wifi
 
 print('Connecting to WiFi...')
-wifi.radio.connect('UCInet Mobile Access')
+wifi.radio.connect(ssid='UCInet Mobile Access')
 print('Connected to WiFi')
 
 # Lookup our temporarily assigned (IP) address.
 print('My IP address is', wifi.radio.ipv4_address)
 
 # Try to "ping" the google servers.
-ipv4 = ipaddress.ip_address('8.8.4.4')
-print('Ping google.com: %f ms' % (wifi.radio.ping(ipv4)*1000))
+ping_ip = ipaddress.IPv4Address("8.8.8.8")  # Google.com
+ntry = 10
+for i in range(ntry):
+    ping = wifi.radio.ping(ip=ping_ip)
+    print(f'ping {i+1}/{ntry}: {ping}')
+    time.sleep(1)
 ```
 
 Note that the campus network is unusual since it requires pre-registration of a MAC address but then no password when you connect. If you wanted to connect to a more typical network instead, you would use:
 ```python
-wifi.radio.connect(ESSID, pw)
+wifi.radio.connect(ssid=ESSID, password=pw)
 ```
 where `ESSID` is the [network name](https://en.wikipedia.org/wiki/Service_set_(802.11_network)#SSID) and `pw` is the network password. Since the password is in plain text in your code, be careful not to publish this code anywhere publicly visible (such as github).
 
 This program prints an [IP address](https://en.wikipedia.org/wiki/IP_address), which is a temporary identifier assigned when you join the network (using the DHCP protocol). The IP address is how your identify yourself to other computers over the internet. Within the UCI campus network, all IP addresses have the same initial numbers.
 
-The last two lines of the program perform a simple test that your Pico can send and receive data using the [Ping protocol](https://en.wikipedia.org/wiki/Ping_(networking_utility)).  This test attempts to send a small packet of data to a google server then times how long the response takes. Notice how this is quite similar to a [sonar distance measurement](sonar.md)!
+The final lines of the program perform a simple test that your Pico can send and receive data using the [Ping protocol](https://en.wikipedia.org/wiki/Ping_(networking_utility)).  This test attempts to send a small packet of data to a google server then times how long the response takes. Notice how this is quite similar to a [sonar distance measurement](sonar.md)! Initial ping attempts often fail, but you should eventually see numerical values which are the round-trip packet time in seconds.
 
 Typical output from this program would be:
 ```
 Connecting to WiFi...
 Connected to WiFi
-My IP address is 169.234.42.56
-Ping google.com: 75.999969 ms
+My IP address is 192.168.87.27
+ping 1/10: None
+ping 2/10: None
+ping 3/10: None
+ping 4/10: 0.056
+ping 5/10: 0.02
+ping 6/10: 0.02
+ping 7/10: 0.019
+ping 8/10: 0.034
+ping 9/10: 0.023
+ping 10/10: 0.014
 ```
 
 ## Log Data to a Google Spreadsheet
@@ -75,7 +88,7 @@ import adafruit_requests
 print('Connecting to WiFi...')
 # The arguments are the network SSID and password.
 # These values are for a temporary network in the classroom.
-wifi.radio.connect('UCInet Mobile Access')
+wifi.radio.connect(ssid='UCInet Mobile Access')
 print('Connected to WiFi')
 
 # Lookup our permanent (MAC) and temporarily assigned (IP) addresses.
