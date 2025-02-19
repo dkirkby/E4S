@@ -27,6 +27,7 @@ This program uses the [wifi library](https://docs.circuitpython.org/en/latest/sh
 
 Next, verify that you can connect to the campus network using this program:
 ```python
+import time
 import ipaddress
 import wifi
 
@@ -72,6 +73,10 @@ ping 8/10: 0.034
 ping 9/10: 0.023
 ping 10/10: 0.014
 ```
+
+## Read a Web Page
+
+
 
 ## Log Data to a Google Spreadsheet
 
