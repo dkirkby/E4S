@@ -76,18 +76,52 @@ ping 10/10: 0.014
 
 ## Read a Web Page
 
+Next, we will use the [adafruit requests library](https://docs.circuitpython.org/projects/requests/en/latest/api.html)
+to access a web page. This library is a stripped-down version of the widely used
+[python requests package](https://requests.readthedocs.io/en/latest/). Note that when we access a web
+page using code, we are downloading its data using the HTTP protocol, but will not see it rendered the way
+you are used to in a web browser. Therefore, it is helpful to test using some simple web pages where the
+data we download is easy to interpret. For example, try these in your browser:
+ - http://wifitest.adafruit.com/testwifi/index.html
+ - https://wttr.in/Irvine
+ - https://uci.edu/
 
+To see how these pages will appear to a program, use the "View Source" menu option in your browser.
+
+Here is a program to read a web page and print its contents:
+```python
+import wifi
+import adafruit_connection_manager
+import adafruit_requests
+
+print('Connecting to WiFi...')
+wifi.radio.connect(ssid='UCInet Mobile Access')
+print('Connected to WiFi')
+
+# Lookup our temporarily assigned (IP) address.
+print('My IP address is', wifi.radio.ipv4_address)
+
+# Initialize HTTP access
+print('Initializing requests library...')
+pool = adafruit_connection_manager.get_radio_socketpool(wifi.radio)
+ssl_context = adafruit_connection_manager.get_radio_ssl_context(wifi.radio)
+requests = adafruit_requests.Session(pool, ssl_context)
+print('Success!')
+
+with requests.get("http://wifitest.adafruit.com/testwifi/index.html") as response:
+    print(response.text)
+```
 
 ## Log Data to a Google Spreadsheet
 
-Here is a more complex example of using the [requests library](https://docs.circuitpython.org/projects/requests/en/latest/api.html) to access cloud-based services via their web-based APIs, i.e. by accessing specially prepared URLs via the HTTP protocol. In this case, we are logging data to a google spreadsheet using the google form API:
+Here is a more complex example of using the [requests library](https://docs.circuitpython.org/projects/requests/en/latest/api.html)
+to access cloud-based services via their web-based APIs, i.e. by accessing specially prepared URLs via the HTTP protocol. In this case, we are logging data to a google spreadsheet using the google form API:
 ```python
 import time
 import json
 import ipaddress
 import wifi
-import ssl
-import socketpool
+import adafruit_connection_manager
 import adafruit_requests
 
 print('Connecting to WiFi...')
@@ -96,24 +130,18 @@ print('Connecting to WiFi...')
 wifi.radio.connect(ssid='UCInet Mobile Access')
 print('Connected to WiFi')
 
-# Lookup our permanent (MAC) and temporarily assigned (IP) addresses.
-# https://en.wikipedia.org/wiki/MAC_address
-MACaddr = ''.join([f'{i:02x}' for i in wifi.radio.mac_address])
-print('My MAC address is', MACaddr)
-IPaddr = wifi.radio.ipv4_address
-print('My IP address is', IPaddr)
-
 # Initialize the requests library for use with our wifi connection.
 # See https://docs.circuitpython.org/projects/requests/en/latest/api.html
 print('Initializing requests library...')
-pool = socketpool.SocketPool(wifi.radio)
-requests = adafruit_requests.Session(pool, ssl.create_default_context())
+pool = adafruit_connection_manager.get_radio_socketpool(wifi.radio)
+ssl_context = adafruit_connection_manager.get_radio_ssl_context(wifi.radio)
+requests = adafruit_requests.Session(pool, ssl_context)
 print('Success!')
 
 # Get the prefilled URL for a google form that does not require any sign in or authentication.
 # The values you type into the prefilled form are the placeholders used to identify each value
 # passed to the submit() function defined below.
-PREFILLED='https://docs.google.com/forms/d/e/1FAIpQLSdck4ybXdYOxhM2syRVQpQcQ8GBuTcWGCFtdxDDxNZ7QivJmw/viewform?usp=pp_url&entry.744442955=version&entry.954313297=MACaddr&entry.678802473=IPaddr&entry.824900847=data'
+PREFILLED='https://docs.google.com/forms/d/e/1FAIpQLSddxA63cvCGBxfKTqH3aemRZ4BPDJ6PCZpEdmSa9DpFsNQ1Nw/viewform?usp=pp_url&entry.1607031342=TEMPERATURE&entry.2073013553=PRESSURE'
 
 POST_URL = PREFILLED[:PREFILLED.index('viewform?')] + 'formResponse'
 
@@ -134,9 +162,9 @@ def submit(**kwargs):
         print(f'Error submitting data: {r.status_code}')
 
 for i in range(3):
-    data = json.dumps({"i":i})
-    print(f'sending data: {data}')
-    submit(version=1, MACaddr=MACaddr, IPaddr=IPaddr, data=data)
+    # could read these values from the I2C pressure sensor module
+    print(f'Sending data packet {i}')
+    submit(TEMPERATURE=99.9, PRESSURE=102.3)
     time.sleep(1)
 ```
 Typical output from this program would be:
@@ -147,9 +175,9 @@ My MAC address is 28cdc10841ee
 My IP address is 169.234.42.56
 Initializing requests library...
 Success!
-sending data: {"i": 0}
-sending data: {"i": 1}
-sending data: {"i": 2}
+sending data packet 0
+sending data packet 1
+sending data packet 2
 ```
 If you see these lines, you should also see three corresponding new rows in the spreadsheet that automatically records all of the google form submissions.
 
@@ -159,8 +187,9 @@ The example above uses a shared form but can you also create your own form for d
  1. Visit https://docs.google.com/forms/ and create a blank form
  2. Create four questions, named "version", "MACaddr", "IPaddr" and "data". You can change these names but it will be easier to fill the form via python if you use names that are valid python identifiers (i.e. avoid spaces and punctuation).
  3. Verify that the first 3 questions have the "Short Answer" type and the last one (for "data") has the "Paragraph" type.
- 4. Use the "Get pre-filled link" menu item and set the answers equal to the question name for all 4 questions.
- 5. Copy the link into the code above at this line:
+ 4. Publish your form and set the "Responder view" to "Anyone with the link".
+ 5. Use the "Get pre-filled link" menu item and set the answers equal to the question name for all 4 questions.
+ 6. Copy the link into the code above at this line:
  ```python
  PREFILLED=`...prefilled link goes here...`
  ```
