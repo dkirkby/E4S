@@ -28,6 +28,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Audio input and output](audio.md)
 - [How to examine a circuit board](examine.md)
 - [Power measurement and design considerations](power.md)
+- [Hardware debugging techniques](hwdebug.md)
 - [WiFi communication](wifi.md)
 
 ## Projects

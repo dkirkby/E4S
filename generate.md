@@ -23,4 +23,4 @@ while True:
 
 The circuit configuration is where you specify the connections between your Pico and the rest of the circuit. Each connection is either an Input or an Output. The voltage that you connect to is either being treated as Digital or Analog.
 
-Use this [interactive tool](https://observablehq.com/embed/@dkirkby/pin-wizzard?cells=viewof+assign%2CgeneratedCode) to explore and generate code for the different options.
+Use this [interactive tool](https://observablehq.com/embed/@dkirkby/pin-wizzard@63?cells=viewof+assign%2CgeneratedCode) to explore and generate code for the different options.
