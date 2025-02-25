@@ -63,8 +63,8 @@ signal1.duty_cycle = 0x0000
 signal2.duty_cycle = 0x8000
 
 while True:
-    signal1.duty_cycle = (signal1.duty_cycle + 0x0010) % 0xffff
-    signal2.duty_cycle = (signal2.duty_cycle + 0x0010) % 0xffff
+    signal1.duty_cycle = (signal1.duty_cycle + 0x0100) % 0xffff
+    signal2.duty_cycle = (signal2.duty_cycle + 0x0100) % 0xffff
     time.sleep(0.005)
 ```
 If you watch the LEDs, you will see that their brightness traces out a "sawtooth" pattern, i.e. a linear ramp upwards then a sudden reset back to zero, cycling forever. However, the two LEDs are out of phase with each other. Study the code to identify how each of these features is accomplished:
