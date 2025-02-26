@@ -116,6 +116,8 @@ with requests.get("http://wifitest.adafruit.com/testwifi/index.html") as respons
     print(response.text)
 ```
 
+> If you get an error in the Mu Editor Serial port about missing `adafruit_connection_manager`, download it from [here](bin/adafruit_connection_manager.mpy?raw=true) and copy into the `lib` folder on your `CIRCUITPY` USB drive.
+
 ## Log Data to a Google Spreadsheet
 
 Here is a more complex example of using the [requests library](https://docs.circuitpython.org/projects/requests/en/latest/api.html)
@@ -189,7 +191,7 @@ Read T=22.10C P=1011.45hPa
 Read T=22.10C P=1011.46hPa
 Read T=22.10C P=1011.45hPa
 ```
-If you see these lines, you should also see corresponding new rows in the spreadsheet that automatically records all of the google form submissions.
+If you see these lines, you should also see corresponding new rows in the spreadsheet that automatically records all of the google form submissions. Note that each row is automatically assigned a timestamp, so you have a record of when the data was sent.
 
 This template can be modified to automatically log any type of sensor data to the cloud that is recorded by your circuit, assuming that you have access to a wifi network.
 
@@ -208,3 +210,45 @@ You can change the number and names of each question to suit your application, b
 ```python
     submit(TEMPERATURE=temperature, PRESSURE=pressure)
 ```
+
+## Serve a Web Page
+
+As a final example, we show how the Pico W can run a lightweight web server that you can connect to from a browser running on a different device (laptop, phone, etc). This simple code just displays a static web page, but could be expanded to display some buttons that control your circuit, for example. The design technique of replacing physical switches, knobs, sliders, etc, with their web (or native app) equivalents leads to lower costs and greater flexibility (since changes can be made even after the circuit is built). Many designs today adopt this approach, but the downside for users is that even basic operation now requires a wifi connection and app.
+
+Here is the simple code for getting started:
+```python
+import wifi
+import microcontroller
+import adafruit_connection_manager
+import adafruit_httpserver
+
+print('Connecting to WiFi...')
+wifi.radio.connect(ssid='UCInet Mobile Access')
+print('Connected to WiFi at', wifi.radio.ipv4_address)
+
+# Initialize the web server
+print('Initializing web server...')
+pool = adafruit_connection_manager.get_radio_socketpool(wifi.radio)
+server = adafruit_httpserver.Server(pool, "/static", debug=True)
+
+# Define the default web page to serve
+content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <title>Pico W HTTP Server</title>
+</body>
+"""
+
+@server.route("/")
+def base(request: adafruit_httpserver.Request):
+    return adafruit_httpserver.Response(request, content, content_type='text/html')
+
+server.serve_forever(str(wifi.radio.ipv4_address))
+```
+
+> This code does not work on the UCI campus wifi network
