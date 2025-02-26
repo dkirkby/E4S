@@ -6,7 +6,11 @@
 
 The W in "Pico W" stands for wireless.  Wireless communication uses microwave frequencies near 2.4GHz and 5.0GHz that are shared with Bluetooth and other communications protocols (since it is unregulated) as well as microwave ovens!  All that sharing leads to a rather complex protocol that requires its own dedicated processor, as well as specialized circuitry capable of handling very high frequency signals.  You can usually identify a microwave radio interface on a circuit board because it is enclosed in a metal shield to minimize [electromagnetic inteference](https://en.wikipedia.org/wiki/Electromagnetic_interference) with other devices, as required for consumer product certification. There should also be an antenna visible, or a connector for an external antenna. The size of an antenna is generally matched to the wavelengths of interest, which are in the centimeter-range for microwaves.
 
-Identify the radio interface and antenna on your Pico W module.
+Identify the [radio interface](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-4-802.11n/cyw43439/) and [antenna](https://abracon.com/niche-antennas) on your Pico W module:
+
+![Pico W PCB](img/pico-w-pcb.jpg)
+
+> The programs below will sometimes fail with mysterious errors, but should eventually succeed if you keep retrying.
 
 ## Connecting to the Campus Wifi Network
 
@@ -123,10 +127,15 @@ import ipaddress
 import wifi
 import adafruit_connection_manager
 import adafruit_requests
+import adafruit_dps310
+
+# Initialize pressure sensor
+print('Initializing pressure sensor...')
+sda, scl = board.GP0, board.GP1
+i2c = busio.I2C(sda=sda, scl=scl)
+tpsensor = adafruit_dps310.DPS310(i2c)
 
 print('Connecting to WiFi...')
-# The arguments are the network SSID and password.
-# These values are for a temporary network in the classroom.
 wifi.radio.connect(ssid='UCInet Mobile Access')
 print('Connected to WiFi')
 
@@ -161,25 +170,26 @@ def submit(**kwargs):
     if r.status_code != 200:
         print(f'Error submitting data: {r.status_code}')
 
-for i in range(3):
-    # could read these values from the I2C pressure sensor module
-    print(f'Sending data packet {i}')
-    submit(TEMPERATURE=99.9, PRESSURE=102.3)
+for i in range(5):
+    temperature = tpsensor.temperature
+    pressure = tpsensor.pressure
+    submit(TEMPERATURE=temperature, PRESSURE=pressure)
     time.sleep(1)
 ```
 Typical output from this program would be:
 ```
+Initializing pressure sensor...
 Connecting to WiFi...
 Connected to WiFi
-My MAC address is 28cdc10841ee
-My IP address is 169.234.42.56
 Initializing requests library...
 Success!
-sending data packet 0
-sending data packet 1
-sending data packet 2
+Read T=22.10C P=1011.45hPa
+Read T=22.10C P=1011.46hPa
+Read T=22.10C P=1011.45hPa
+Read T=22.10C P=1011.46hPa
+Read T=22.10C P=1011.45hPa
 ```
-If you see these lines, you should also see three corresponding new rows in the spreadsheet that automatically records all of the google form submissions.
+If you see these lines, you should also see corresponding new rows in the spreadsheet that automatically records all of the google form submissions.
 
 This template can be modified to automatically log any type of sensor data to the cloud that is recorded by your circuit, assuming that you have access to a wifi network.
 
@@ -196,5 +206,5 @@ The example above uses a shared form but can you also create your own form for d
 
 You can change the number and names of each question to suit your application, but make sure that this line matches your choices:
 ```python
-    submit(version=1, MACaddr=MACaddr, IPaddr=IPaddr, data=data)
+    submit(TEMPERATURE=temperature, PRESSURE=pressure)
 ```
