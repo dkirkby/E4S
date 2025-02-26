@@ -215,7 +215,7 @@ You can change the number and names of each question to suit your application, b
 
 As a final example, we show how the Pico W can run a lightweight web server that you can connect to from a browser running on a different device (laptop, phone, etc). This simple code just displays a static web page, but could be expanded to display some buttons that control your circuit, for example. The design technique of replacing physical switches, knobs, sliders, etc, with their web (or native app) equivalents leads to lower costs and greater flexibility (since changes can be made even after the circuit is built). Many designs today adopt this approach, but the downside for users is that even basic operation now requires a wifi connection and app.
 
-Here is the simple code for getting started:
+Here is the simple code for getting started. See [here](https://docs.circuitpython.org/projects/httpserver/en/stable/index.html) for more details and advanced documentation.
 ```python
 import wifi
 import microcontroller
