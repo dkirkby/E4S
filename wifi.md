@@ -251,4 +251,4 @@ def base(request: adafruit_httpserver.Request):
 server.serve_forever(str(wifi.radio.ipv4_address))
 ```
 
-> This code does not work on the UCI campus wifi network
+> Since this site uses HTTP (instead of HTTPS) many browsers (including chrome and firefox) will not load it by default.

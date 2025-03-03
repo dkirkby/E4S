@@ -30,6 +30,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Power measurement and design considerations](power.md)
 - [Hardware debugging techniques](hwdebug.md)
 - [WiFi communication](wifi.md)
+- [AI design assistant](AI-design.md)
 
 ## Projects
 
