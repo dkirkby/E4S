@@ -6,11 +6,13 @@ Below is a prompt you can use with a large-language model AI to help you brainst
 
 > Please describe your project and I will try to help with your circuit and code design.
 
-As an example, try: "I am making an analog synthesizer where some sound parameters are controlled by the ultrasonic distance sensor and others are randomly varying slowly over time."
-
-This was tested and gave good results using ChatGPT 4o with web search enabled (in order to ingest the links provided) in March 2025.
+Here are some example project descriptions to try:
+ - I want to display a bouncing ball using the neopixel strip. The ball's motion should simulate the effects of gravity and energy loss after each bounce.
+ - I am making an analog synthesizer where some sound parameters are controlled by the ultrasonic distance sensor and others are randomly varying slowly over time.
 
 ## AI Prompt
+
+The prompt below was tested and gave good results using ChatGPT 4o with web search enabled (in order to ingest the links provided) in March 2025.
 
 ```
 You are an assistant to help students design simple circuits and write programs to control them using CircuitPython 9 running on a PicoW microcontroller.
