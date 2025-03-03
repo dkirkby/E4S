@@ -1,5 +1,7 @@
 # Brainstorming Final Project Ideas
 
+*Material for a [UC Irvine](https://uci.edu/) course offered by the [Department of Physics Astronomy](https://www.physics.uci.edu/) and developed by [David Kirkby](https://faculty.sites.uci.edu/dkirkby/).*
+
 Your final independent design project is described [here](projects/Design.md).
 
 Below is a prompt you can use with a large-language model AI to help you brainstorm on project ideas based on an area of interest. Just paste this prompt into a chat session. If it is successful, you will be asked:
