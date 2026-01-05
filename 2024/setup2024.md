@@ -9,7 +9,7 @@ Each microcontroller contains two "firmware" programs: a bootloader (similar to 
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2024. For archived past instructions see [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2024. For archived past instructions see [Jan 2023](../2023/setup2023.md), [Jan 2022](../2022/setup2022.md) or [Jan 2021](../2021/setup2021.md).
 
 ## Install CircuitPython on each Pico W
 
@@ -40,7 +40,7 @@ Unmount your **CIRCUITPY** drive the same way you would remove any USB drive, th
 
 ## Libraries
 
-Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](hello.md).
+Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](../hello.md).
 
 To install an additional library, you just copy it into a `lib` folder of your **CIRCUITPY** USB drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
@@ -61,11 +61,11 @@ Copy all of these into the `lib` folder on your the **CIRCUITPY** USB drive for 
 
 Your **CIRCUITPY** drive should now have the following contents:
 
-![top-level files](img/top-level-files.jpg)
+![top-level files](../img/top-level-files-2024.jpg)
 
 and the `lib` folder should contain:
 
-![lib folder](img/lib-folder.jpg)
+![lib folder](../img/lib-folder-2024.jpg)
 
 You are now ready to use these libraries.
 

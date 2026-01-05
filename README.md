@@ -36,7 +36,9 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 
 1. [Digital Multimeter](projects/DMM.md)
 2. [Waveforms and Photons](projects/Photons.md)
-3. [Communication](projects/Chatter.md)
-4. [Motion Feedback](projects/Motion.md)
-5. [Digital Signal Processing](projects/DSP.md)
-6. [Independent Design Project](projects/Design.md)
+3. [Design Project: Phase 1](projects/Design.md)
+4. [Communication](projects/Chatter.md)
+5. [Motion Feedback](projects/Motion.md)
+6. [Design Project: Phase 2](projects/Design.md)
+7. [Digital Signal Processing](projects/DSP.md)
+8. [Independent Design Project](projects/Design.md)
