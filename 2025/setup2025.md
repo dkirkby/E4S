@@ -9,11 +9,11 @@ Each microcontroller contains two "firmware" programs: a bootloader (similar to 
 
 The final piece of software you will need is an editor that works well with the CircuitPython development environment.  Unlike the bootloader and main program, which run on the microcontroller, the editor runs on your computer and communicates with the microcontroller over USB.
 
-The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2025. For archived past instructions see [Jan 2024](2024/setup2024.md), [Jan 2023](2023/setup2023.md), [Jan 2022](2022/setup2022.md) or [Jan 2021](2021/setup2021.md).
+The steps described below ensure that you have current working versions of these programs, and are based on the general instructions [here](https://circuitpython.org/board/raspberry_pi_pico_w/). These instructions were last updated in Jan 2025. For archived past instructions see [Jan 2024](../2024/setup2024.md), [Jan 2023](../2023/setup2023.md), [Jan 2022](../2022/setup2022.md) or [Jan 2021](../2021/setup2021.md).
 
 ## Install CircuitPython on each Pico W
 
-Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.2.1.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
+Download this [circuit python program](../bin/adafruit-circuitpython-raspberry_pi_pico_w-en_US-9.2.1.uf2?raw=true) to your laptop.  Since this program will run on the microcontroller, not your laptop, it does not matter what operating system your laptop is running.
 
 Connect the Pico W to your laptop with a USB cable and look for a new USB drive in your operating system. If no USB drive appears, let the instructor know (or try the expert [last resort steps](flash_nuke.md) yourself), and try using your other Pico W.
 
@@ -44,13 +44,13 @@ Unmount your **CIRCUITPY** drive the same way you would remove any USB drive, th
 
 ## Libraries
 
-Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](hello.md).
+Some of the components in the kit need additional libraries that are not installed when you install CircuitPython. Any extra libraries needed are always mentioned in the comments at the top of each component's [hello example](../hello.md).
 
 To install an additional library, you just copy it into a `lib` folder of your **CIRCUITPY** USB drive. You only need to do this once.  The instructions below show you how to install all of the libraries for the kit components at once.
 
 Since we are running CircuitPython 9.2.1, we need to install libraries from the 9.x bundle (we are using 9.x from the [20250106 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20250106)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-9.x.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](../bin/E4S-libraries-9.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
@@ -64,11 +64,11 @@ The expanded folder should be called `lib`. Open your **CIRCUITPY** USB drive an
 
 Your **CIRCUITPY** drive should now have the following contents:
 
-![top-level files](img/top-level-files-2025.jpg)
+![top-level files](../img/top-level-files-2025.jpg)
 
 and the `lib` folder should contain:
 
-![lib folder](img/lib-folder-2025.jpg)
+![lib folder](../img/lib-folder-2025.jpg)
 
 You are now ready to use these libraries.
 
