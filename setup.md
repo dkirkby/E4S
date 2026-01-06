@@ -17,12 +17,14 @@ Download this [circuit python program](bin/adafruit-circuitpython-raspberry_pi_p
 
 Connect the Pico W to your laptop with a USB cable and look for a new USB drive in your operating system. If no USB drive appears, let the instructor know (or try the expert [last resort steps](flash_nuke.md) yourself), and try using your other Pico W.
 
+> Mac users: if you get a popup asking "Allow accessory to connect?", click "Connect".
+
 ### Reset your USB drive if it is not called RPI-RP2
 
 If your USB drive is called **RPI-RP2**, skip to the section below. Otherwise, it is mostly likely called **CIRCUITPY** and this just means someone else has already installed an older version of the software you will need for this course. To reset your Pico W and continue with the instructions below, follow these steps:
- - Open the drive and delete all of the files it contains. You will also need to empty the Trash on a Mac.
- - Unmount the **CIRCUITPY** drive and uplug the USB from your laptop.
- - Press down the small white button while you plug the USB back into your laptop.
+ - Open the drive and delete all of the files it contains (i.e. drag them to the Trash).
+ - Eject the **CIRCUITPY** drive and uplug the USB cable from your laptop.
+ - Press and hold down the small white button while you plug the USB back into your laptop. (Mac users may need to allow the accessory to connect again).
  - You should now see the drive called **RPI-RP2** and can release the white button and proceed with the steps below.
 
 ### Install software on USB drive called RPI-RP2
@@ -31,14 +33,14 @@ Copy the downloaded file to the USB drive, e.g. using drag and drop.  After a sh
 
 > Mac users will probably get a warning about "Disk Not Ejected Properly" that you can safely ignore.
 
-If you open your **CIRCUITPY** drive, you should see only a single small text file `boot_out.txt` that starts with the lines:
+If you open your **CIRCUITPY** drive, you should see only a single small text file `boot_out.txt` that starts with the lines (the extra two lines are unique to your Pico):
 ```
-Adafruit CircuitPython 10.0.3 on 2024-11-20; Raspberry Pi Pico W with rp2040
+Adafruit CircuitPython 10.0.3 on 2025-10-17; Raspberry Pi Pico W with rp2040
 Board ID:raspberry_pi_pico_w
 ```
 If you see other files, and you forgot to delete them in the instructions above, delete them now and repeat this section. Otherwise, let the instructor know.
 
-Unmount your **CIRCUITPY** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
+Eject your **CIRCUITPY** drive the same way you would remove any USB drive, then repeat these steps for the other Pico W in your kit.
 
 > Since both of your microcontrollers now have the same USB drive name, it would be confusing to have them both connected to your laptop at the same time.  However, while we will sometimes use both at once in a project, we will not need them both connected via USB at once.
 
@@ -50,13 +52,15 @@ To install an additional library, you just copy it into a `lib` folder of your *
 
 Since we are running CircuitPython 10.0.3, we need to install libraries from the 10.x bundle (we are using 10.x from the [20251231 auto release](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20251231)). We do not install the whole bundle since it is too big to fit in the microcontroller memory.
 
-Download and expand [this zip file](bin/E4S-libraries-9.x.zip?raw=true) with the libraries needed by the following kit components:
+Download and expand [this zip file](bin/E4S-libraries-10.x.zip?raw=true) with the libraries needed by the following kit components:
  - OLED display
  - pressure & altitude sensor
  - acceleration & rotation & magnetic field sensor
  - 10-band photodetector
  - ultrasonic distance sensor
  - Pico-W wifi networking
+
+> If you are curious, this [python script](bin/update-libs.py) was used to create this zip file from the whole bundle.
 
 The expanded folder should be called `lib`. Open your **CIRCUITPY** USB drive and copy the `lib` folder (e.g. using drag and drop) to your **CIRCUITPY** USB drive.
 
