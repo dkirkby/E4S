@@ -17,7 +17,7 @@ The corresponding electrical circuit diagram is:
 The light-green microcontroller pins labeled **GP2, GP3, GP4, ...** are for general-purpose digital input and output. In this context, *digital* means that signals are represented by a voltage that is either close to 0V ("low") or close to 3.3V ("high").
 To complete your circuit, connect the Pico W to your laptop with a USB cable.  This will apply power to your circuit (from your laptop's USB port) and start running any previously loaded program, but there probably won't be any sign of this.
 
-To bring this circuit to life, enter the following program into your Mu editor:
+To bring this circuit to life, enter the following program into your editor:
 ```python
 import board
 import digitalio
@@ -30,11 +30,13 @@ while True:
     led.value = not led.value # toggle on/off
     time.sleep(0.5) # seconds
 ```
-To load this program into the RP2020 processor on your Pico W board, you simply save it in the Mu editor.  This triggers the Mu editor to download your program via the USB cable and reset the processor so it starts running your code.  If all goes well, you should now see your LED blinking once per second. It is important that your program is saved to the top level of your **CIRCUITPY** drive (so not under the `lib` folder) with the name `code.py` since this is what CircuitPython expects. Check the name in the Mu editor tab, circled in red below:
+To test this program, click the green Run arrow in the Thonny toolbar (circled in yellow below).  This triggers the Mu editor to download your program via the USB cable and reset the processor so that it starts running your code.  If all goes well, you should now see your LED blinking once per second, alternating 0.5s ON then 0.5s OFF.
 
-![Mu editor tab](img/mu-code-py.jpg)
+It is important that your program is saved to the top level of your **CIRCUITPY** drive (so not under the `lib` folder) with the name `code.py` since this is what CircuitPython expects. Check the name in the editor tab, circled in yellow below:
 
-> In case your program is saved with a different name, it will not be running. To fix this, double click on its name in the Mu editor tab to open a dialog where you can re-save it as `code.py`
+![Thonny editor tab](img/thonny-code-py.jpg)
+
+> In case your program is saved with a different name, it will not be running. To fix this, use **File > Save As...** to open a dialog where you can re-save it as `code.py`
 
 If you already have experience with python programming, you might notice a few new features in the MicroPython world. First, the imported `board` and `digitalio` modules are specific to your Pico W microcontroller board. Second, the `digitalio` module allows you to control a (digital) voltage in your circuit as if it were a normal python variable, with `True` corresponding to the "high" (3.3V) logic level and `False` corresponding to "low" (0V). You will soon learn how to control an analog voltage (with values anywhere between 0 and 3.3V) and measure both digital and analog voltages in your circuit.
 

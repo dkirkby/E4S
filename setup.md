@@ -76,7 +76,7 @@ and the `lib` folder should contain:
 
 You are now ready to use these libraries.
 
-## Install the Mu Editor
+## Install the Thonny Editor
 
 You have completed the setup of your microcontroller boards and are now ready to install a code editor on your laptop.
 
@@ -85,20 +85,26 @@ Any file named `code.py` on your **CIRCUITPY** drive will be automatically run w
 > There is no file called `code.py` on your **CIRCUITPY** drive after the initial setup, but you will create it below.
 
 In principle, you can use any text or code editor to modify `code.py` directly from the USB drive.  However,
-we will start with the [Mu Editor](https://codewith.mu/) which is specifically designed to work well with Adafruit microcontroller boards and CircuitPython.
+we will start with a program called [Thonny](https://thonny.org/) which is specifically designed to work well with CircuitPython.
 
-Visit this [download page](https://codewith.mu/en/download) to select the appropriate official installer for your computer.
+Download and install the appropriate version for your laptop from the [Thonny home page](https://thonny.org/).
 
-The first time you run the Mu Editor, you will be prompted to select a [mode](https://codewith.mu/en/tutorials/1.0/modes): select the *Adafruit CircuitPython* mode (or, *CircuitPython* if that is not available).  Whenever you are running Mu, you can view and change your mode by clicking on the *Mode*  button in the toolbar.
+The first time you run Thonny, you will be asked to chose initial settings: select "Standard". Next, with your Pico connected to your laptop (as "CIRCUITPY"), go to **Run > Configure interpreter...**, change "Local Python 3" to "Circuit Python (Generic)", then click "OK". Your window should now look like this, with the highlighted text confirming that you have configured Thonny to edit code on your connected Pico:
 
-The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` so click "Save" then enter `code.py` now:
+![Thonny startup](img/thonny-startup.jpg)
 
-![Mu editor initial save](img/mu-save-code.jpg)
+The name of the file you are currrently editing appears in the editor title bar, and should generally be `code.py`.  The first time you use the Mu Editor with a new **CIRCUITPY** drive installed, the name will be `untitled` so use **File > Save** (or click the disk icon in the toolbar) now. When asked "Where to save to?" select "CircuitPython device", then enter "code.py" as the file name and click "OK".
+
+> Mac users might be asked for permission to access files on a removable volume: you must "Allow" this to proceed.
+
+Verify that "<untitled>" has changed to "[code.py]" in your editor tab.
 
 > Every time you save `code.py` in the Mu editor, you are actually rebooting the Pico W processor and telling it to start running your updated program from the beginning.
 
 > A problem you may encounter later is that you are editing a file that is not called `code.py`, so your edits are having no effect. The solution is simply to save your file as `code.py`.
 
-I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22).
+I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22). Experience programmers often prefer to use Visual Studio Code, but be aware that it is lacking a plotting capability that we will be using in this course.
 
 You are now ready to [start programming your microcontroller boards](first-prog.md).
+
+> This course used a similar editor called "Mu" before 2026, but it is no longer supported. However, you might still see some references to that in the course material.
