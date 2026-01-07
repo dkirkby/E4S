@@ -31,7 +31,7 @@ while True:
     print(f'ADU = {ADU:5d} (dec) = ${ADU:04x} (hex)')
     time.sleep(0.5)
 ```
-Enter this program using the Mu editor and save to your microcontroller. Open the "Serial" tab to display the resulting values.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.  If you are using linux and get an error about accessing the serial port device, you will need to update your permissions[^linuxperms].
+Enter this program into your editor and run it to display the resulting values in the "Serial" tab.  If you are not familiar with [hexadecimal (hex) notation](https://www.youtube.com/watch?v=4EJay-6Bioo), take a moment to review it now.  If you are using linux and get an error about accessing the serial port device, you will need to update your permissions[^linuxperms].
 
 [^linuxperms]:
     On ubuntu and debian, this command should give your user account access to the serial port:
