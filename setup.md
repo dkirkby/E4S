@@ -99,11 +99,11 @@ The name of the file you are currrently editing appears in the editor title bar,
 
 Verify that "<untitled>" has changed to "[code.py]" in your editor tab.
 
-> Every time you save `code.py` in the Mu editor, you are actually rebooting the Pico W processor and telling it to start running your updated program from the beginning.
+The lower "Shell" window in Thonny provides a way to directly interact with the CircuitPython interpreter running on your Pico. Ignore it for now, but it will be useful later on.
 
-> A problem you may encounter later is that you are editing a file that is not called `code.py`, so your edits are having no effect. The solution is simply to save your file as `code.py`.
+> A problem you may encounter later is that you are editing a file that is not called `code.py`, so your edits are having no effect on the program your Pico is running. The solution is simply to re-save your file as `code.py`.
 
-I recommend that everyone start with the Mu Editor.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22). Experience programmers often prefer to use Visual Studio Code, but be aware that it is lacking a plotting capability that we will be using in this course.
+I recommend that everyone start with Thonny.  However, if you prefer to use a different editor, start [here](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code#1-use-an-editor-that-writes-out-the-file-completely-when-you-save-it-2977444-22). Experienced programmers often prefer to use Visual Studio Code, but be aware that it is lacking a plotting capability that we will be using in this course.
 
 You are now ready to [start programming your microcontroller boards](first-prog.md).
 

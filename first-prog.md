@@ -32,13 +32,25 @@ while True:
 ```
 To test this program, click the green Run arrow in the Thonny toolbar (circled in yellow below).  This triggers the Mu editor to download your program via the USB cable and reset the processor so that it starts running your code.  If all goes well, you should now see your LED blinking once per second, alternating 0.5s ON then 0.5s OFF.
 
-It is important that your program is saved to the top level of your **CIRCUITPY** drive (so not under the `lib` folder) with the name `code.py` since this is what CircuitPython expects. Check the name in the editor tab, circled in yellow below:
+It is important that your program is saved to the top level of your **CIRCUITPY** drive (so not under the `lib` folder, for example) with the name `code.py` since this is what CircuitPython expects. Check the name in the editor tab, circled in yellow below:
 
 ![Thonny editor tab](img/thonny-code-py.jpg)
 
 > In case your program is saved with a different name, it will not be running. To fix this, use **File > Save As...** to open a dialog where you can re-save it as `code.py`
 
 If you already have experience with python programming, you might notice a few new features in the MicroPython world. First, the imported `board` and `digitalio` modules are specific to your Pico W microcontroller board. Second, the `digitalio` module allows you to control a (digital) voltage in your circuit as if it were a normal python variable, with `True` corresponding to the "high" (3.3V) logic level and `False` corresponding to "low" (0V). You will soon learn how to control an analog voltage (with values anywhere between 0 and 3.3V) and measure both digital and analog voltages in your circuit.
+
+What happens if you make a mistake writing your program? Remove the "a" from "import board" on the first line and run your code to see what happens:
+
+![Thonny python error](img/thonny-python-error.jpg)
+
+Note the error message printed in the lower "Shell" window. Links in this error message will highlight the specific line that triggered the error. Now fix this error and re-run.
+
+Running a program on the Pico is quite different from running a program on your laptop where, after turning it on (or rebooting it), you can select and run multiple programs then quit them when you are done. Life on the Pico is much simpler: it only runs one program that starts immediately when it is turned on (or rebooted), and runs that program forever (until you turn it off or reboot). Pico programs generally all have the same simple structure:
+ - lines before `while True:` execute once, when the program starts, so are used for initialization
+ - lines after `while True:` are indented, and execute repeatedly forever, so determine the program's behavior
+
+![Pico code structure](img/code-structure.jpg)
 
 Here are some experiments to try with your circuit and code. For each one, predict what might happen, try it then, in case you are surprised, think about why. The circuit changes below can be safely performed while your Pico is powered via USB.
  - Turn the LED around
