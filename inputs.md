@@ -75,7 +75,7 @@ The corresponding circuit diagram is:
 
 ![joystick digital input circuit diagram](img/joystick-digital-in-diag.jpg)
 
-Enter this program in the Mu editor to read the switch:
+Enter this program in the editor to read the switch:
 ```python
 import board
 import digitalio
@@ -90,7 +90,7 @@ while True:
         state = switch.value
         print('Switch state is', state)
 ```
-This program tracks and prints any changes to the switch state.  You will need to view the Mu editor serial pane to see this print output (click the "Serial" button in the top toolbar if it is not already open). Note how the microcontroller captures the switch state as a True/False boolean value. Which state corresponds to the button being pressed?  This circuit could use any of the **GPn** microcontroller pins as long as the wiring and code are consistent.
+This program tracks and prints any changes to the switch state.  You will need to view the editor *Shell* window to see this print output (use **View > Shell** if it is not already open). Note how the microcontroller captures the switch state as a True/False boolean value. Which state corresponds to the button being pressed?  This circuit could use any of the **GPn** microcontroller pins as long as the wiring and code are consistent.
 
 **Why the resistor?** This circuit includes a 1KΩ "pull-up" resistor.  Why is this necessary?  The reason is that the two electrical states of a switch are open- and closed-circuit, but the microcontroller expects digital states corresponding to voltages near 3.3V and 0V.  Therefore we need to convert open/closed circuit conditions into high/low voltage conditions.  Since the presence of any voltage requires some current flow, we need to define a current path during the open-circuit condition. The simplest way to accomplish this is with a single resistor to 3.3V ("pull-up") or GND ("pull-down"). The exact value of the pull up/down resistance is not critical and both 1KΩ or 10KΩ work fine in this circuit.
 
