@@ -135,7 +135,7 @@ while True:
 ```
 This program reads and prints the **Xout** voltage twice a second. Test that moving the joystick left and right has the expected effect. What happens when you move the joystick up and down, or rotating in a circle so X and Y are both varying?
 
-> The Pico W analog-input pins are labeled **ADC0**, **ADC1*** and **ADC2** but the corresponding names in MicroPython are `board.A0`, `board.A1` and `board.A2`.
+> The Pico W analog-input pins are labeled **ADC0**, **ADC1*** and **ADC2** but the corresponding names in CircuitPython are `board.A0`, `board.A1` and `board.A2`.
 
 Note how the microcontroller captures the analog voltage as a large integer value, which is not simply the measured voltage.  The range of these values is roughly 0 - 65,535, which tells us that it is represented by a 16-bit value since $$65,535 = 2^{16} - 1$$.  In the [DMM project](projects/DMM.md) you will learn how to convert these values to voltages.
 
@@ -149,4 +149,4 @@ Build a circuit and write code so that pressing the button causes a green LED to
 
 Once that is working, modify your circuit and code so that, in addition to flashing green when the button is pressed, a red LED flashes whenever the button is released.  What would you like to happen when you release the button after less than two seconds?  Can you write code to achieve this?
 
-*Hint: use a separate GPn pin to control the LED and use a python [for loop](https://wiki.python.org/moin/ForLoop) to flash it.*
+*Hints: Each LED requires a separate GPn pin. Use a python [for loop](https://wiki.python.org/moin/ForLoop) to flash an LED some fixed number of times.*
