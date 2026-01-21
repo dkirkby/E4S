@@ -127,7 +127,7 @@ Finally, modify your loop to modulate the LED brightness with a smooth sine func
 $$
 y(t) = y_0 + \Delta y \sin(2\pi t / T)
 $$
-with $y_0 - \Delta_y$ equal to `LO`, $y_0 + \Delta_y` equal to `HI`, and $T = 5$ seconds.
+with $y_0 - \Delta_y$ equal to `LO`, $y_0 + \Delta_y$ equal to `HI`, and $T = 5$ seconds.
 
 In order to access the current time in your "run forever" loop, you can use `time.monotonic()`, which returns a *floating-point* value (i.e. something with a decimal point) in seconds, not an integer. You will also need to use python's [sine function](https://docs.python.org/3/library/math.html#math.sin) and definition of $\pi$. In order to use any python math functions or constants, you will need to `import math` before your `while True:`. Here is the complete program, with the parts you need to fill in indicated with `???`:
 ```python
