@@ -4,7 +4,7 @@ In this project you will explore how two circuits can communicate. You will firs
 
 ## Build the Transmitter
 
-In this project, you will use both of the pico W modules: one to transmit and one to receive.  Only one Pico can be connected to the Mu editor at once, with convenient debugging with print statements, and the other will be powered and running independently from the first Pico's USB cable via some jumper wires.
+In this project, you will use both of the pico W modules: one to transmit and one to receive.  Only one Pico can be connected to the editor at once, with convenient debugging with print statements, and the other will be powered and running independently from the first Pico's USB cable via some jumper wires.
 
 Build the following circuit using both Pico modules:
 
@@ -82,11 +82,10 @@ The "S" label identfies a **start bit**, which is frequently used to implement [
 ```
 Notice that we require the bus to be idle for `MSG_BITS+1` bit durations before each message, which effectively imposes at least 50% deadtime on this protocol.  What might go wrong without this long idle-time requirement?  Modern protocols avoid this using techniques such as [bit stuffing](https://en.wikipedia.org/wiki/Bit_stuffing).
 
-Open the Mu Serial window and compare the output with the indicator LED flashes. Make sure you understand why the code produces the sequence of flashes you observe before proceeding to the next step of this project.
+Watch the print output in the editor's Shell window and compare with the indicator LED flashes. Make sure you understand why the code produces the sequence of flashes you observe before proceeding to the next step of this project.
 
 To complete this section, untether your transmitter and power the receiver with the following steps:
  - Eject the CIRCUITPY usb drive from your computer.
- - Close the Serial window in the Mu editor (if it was open).
  - Disconnect the USB cable from the transmitter Pico.
  - Plug the USB cable into your second Pico, which will be our receiver.
 
@@ -203,7 +202,7 @@ while True:
     #transmit([1,0,1,0])
     print(receive())
 ```
-When you run this code, you should see repeated output in the Mu Serial window similar to:
+When you run this code, you should see repeated output in the editor Shell window similar to:
 ```
 idle start
 min idle completed
@@ -216,7 +215,7 @@ array('B', [1, 1, 0, 1])
 ```
 However, the received values (1,1,0,1 in this example) will be constantly changing, instead of showing the actual transmitted values of (1,0,1,0).  Try disconnecting the communictions jumper wire between the transmitter GP21 and receiver GP20: the received values should now always be (0,0,0,0) which indicates that at least the bus is doing something.
 
-In order to get your reciever working correctly, you will need to fill in the three `...` sections in the code, following the instructions in the comments.  Think about why the code sleeps for a `HALF_BIT_DURATION` before sampling each bit of the message. When your receiver code is working, you should see the following repeated sequence of print output in the Mu Serial window:
+In order to get your reciever working correctly, you will need to fill in the three `...` sections in the code, following the instructions in the comments.  Think about why the code sleeps for a `HALF_BIT_DURATION` before sampling each bit of the message. When your receiver code is working, you should see the following repeated sequence of print output in the editor Shell window:
 ```
 idle start
 min idle completed
@@ -263,11 +262,11 @@ while True:
 ```
 Finally, replace the jumper wire between GP20 and GP22, remembering that the transmitter and receiver roles are now reversed (as well as the green and red LEDs).
 
-You should now see this print output repeated in the receiver's Mu Serial window:
+You should now see this receiver print output repeated in the editor Shell window:
 ```
 array('B', [1, 0, 1, 0, 0, 1, 1, 0])
 ```
-In case you don't see this, close and re-open the serial window then double check your code and connections. **Double check that you commented all print statements in the receive and transmit functions.** If the high speed protocol is still not working, you may have discovered a flaw in your receiver code that only affects high-speed operation.  To test this theory, try different speeds by changing `BIT_DURATION`.  Remember that you need to update both the receiver and transmitter whenever you make a change to the protocol parameters.
+In case you don't see this, close and re-open the Shell window then double check your code and connections. **Double check that you commented all print statements in the receive and transmit functions.** If the high speed protocol is still not working, you may have discovered a flaw in your receiver code that only affects high-speed operation.  To test this theory, try different speeds by changing `BIT_DURATION`.  Remember that you need to update both the receiver and transmitter whenever you make a change to the protocol parameters.
 
 ## Another Layer
 
@@ -382,7 +381,7 @@ to establish the second communications channel in the opposite direction.  A goo
 
 Bidirectional communication is also known as [duplex](https://en.wikipedia.org/wiki/Duplex_(telecommunications)), which comes in two flavors: **full-duplex**, where communication is possible simultaneously in both directions, or **half-duplex**, where both sides must take turns.  Explain why our implementation is half-duplex and how it could be easily upgraded to full-duplex.
 
-The untethered Pico now waits for a message, processes it, then returns the result.  In this example, the processing is simply to [convert to upper case](https://docs.python.org/3/library/stdtypes.html#str.upper), leading to this repeated output in the Mu editor serial window:
+The untethered Pico now waits for a message, processes it, then returns the result.  In this example, the processing is simply to [convert to upper case](https://docs.python.org/3/library/stdtypes.html#str.upper), leading to this repeated output in the editor Shell window:
 ```
 >> Hello, world!
 << HELLO, WORLD!
