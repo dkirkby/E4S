@@ -304,4 +304,4 @@ Using the same circuit, combine the IMU and OLED programs to display the magnitu
 
 ## Exercise
 
-Use the joystick to move a circle around the display in X and Y.
+Use the joystick to move a circle around the display in X and Y. Toggle between displaying a circle and X when the joystick is pressed.
