@@ -244,6 +244,7 @@ import board
 import busio
 import displayio
 import terminalio
+import i2cdisplaybus
 from adafruit_display_text import label
 import adafruit_displayio_ssd1306
 
@@ -274,7 +275,7 @@ sda, scl = board.GP0, board.GP1
 with busio.I2C(sda=sda, scl=scl) as i2c:
 
     displayio.release_displays()
-    display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
+    display_bus = i2cdisplaybus.I2CDisplayBus(i2c, device_address=0x3c)
     display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
 
     splash = displayio.Group()
