@@ -173,6 +173,8 @@ while True:
 ```
 Look up the range of wavelengths in nanometers (nm) corresponding to the visible spectrum and compare with the central wavelengths of each band that are printed to the Serial Window.  Look at the code and note that the measured fluxes in each band are displayed as a bar chart using logarithm (not linear) scaling.
 
+Compare the filter curves for each band from the [AS7341 datasheet](datasheets/multispec.pdf) with the [response curves](http://hyperphysics.phy-astr.gsu.edu/hbase/vision/colcon.html) for cones in the human eye.
+
 Observe and estimate the level of noise in each band.
 
 Try setting `USE_LED = True` and describe what happens.  Why might this be useful?  Hint: try placing different colored surfaces close to the device when the LED is on and compare the printed results.
@@ -237,7 +239,7 @@ Does the measured rotation make sense when the module is stationary?
 
 ## OLED Display
 
-The [OLED display](https://www.adafruit.com/product/4440) in your kit has a very small resolution of 128x32 pixels, but this is sufficient to display three lines of text.  CircuitPython needs several libraries to accomplish this, as you can see in this example program:
+The [OLED display](https://www.adafruit.com/product/4440) in your kit has a very small resolution of 128x32 pixels, but this is sufficient to display three short (up to 21 characters) lines of text.  CircuitPython needs several libraries to accomplish this, as you can see in this example program:
 ```python
 import time
 import board
@@ -299,3 +301,7 @@ Power off your USB bus and connect just the IMU and OLED display, then load the 
 ## Exercise
 
 Using the same circuit, combine the IMU and OLED programs to display the magnitudes of the acceleration, rotation and magnetic field on the OLED display once per second.
+
+## Exercise
+
+Use the joystick to move a circle around the display in X and Y.
