@@ -63,7 +63,53 @@ The kit speaker module has three pins to connect, similar to the microphone, but
 
 Note that, since the Pico does not have true analog outputs, we must use a digital (GP) output together with [PWM](aout.md).
 
-Like the microphone module, the speaker module already amplifies and offsets its input signal so that you can provide values in the range 0x0000 - 0xffff.  We will start by outputing a sine wave.  Since trig functions are relatively slow, we precompute the sine wave in a table:
+Like the microphone module, the speaker module already amplifies and offsets its input signal so that you can provide values in the range 0x0000 - 0xffff.
+
+### Square Wave Output
+
+The simplest possible wave to output is a square wave, i.e. alternating HI (3.3V) and LO (0V) levels on a digital output. The PWM feature allows us to output a square wave continuously without needing to write code to toggle between the HI and LO states. Here is a simple starting point:
+```python
+import board
+import pwmio
+
+PWM = pwmio.PWMOut(board.GP22, frequency=500)
+PWM.duty_cycle = 0x8000
+
+while True:
+    pass
+```
+Test this program with the speaker signal wire (white) connected directly to GP22. You should hear a (loud!) 500 Hz tone.
+
+Note that this is an unusual program since the code inside `while True` does nothing!
+
+To make the sound quieter, connect a 10:1 voltage divider between GP22 and GND using your kit resistors, and drive the speaker from its midpoint, so the voltage is reduced by 1/11.
+
+Next, we can use the kit joystick to vary the sound:
+```python
+import time
+import board
+import analogio
+import pwmio
+
+Yout = analogio.AnalogIn(board.A0)
+Xout = analogio.AnalogIn(board.A1)
+
+PWM = pwmio.PWMOut(board.GP22, frequency=500, variable_frequency=True)
+
+while True:
+    freq = int(100 + 1000 * Yout.value / 0xffff)
+    duty = 0x8000 + int(0x7000 * Xout.value / 0xffff)
+    PWM.duty_cycle = duty
+    PWM.frequency = freq
+    time.sleep(0.01)
+```
+Inspect the code to determine how to wire the joystick into your circuit. Note the use of `variable_frequency=True` when creating the PWM output.
+
+How are the joystick X and Y axes varying the sound you hear?
+
+### Sine Wave Output
+
+Next, let's output a sine wave, which is a more pleasing sound but more difficult to generate than a simple square wave.  Since trig functions are relatively slow, we precompute the sine wave in a table:
 ```python
 import math
 import array
