@@ -107,6 +107,26 @@ Inspect the code to determine how to wire the joystick into your circuit. Note t
 
 How are the joystick X and Y axes varying the sound you hear?
 
+Finally, here is a simple example of sequencing musical notes:
+```python
+import time
+import board
+import pwmio
+
+PWM = pwmio.PWMOut(board.GP22, frequency=500, variable_frequency=True)
+PWM.duty_cycle = 0x8000
+
+freqs = [82.41, 98.0, 110, 98.0, 146.83, 130.81, 146.83, 164.81]
+
+notelen = 0.091
+
+while True:
+    for freq in freqs:
+        PWM.frequency = int(freq)
+        time.sleep(notelen)
+```
+You might recognize this sequence from a [classic song](https://www.youtube.com/watch?v=G0wOOlwXLgA).
+
 ### Sine Wave Output
 
 Next, let's output a sine wave, which is a more pleasing sound but more difficult to generate than a simple square wave.  Since trig functions are relatively slow, we precompute the sine wave in a table:
