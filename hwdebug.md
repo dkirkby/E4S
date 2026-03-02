@@ -36,7 +36,7 @@ This works fine when the signals change at 2Hz, but if you change the delay from
 
 ## Logic Analyzers
 
-A [logic analyzer](https://en.wikipedia.org/wiki/Logic_analyzer) is a hardware device that captures and displays multiple digital signals. It is similar to an oscilloscope but generally handles more signals (compared with 2 or 4 for a scope) but only records their digital (high/low) state. Traditional logic analyzers have displays and lots of buttons, but modern analyzers are often USB based and rely on a separate computer for the display and controls. The examples below use a USB-based [Salae Logic Pro 16](https://www.saleae.com/products/saleae-logic-pro-16), which costs about US$1500 in 2025 and and capture 16 digital signals simultaneously.
+A [logic analyzer](https://en.wikipedia.org/wiki/Logic_analyzer) is a hardware device that captures and displays multiple digital signals. It is similar to an oscilloscope but generally handles more signals (compared with 2 or 4 for a scope) but only records their digital (high/low) state. Traditional logic analyzers have displays and lots of buttons, but modern analyzers are often USB based and rely on a separate computer for the display and controls. The examples below use a USB-based [Salae Logic Pro 16](https://saleae.com/logic), which costs about US$1500 in 2026 and and capture 16 digital signals simultaneously.
 
 Connect the logic analyzer to the circuit above:
 
@@ -111,6 +111,8 @@ Note that we are sending 0x55 followed by 0x66 in the inner loop. Lookup these c
  - hex 0x55 = decimal 85 = binary 01010101 = ASCII 'U'
  - hex 0x66 = decimal 102 = binary 01100110 = ASCII 'f'
 
+Notice that the gap between the transmitted bits of each byte is shorter than the 2ms and 4ms delays in the code. Why is that?
+
 A good logic analyzer is able to interpret the digital data stream associated with different communications protocols and display a higher-level summary of the data. For example, with the Logic Pro analyzer, we can enable an "Async Serial" analyzer with the transmit wire (Tx = GP4), then we see:
 
 ![UART trace](img/trace-uart.png)
@@ -122,6 +124,7 @@ For a more complex example, change the transmitted data above to:
 data1 = bytearray('Hello, world!', 'utf-8')
 data2 = bytearray('Bonjour, monde!', 'utf-8')
 ```
+To see some space between these messages, increase the delays to 20ms and 40ms.
 
 ## I2C Communication
 
