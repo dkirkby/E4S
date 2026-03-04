@@ -148,6 +148,7 @@ print('Connected to WiFi')
 print('Initializing requests library...')
 pool = adafruit_connection_manager.get_radio_socketpool(wifi.radio)
 ssl_context = adafruit_connection_manager.get_radio_ssl_context(wifi.radio)
+ssl_context.check_hostname = False
 requests = adafruit_requests.Session(pool, ssl_context)
 print('Success!')
 
@@ -199,11 +200,11 @@ This template can be modified to automatically log any type of sensor data to th
 
 The example above uses a shared form but can you also create your own form for data logging. Here are the instructions to recreate a form similar to the one used above:
  1. Visit https://docs.google.com/forms/ and create a blank form
- 2. Create four questions, named "version", "MACaddr", "IPaddr" and "data". You can change these names but it will be easier to fill the form via python if you use names that are valid python identifiers (i.e. avoid spaces and punctuation).
- 3. Verify that the first 3 questions have the "Short Answer" type and the last one (for "data") has the "Paragraph" type.
+ 2. Create a question for each spreadsheet column you will fill with a value. Keep the question text short and simple, avoiding spaces and punctuation, e.g. "TEMPERATURE" and "PRESSURE".
+ 3. Verify that the 3 questions have the "Short Answer" type. It is possible to work with other question types but that is more complex.
  4. Publish your form and set the "Responder view" to "Anyone with the link".
- 5. Use the "Get pre-filled link" menu item and set the answers equal to the question name for all 4 questions.
- 6. Copy the link into the code above at this line:
+ 5. Use the "Pre-fill form" menu item to set answers equal to the question names.
+ 6. Click "Get link" to copy the link into the code above at this line:
  ```python
  PREFILLED=`...prefilled link goes here...`
  ```
