@@ -125,6 +125,8 @@ to access cloud-based services via their web-based APIs, i.e. by accessing speci
 ```python
 import time
 import json
+import board
+import busio
 import ipaddress
 import wifi
 import adafruit_connection_manager
