@@ -87,7 +87,7 @@ page using code, we are downloading its data using the HTTP protocol, but will n
 you are used to in a web browser. Therefore, it is helpful to test using some simple web pages where the
 data we download is easy to interpret. For example, try these in your browser:
  - http://wifitest.adafruit.com/testwifi/index.html
- - https://wttr.in/Irvine
+ - http://checkip.amazonaws.com/
  - https://uci.edu/
 
 To see how these pages will appear to a program, use the "View Source" menu option in your browser.
