@@ -243,7 +243,7 @@ content = f"""
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <title>Pico W HTTP Server</title>
+    <h1>Pico W HTTP Server</h1>
 </body>
 """
 
