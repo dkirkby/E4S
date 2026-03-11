@@ -18,6 +18,8 @@ Each numbered bag contains:
 - PSoC6 evaluation kit
 - string looped through the plastic parts and bundled up with a rubber band
 
+![Equipment](img/psoc6-equipment.jpg)
+
 Make a note of your bag's number.
 
 The battery cable should be disconnected now. You will connect it later to start the program running on the PSoC6. There is no on/off switch, just like with your PicoW modules.
@@ -58,6 +60,7 @@ The program source code is written in C and [available on github](https://github
 
 ### Mac Security Instructions
 
+If you are using a Mac with a recent version of the OS, you will need to tell it to trust this application following these steps:
  - Try to run CoolTerm, but it will be blocked by the OS. Click "Cancel" (do not click the "Delete" option).
  - Open your System Settings and navigate to "Privacy & Security"
  - Scroll down to the Security section. You should see a note saying something like "CoolTerm was blocked from opening because it is not from an identified developer."
@@ -67,15 +70,17 @@ The program source code is written in C and [available on github](https://github
 
 ## Collect Calibration Data
 
- - Connect battery to PSoC6 module. Pay attention to how the connector fits and do not force it in backwards.
+ - Connect battery to PSoC6 module. Pay attention to how the connector fits and do not force it in backwards. Refer to the image below, showing the correct orientation for inserting the connector. Never pull directly on the red or black wires.
  - Refer to the image above to locate the USR1 red LED and the USER button on the PSoC6 module.
  - Turn on your 2KHz tone somewhere near your PSoC6 module.
- - Press the USER button and leave the fixture stationary, without disturbing it.
+ - Press the USER button and leave the fixture stationary, without disturbing it. You will need to support the circuit board from below when pushing the button. Since the button is so small, it might be easier to press it down with a fingernail.
  - The red USR1 LED will flash slowly for 5s then rapidly for 64s.
  - The initial 5s is to let the fixture settle, then data is recorded during the 64s.
  - The IMU and microphone are sampled every 128ms, which gives 500 samples over 64s.
  - Turn off 2KHz tone.
  - You will leave the battery connected for the rest of the class.
+
+![Battery cable insertion](img/psoc6-battery.jpg)
 
 ## Download Calibration Data
 
@@ -103,7 +108,7 @@ The program source code is written in C and [available on github](https://github
 
 ## Collect Pendulum Data
 
- - Remove the rubber band around the string and practice swinging the pendulum with the upper piece held a fixed distance above the floor. Aim for only a small gap (10-20cm) between the bottom of the pendulum arc and the floor.
+ - Remove the rubber band around the string and practice swinging the pendulum with the upper piece held a fixed distance above the floor. Aim for only a small gap (10-20cm) between the bottom of the pendulum arc and the floor. Refer to the photo below to see how the pendulum is supposed to hang. The swing plane is perpendicular to the plane of the photo. Note how the pair of strings encourages the pendulum to swing in a defined plane, with minimal twisting.
  - Estimate the distance from the pivot point to the microphones, i.e. the length of your pendulum.
  - Mark a point on the floor that your pivot will be hand held above. Mark a distance about 60cm away, which is where you will launch the pendulum from. It is not necessary to measure this distance precisely.
  - Mark a distance of about 40cm away from the pivot, towards the 60cm mark. Place your tone generator at this point (but leave it quiet for now). It is not necessary to measure this distance precisely.
@@ -111,6 +116,8 @@ The program source code is written in C and [available on github](https://github
  - One person holds the pivot point as steady as possible.
  - The other person holds the PSoC6 module and battery assembly out at an angle, ready to press the button then launch. You should launch from the same side as your tone generator, and starting a bit beyond it. Remember that data collection does not start for 5s after you press the button.
  - Let the pendulum swing for up to 64s, as long as it is still in motion, following a nice arc in its original plane.
+
+![Pendulum](img/psoc6-pendulum.jpg)
 
 ## Download Pendulum Data
 
