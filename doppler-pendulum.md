@@ -96,7 +96,7 @@ If you are using a Mac with a recent version of the OS, you will need to tell it
 
 ## Analyze the Calibration Data
 
- - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@587?cells=viewof+fileOptions%2CdataPlot%2CdataHistograms).
+ - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+fileOptions%2CdataPlot%2CdataHistograms).
  - Click "Choose File" to load your `idle.csv` file.
  - Adjust the start/stop sliders, if needed, to trim data at either end where the module was not stable.
  - Study the histograms, which show:
