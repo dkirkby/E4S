@@ -46,9 +46,10 @@ The program source code is written in C and [available on github](https://github
 
 ## Calculate Sound Speed
 
-- Look up relative humidity online
-- use NB#1 to calculate speed in m/s
-- estimate uncertainty in speed assuming RH error of 10% and temp error of 1°C
+- Measure ambient air temperature in degC using your PicoW circuit
+- Look up relative humidity (RH) online
+- use [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@587?cells=viewof+soundParams%2CspeedPrint) to calculate and record the speed of sound in m/s
+- Estimate the uncertainty in your calculated speed by varying the sliders and assuming a RH error of 10% and temp error of 1°C. Hint: hovering your mouse to the right edge of the temperature and RH numerical inputs reveals up/down arrows that you can use for precise adjustments.
 
 ## Install Serial Terminal
 
@@ -65,30 +66,39 @@ The program source code is written in C and [available on github](https://github
 
 ## Collect Calibration Data
 
- - connect battery to PSoC6 module
- - img showing what LEDs should look like and identifying USR button
- - turn on 2KHz tone
- - press the USER button and leave the fixture stationary, without disturbing it
- - a red LED will flash slowly for 5s then rapidly for 64s
- - the initial 5s is to let the fixture settle, then data is recorded during the 64s
- - turn off 2KHz tone
- - leave the battery connected
+ - Connect battery to PSoC6 module. Pay attention to how the connector fits and do not force it in backwards.
+ - Refer to the image above to locate the USR1 red LED and the USER button on the PSoC6 module.
+ - Turn on your 2KHz tone somewhere near your PSoC6 module.
+ - Press the USER button and leave the fixture stationary, without disturbing it.
+ - The red USR1 LED will flash slowly for 5s then rapidly for 64s.
+ - The initial 5s is to let the fixture settle, then data is recorded during the 64s.
+ - The IMU and microphone are sampled every 128ms, which gives 500 samples over 64s.
+ - Turn off 2KHz tone.
+ - You will leave the battery connected for the rest of the class.
 
 ## Download Calibration Data
 
- - Connect a USB cable to the connector marked "DATA" in the diagram above. You can leave the battery connected.
+ - Connect a USB cable to the connector marked "DATA" in the diagram above.
  - Connect the other end of the cable to the laptop where CoolTerm is installed.
  - Click on the down arrow in the bottom-left corner of CoolTerm to select:
   - the new port that should now appear
   - a baud rate of 115200
- - Start capturing data to a file using the "Connection > File Capture > Start..." menu item. Select "idle.csv" for your filename.
- - Type "d" in the terminal window. You should see many lines of numbers fly by, which are being captured to your CSV file.
- - Close the file using the "Connection > File Capture > Stop" menu item.
+ - Start capturing data to a file using the **Connection > File Capture > Start...** menu item. Use `idle.csv` for your filename.
+ - Type `d` in the terminal window. You should see many lines of numbers fly by, which are being captured to your CSV file.
+ - Close the file using the **Connection > File Capture > Stop** menu item.
 
 ## Analyze the Calibration Data
 
- - Use NB#2 to load your CSV file.
- - ...
+ - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@587?cells=viewof+fileOptions%2CdataPlot%2CdataHistograms).
+ - Click "Choose File" to load your `idle.csv` file.
+ - Adjust the start/stop sliders, if needed, to trim data at either end where the module was not stable.
+ - Study the histograms, which show:
+   - The magnitude of the measured acceleration vector in units of g=981 cm/s^2, which should peak near one.
+   - The observed frequency of each 128ms chunk of recorded audio data, obtained using a fast Fourier transform,
+   which should peak near your tone generator frequency.
+ - Both of your histograms should be Gaussian shaped and quite narrow. If not, you may need to repeat your experiment, making sure that that your module is not disturbed during the recording period and that your tone generator is on and sufficiently loud.
+ - Calculate the relative accuracy of the acceleration and frequency measurements in percent.
+ - Save a screenshot of the two histogram plots.
 
 ## Collect Pendulum Data
 
@@ -107,12 +117,19 @@ The program source code is written in C and [available on github](https://github
 
 ## Analyze Pendulum Data
 
-- Use NB#3 to load your CSV file.
-- ...
+ - Load [this page]()
+ - Click "Choose File" to load your `swing.csv` file.
+ - Adjust the start/stop sliders, if needed, to trim data at either end where the module was not swinging freely.
+ - Fine tune the start slider so that the data starts at the lowest point of a cycle.
+ - Study the plots where your data is superimposed on the theoretical predictions for the IMU acceleration along the module's x axis (aligned with the pendulum string) and the Doppler shift of the observed frequency.
+ - Adjust the model inputs to get the best possible agreement with your data. Here is a general strategy to use:
+   - Adjust the *String Length* slider and watch the IMU-x plot to match the number of cycles between theory and experiment. Do not worry about differences in amplitude at this point. Check that the length value in cm make sense for your physical setup. You may need to fine tune your start slider to match the phase of the data to the theory.
+   - Adjust the *Initial Offset* slider and watch the IMU-x plot to match the amplitude at the left-hand side. Check that the offset value in cm makes sense for your physical setup.
+   - Adjust the *Damping Coef* slider and watch the IMU-x plot to match the amplitude at the right-hand side.
 
 ## What to upload to Canvas...
 
- - ...
+ - Ambient air temp in degC, RH, calculated sound speed and its uncertainty
 
 ## Cleanup
 
