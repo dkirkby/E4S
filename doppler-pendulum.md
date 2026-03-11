@@ -12,13 +12,19 @@ The goal of the experiment is to study:
 
 ## Equipment
 
-Each bag contains:
+Each numbered bag contains:
 - pendulum fixture made of 3 laser-cut plastic parts
-- 3.7V LiPo rechargeable battery
+- 3.7V LiPo rechargeable battery, connected to the plastic parts with 2 rubber bands
 - PSoC6 evaluation kit
-- string
+- string looped through the plastic parts and bundled up with a rubber band
+
+Make a note of your bag's number.
+
+The battery cable should be disconnected now. You will connect it later to start the program running on the PSoC6. There is no on/off switch, just like with your PicoW modules.
 
 Drawings for the laser-cut plastic parts are [here](https://github.com/dkirkby/pendulum-doppler/blob/c4a3a23339414bcdc50123baae7955579e4161d6/laser/laser-parts.jpg)
+
+![Laser-cut parts](img/laser-parts.jpg)
 
 ## PSoC6 Evaluation Kit Overview
 
@@ -28,15 +34,15 @@ Drawings for the laser-cut plastic parts are [here](https://github.com/dkirkby/p
 
 Kindly donated by [infineon technologies](https://www.infineon.com/).
 
-PSoC6 is programmed in C. Code and laser-cut outlines are [available on github](https://github.com/dkirkby/pendulum-doppler).
+The program source code is written in C and [available on github](https://github.com/dkirkby/pendulum-doppler). The code monitors the USER button, controls the USR1 red LED, reads out the IMU accelerometer and one of the microphones, and dumps data to one of the USB ports.
 
 ## Build PicoW Circuit
 
 - Build and program a circuit using a PicoW, speaker and DPS310 (pressure & altitude) module to:
- - output 2KHz sine wave
- - measure air temp using Barometer I2C module
-- install the [phyphox app](https://phyphox.org/) on a phone and use the ?? tool to verify your sine wave
- - if you have trouble generating a 2KHz sine wave, you can use the phyphox tone generator instead
+  - output 2KHz sine wave
+  - measure air temp using Barometer I2C module
+- install the [phyphox app](https://phyphox.org/) on a phone and use the *Audio Scope* and *Frequency History* tools to verify your sine wave
+  - if you have trouble generating a 2KHz sine wave, you can use the phyphox *Tone Generator* instead
 
 ## Calculate Sound Speed
 
@@ -88,7 +94,8 @@ PSoC6 is programmed in C. Code and laser-cut outlines are [available on github](
 
  - Remove the rubber band around the string and practice swinging the pendulum with the upper piece held a fixed distance above the floor. Aim for only a small gap (10-20cm) between the bottom of the pendulum arc and the floor.
  - Estimate the distance from the pivot point to the microphones, i.e. the length of your pendulum.
- - Pick a distance between 40-60cm and measure this out on the floor. This will be the horizontal distance between your pendulum pivot point and the tone generator.
+ - Mark a point on the floor that your pivot will be hand held above. Mark a distance about 60cm away, which is where you will launch the pendulum from. It is not necessary to measure this distance precisely.
+ - Mark a distance of about 40cm away from the pivot, towards the 60cm mark. Place your tone generator at this point (but leave it quiet for now). It is not necessary to measure this distance precisely.
  - The procedure to start collecting data with the USER button is the same as before, but you also have the option to press the USER button a second time to stop collecting data before it stops automatically after 64s.
  - One person holds the pivot point as steady as possible.
  - The other person holds the PSoC6 module and battery assembly out at an angle, ready to press the button then launch. You should launch from the same side as your tone generator, and starting a bit beyond it. Remember that data collection does not start for 5s after you press the button.
