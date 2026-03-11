@@ -117,19 +117,26 @@ The program source code is written in C and [available on github](https://github
 
 ## Analyze Pendulum Data
 
- - Load [this page]()
- - Click "Choose File" to load your `swing.csv` file.
+ - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+params%2Cplot1%2Cplot2%2Cviewof+srcParams%2Cviewof+soundParams%2Cviewof+fileOptions%2CdataPlot)
+ - Re-enter the air temperature and RH you obtain earlier to set the sound speed to use for your analysis.
+ - Click "Choose File" near the bottom of this page to load your `swing.csv` file.
  - Adjust the start/stop sliders, if needed, to trim data at either end where the module was not swinging freely.
  - Fine tune the start slider so that the data starts at the lowest point of a cycle.
  - Study the plots where your data is superimposed on the theoretical predictions for the IMU acceleration along the module's x axis (aligned with the pendulum string) and the Doppler shift of the observed frequency.
- - Adjust the model inputs to get the best possible agreement with your data. Here is a general strategy to use:
-   - Adjust the *String Length* slider and watch the IMU-x plot to match the number of cycles between theory and experiment. Do not worry about differences in amplitude at this point. Check that the length value in cm make sense for your physical setup. You may need to fine tune your start slider to match the phase of the data to the theory.
-   - Adjust the *Initial Offset* slider and watch the IMU-x plot to match the amplitude at the left-hand side. Check that the offset value in cm makes sense for your physical setup.
-   - Adjust the *Damping Coef* slider and watch the IMU-x plot to match the amplitude at the right-hand side.
+ - Next, you will adjust the model inputs to get the best possible agreement with your data.
+ - Starting with the IMU-x plot:
+   - Adjust the *String Length* slider to match the number of cycles between theory and experiment. Do not worry about differences in amplitude at this point. Check that the length value in cm make sense for your physical setup. You may need to fine tune your start slider to match the phase of the data to the theory.
+   - Adjust the *Initial Offset* slider to match the amplitude at the left-hand side. Check that the offset value in cm makes sense for your physical setup.
+   - Adjust the *Damping Coef* slider to match the amplitude at the right-hand side.
+ - Now focus on the Doppler Shift plot:
+   - Adjust the *Source Offset* and *Height* sliders to match the observed Doppler shift.
+ - Save a screen shot of the two plots.
 
 ## What to upload to Canvas...
 
  - Ambient air temp in degC, RH, calculated sound speed and its uncertainty
+ - screen shot of calibration histograms, calculated % accuracies
+ - screen shot of
 
 ## Cleanup
 
