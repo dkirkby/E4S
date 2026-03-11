@@ -89,6 +89,7 @@ If you are using a Mac with a recent version of the OS, you will need to tell it
  - Click on the down arrow in the bottom-left corner of CoolTerm to select:
   - the new port that should now appear
   - a baud rate of 115200
+ - Click *Connect*
  - Start capturing data to a file using the **Connection > File Capture > Start...** menu item. Use `idle.csv` for your filename.
  - Type `d` in the terminal window. You should see many lines of numbers fly by, which are being captured to your CSV file.
  - Close the file using the **Connection > File Capture > Stop** menu item.
