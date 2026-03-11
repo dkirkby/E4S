@@ -32,7 +32,7 @@ Drawings for the laser-cut plastic parts are [here](https://github.com/dkirkby/p
 
 [Manual](https://www.infineon.com/assets/row/public/documents/30/44/infineon-cy8ckit-062s2-user-guide-usermanual-en.pdf)
 
-Kindly donated by [infineon technologies](https://www.infineon.com/).
+These evaluation kits were kindly donated by [infineon technologies](https://www.infineon.com/).
 
 The program source code is written in C and [available on github](https://github.com/dkirkby/pendulum-doppler). The code monitors the USER button, controls the USR1 red LED, reads out the IMU accelerometer and one of the microphones, and dumps data to one of the USB ports.
 
@@ -57,6 +57,7 @@ The program source code is written in C and [available on github](https://github
 - Click on the down arrow in the bottom-left corner of CoolTerm and select Port. Make a note of which ports are listed. Later, you will see a new port listed here that you will connect to.
 
 ### Mac Security Instructions
+
  - Try to run CoolTerm, but it will be blocked by the OS. Click "Cancel" (do not click the "Delete" option).
  - Open your System Settings and navigate to "Privacy & Security"
  - Scroll down to the Security section. You should see a note saying something like "CoolTerm was blocked from opening because it is not from an identified developer."
@@ -117,7 +118,8 @@ The program source code is written in C and [available on github](https://github
 
 ## Analyze Pendulum Data
 
- - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+params%2Cplot1%2Cplot2%2Cviewof+srcParams%2Cviewof+soundParams%2Cviewof+fileOptions%2CdataPlot)
+ - Load [this page](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+params%2Cplot1%2Cplot2%2Cviewof+srcParams%2Cviewof+soundParams%2CspeedPrint%2Cviewof+fileOptions%2CdataPlot)
+ - Adjust each of the 4 sliders on the top of the page and observe how they change the predicted theory curves. Your data will be superimposed on these curves and you will be adjusting the theory to match your data.
  - Re-enter the air temperature and RH you obtain earlier to set the sound speed to use for your analysis.
  - Click "Choose File" near the bottom of this page to load your `swing.csv` file.
  - Adjust the start/stop sliders, if needed, to trim data at either end where the module was not swinging freely.
@@ -132,15 +134,9 @@ The program source code is written in C and [available on github](https://github
    - Adjust the *Source Offset* and *Height* sliders to match the observed Doppler shift.
  - Save a screen shot of the two plots.
 
-## What to upload to Canvas...
-
- - Ambient air temp in degC, RH, calculated sound speed and its uncertainty
- - screen shot of calibration histograms, calculated % accuracies
- - screen shot of
-
 ## Cleanup
 
- - Gently remove the battery cable from the PSoC6 connector
- - Roll up the string and secure with the original rubber band
- - Put all contents back in the bag
- - Turn in the bag
+ - Remove the battery cable from the PSoC6 connector by pinching the connector and gently pulling it out. Do not pull directly on the red or black wires!
+ - Roll up the string and secure with the original rubber band.
+ - Put all contents back in the bag.
+ - Turn in the bag.
