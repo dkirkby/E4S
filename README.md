@@ -32,6 +32,9 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [WiFi communication](wifi.md)
 - [AI design assistant](AI-design.md)
 - [Tracking a pendulum and observing Doppler shift](doppler-pendulum.md)
+  - [speed of sound calculator](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@587?cells=viewof+soundParams%2CspeedPrint)
+  - [calibration data analysis](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+fileOptions%2CdataPlot%2CdataHistograms)
+  - [model to predict acceleration and observed frequency](https://observablehq.com/embed/@dkirkby/pendulum-doppler-shift@593?cells=viewof+params%2Cplot1%2Cplot2%2Cviewof+srcParams%2Cviewof+soundParams%2CspeedPrint%2Cviewof+fileOptions%2CdataPlot)
 
 ## Projects
 
