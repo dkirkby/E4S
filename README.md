@@ -31,6 +31,7 @@ For basic examples that demonstrate each of the kit's components, start [here](h
 - [Hardware debugging techniques](hwdebug.md)
 - [WiFi communication](wifi.md)
 - [AI design assistant](AI-design.md)
+- [Tracking a pendulum and observing Doppler shift](doppler-pendulum.md)
 
 ## Projects
 
